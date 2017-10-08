@@ -1,12 +1,19 @@
 package gui;
 
+import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JTextArea;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 
-public class main {
+public class main extends JFrame {
 
-	private JFrame frame;
+	private JPanel contentPane;
+	public static JTextField fun;
 
 	/**
 	 * Launch the application.
@@ -15,8 +22,8 @@ public class main {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					main window = new main();
-					window.frame.setVisible(true);
+					main frame = new main();
+					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -25,19 +32,30 @@ public class main {
 	}
 
 	/**
-	 * Create the application.
+	 * Create the frame.
 	 */
+
 	public main() {
-		initialize();
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 542, 341);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(0, 0, 526, 302);
+		contentPane.add(panel);
+		panel.setLayout(null);
+		
+		fun = new JTextField();
+		fun.setBounds(10, 14, 476, 195);
+		panel.add(fun);
+		fun.setColumns(10);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(307, 14, 2, 2);
+		panel.add(scrollPane);
 	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 610, 384);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	}
-
+	
 }

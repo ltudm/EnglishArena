@@ -127,7 +127,7 @@ public class dangky extends JFrame {
 			        		    JOptionPane.WARNING_MESSAGE);
 			            pswd1.requestFocus();
 			        }
-				 if(vpass.equalsIgnoreCase(pass)){
+				 if(!vpass.equalsIgnoreCase(pass)){
 					 JOptionPane.showMessageDialog(null,
 			        		    "Mật khẩu không trùng khớp.",
 			        		    "warning",
@@ -150,7 +150,7 @@ public class dangky extends JFrame {
 									
 			        } catch (IOException ex) {
 			            Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
-			            JOptionPane.showMessageDialog(frame,
+			            JOptionPane.showMessageDialog(null,
 			            	    "Lỗi",
 			            	    "Lỗi phát sinh",
 			            	    JOptionPane.ERROR_MESSAGE);

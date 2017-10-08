@@ -11,7 +11,9 @@ import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.sound.sampled.Clip;
-import gui.login;
+import javax.swing.JOptionPane;
+
+import gui.*;
 
 
 public class receive extends Thread {
@@ -19,6 +21,8 @@ public class receive extends Thread {
 	Socket socket = null;
     ObjectInputStream din = null;
     data_socket respon = null;
+    login logf = new login();
+    main mf=new main();
     public receive(Socket sk){
         this.socket = sk;
     }
@@ -33,7 +37,13 @@ public class receive extends Thread {
 	                case "login"             : this.check(respon); break;
 	                case "dangky":
 	                {
-	                	
+	                	this.dangky(respon);break;
+	                }
+	                case "fun" :
+	                {
+	                	String a=respon.data[0];
+	                	String b=respon.data[1];
+	                	main.fun.setText(a + "\n" + b);
 	                }
 	                }
 			 }
@@ -46,13 +56,37 @@ public class receive extends Thread {
     public void check(data_socket dtsk) {
     	int a=dtsk.login;
     	if(a==1)
-    		System.out.println("da dang nhap");
+    	{
+    		System.out.println("da dang nhap");   		
+    		mf.setVisible(true);		
+    		logf.setVisible(false);
+    		logf.hide();
+    	}   		
     	else
     		if(a==2)
+    		{
     			System.out.println("admin");
+        		mf.setVisible(true);
+        		logf.setVisible(false);
+        		logf.setEnabled(false);
+    		}
+    			
     		else
     			System.out.println("nhap sai");
     		
+    }
+    public void dangky(data_socket dtsk)
+    {
+    	int a=dtsk.dk;
+    	if(a==1)
+    		JOptionPane.showMessageDialog(null,
+    			    "Dang ky thanh cong.");
+    	else if(a==0)
+    		JOptionPane.showMessageDialog(null,
+    			    "Dang ky khong thanh cong.");
+    	else if(a==-1)
+    		JOptionPane.showMessageDialog(null,
+    			    "email da co nguoi dang ky.");
     }
 
 }
