@@ -5,21 +5,33 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.awt.event.ActionEvent;
+import BUS.*;
 
 public class login {
 
 	private JFrame frame;
-	private JPasswordField passwordField;
-	private JTextField textField;
+	private JPasswordField pswdf;
+	private JTextField emailf;
 
 	/**
 	 * Launch the application.
 	 */
+	ObjectInputStream din = null;
+    ObjectOutputStream dout = null;
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -70,22 +82,44 @@ public class login {
 		lblMtKhu.setBounds(29, 76, 70, 22);
 		panel.add(lblMtKhu);
 		
-		passwordField = new JPasswordField();
-		passwordField.setBounds(105, 79, 147, 20);
-		panel.add(passwordField);
+		pswdf = new JPasswordField();
+		pswdf.setBounds(105, 79, 147, 20);
+		panel.add(pswdf);
 		
-		textField = new JTextField();
-		textField.setBounds(105, 47, 147, 20);
-		panel.add(textField);
-		textField.setColumns(10);
+		emailf = new JTextField();
+		emailf.setBounds(105, 47, 147, 20);
+		panel.add(emailf);
+		emailf.setColumns(10);
 		
-		JButton btnNewButton = new JButton("\u0110\u0103ng nh\u1EADp");
-		btnNewButton.setBounds(65, 118, 89, 23);
-		panel.add(btnNewButton);
+		JButton dnbt = new JButton("\u0110\u0103ng nh\u1EADp");
+		dnbt.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				data_socket dtsk = new data_socket();
+		        String[] data = new String[2];
+		        dtsk.action = "login";
+		        data[0] = emailf.getText();
+		        data[1] = pswdf.getText();
+		        dtsk.data = data;
+		        try {
+		            dout = new ObjectOutputStream(connectserver.socket.getOutputStream());
+		            dout.writeObject(dtsk);
+		        } catch (IOException ex) {
+		            Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+		            JOptionPane.showMessageDialog(frame,
+		            	    "Lỗi",
+		            	    "Lỗi phát sinh",
+		            	    JOptionPane.ERROR_MESSAGE);
+		            
+		        }
+				
+			}
+		});
+		dnbt.setBounds(53, 118, 101, 23);
+		panel.add(dnbt);
 		
-		JButton btnngK = new JButton("\u0110\u0103ng k\u00FD");
-		btnngK.setBounds(194, 118, 89, 23);
-		panel.add(btnngK);
+		JButton dkbt = new JButton("\u0110\u0103ng k\u00FD");
+		dkbt.setBounds(194, 118, 89, 23);
+		panel.add(dkbt);
 		
 		JButton btnHy = new JButton("H\u1EE7y");
 		btnHy.setBounds(194, 152, 89, 23);
