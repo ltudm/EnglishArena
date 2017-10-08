@@ -101,8 +101,13 @@ public class login {
 		        data[1] = pswdf.getText();
 		        dtsk.data = data;
 		        try {
-		            dout = new ObjectOutputStream(connectserver.socket.getOutputStream());
+		        	connectserver cnsv = new connectserver();
+		            dout = new ObjectOutputStream(cnsv.socket.getOutputStream());
 		            dout.writeObject(dtsk);
+		            dout.flush();
+					Thread receive=new receive(cnsv.socket);
+					receive.start();
+					System.out.println("conected");
 		        } catch (IOException ex) {
 		            Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
 		            JOptionPane.showMessageDialog(frame,

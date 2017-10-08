@@ -19,7 +19,6 @@ public class receive extends Thread {
 	Socket socket = null;
     ObjectInputStream din = null;
     data_socket respon = null;
-    Clip clip;  
     public receive(Socket sk){
         this.socket = sk;
     }
