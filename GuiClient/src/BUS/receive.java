@@ -78,6 +78,7 @@ public class receive extends Thread {
     public void dangky(data_socket dtsk)
     {
     	int a=dtsk.dk;
+    	mf.setVisible(false);
     	if(a==1)
     		JOptionPane.showMessageDialog(null,
     			    "Dang ky thanh cong.");

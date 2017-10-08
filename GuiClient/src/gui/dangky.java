@@ -118,6 +118,7 @@ public class dangky extends JFrame {
 			        		    "warning",
 			        		    JOptionPane.WARNING_MESSAGE);
 			            tendn.requestFocus();
+			            return;
 			           
 			        }
 				 if(pass.equalsIgnoreCase("")){
@@ -126,12 +127,14 @@ public class dangky extends JFrame {
 			        		    "warning",
 			        		    JOptionPane.WARNING_MESSAGE);
 			            pswd1.requestFocus();
+			            return;
 			        }
 				 if(!vpass.equalsIgnoreCase(pass)){
 					 JOptionPane.showMessageDialog(null,
 			        		    "Mật khẩu không trùng khớp.",
 			        		    "warning",
-			        		    JOptionPane.WARNING_MESSAGE);			            
+			        		    JOptionPane.WARNING_MESSAGE);	
+					 return;
 			        }
 				 data_socket dtsk = new data_socket();
 			        String[] data = new String[2];
