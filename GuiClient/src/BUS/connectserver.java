@@ -5,6 +5,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import gui.main;
 
 import javax.swing.JOptionPane;
 
@@ -17,6 +18,7 @@ public class connectserver {
 	public static int port = 1995;
     public static String ip_server = "localhost";
     public static Socket socket = null;
+    public static main mainf=null;
     public connectserver()
     {
     	try

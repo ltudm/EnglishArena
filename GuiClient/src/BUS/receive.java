@@ -31,6 +31,10 @@ public class receive extends Thread {
 	                respon = (data_socket)din.readObject();
 	                switch(respon.action){
 	                case "login"             : this.check(respon); break;
+	                case "dangky":
+	                {
+	                	
+	                }
 	                }
 			 }
 	        }

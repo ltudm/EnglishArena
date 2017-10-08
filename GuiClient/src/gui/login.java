@@ -6,7 +6,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
 import java.awt.Font;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -108,6 +107,7 @@ public class login {
 					Thread receive=new receive(cnsv.socket);
 					receive.start();
 					System.out.println("conected");
+								
 		        } catch (IOException ex) {
 		            Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
 		            JOptionPane.showMessageDialog(frame,
@@ -123,6 +123,13 @@ public class login {
 		panel.add(dnbt);
 		
 		JButton dkbt = new JButton("\u0110\u0103ng k\u00FD");
+		dkbt.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+				dangky dkf=new dangky();
+				dkf.setVisible(true);
+			}
+		});
 		dkbt.setBounds(194, 118, 89, 23);
 		panel.add(dkbt);
 		

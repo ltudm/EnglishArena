@@ -8,6 +8,7 @@ public class data_socket implements Serializable{
     public ArrayList<String[]> data_arr;
     public boolean accept = false;
     public int login=-1;
+    public int dk=0;
     public data_socket(){
         
     }
