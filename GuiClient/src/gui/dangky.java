@@ -149,7 +149,7 @@ public class dangky extends JFrame {
 			            dout.flush();
 						Thread receive=new receive(cnsv.socket);
 						receive.start();
-						System.out.println("conected");
+						
 									
 			        } catch (IOException ex) {
 			            Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
@@ -168,4 +168,5 @@ public class dangky extends JFrame {
 		button_1.setBounds(178, 162, 89, 23);
 		contentPane.add(button_1);
 	}
+
 }

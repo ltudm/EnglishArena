@@ -72,13 +72,14 @@ public class receive extends Thread {
     		}
     			
     		else
-    			System.out.println("nhap sai");
+    			JOptionPane.showMessageDialog(null,
+        			    "Nhap sai email hoac mat khau.");
     		
     }
     public void dangky(data_socket dtsk)
     {
     	int a=dtsk.dk;
-    	mf.setVisible(false);
+    	gui.main.HIDE_ON_CLOSE();
     	if(a==1)
     		JOptionPane.showMessageDialog(null,
     			    "Dang ky thanh cong.");

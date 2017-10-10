@@ -148,6 +148,8 @@ public class login extends JFrame {
 				
 				dangky dkf=new dangky();
 				dkf.setVisible(true);
+				dnbt.setEnabled(false);
+				
 			}
 		});
 		dkbt.setBounds(190, 129, 89, 23);

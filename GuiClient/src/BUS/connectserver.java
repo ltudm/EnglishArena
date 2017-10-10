@@ -15,8 +15,8 @@ import gui.main;
 
 
 public class connectserver {
-	public static int port = 1995;
-    public static String ip_server = "115.72.248.27";
+	public static int port = 6788;
+    public static String ip_server = "171.233.232.20";
     public static Socket socket = null;
     public static main mainf=null;
     public connectserver()
