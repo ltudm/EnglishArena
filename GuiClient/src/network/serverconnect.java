@@ -1,25 +1,24 @@
-package BUS;
+package network;
 
 import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import gui.main;
 
 import javax.swing.JOptionPane;
 
-import gui.login;
-import gui.main;
+import GUI.dangnhapform;
+import GUI.mainform;
 
 
 
-public class connectserver {
+public class serverconnect {
 	public static int port = 6788;
-    public static String ip_server = "171.233.232.20";
+    public static String ip_server = "localhost";
     public static Socket socket = null;
-    public static main mainf=null;
-    public connectserver()
+    public static mainform mainf=null;
+    public serverconnect()
     {
     	try
     	{		
@@ -27,7 +26,7 @@ public class connectserver {
             
     	}
     	catch (IOException ex) {
-            Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(dangnhapform.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null, "socket error");
         }
     }

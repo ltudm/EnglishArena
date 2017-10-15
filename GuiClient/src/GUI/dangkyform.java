@@ -1,4 +1,4 @@
-package gui;
+package GUI;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -7,9 +7,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import BUS.connectserver;
-import BUS.data_socket;
-import BUS.receive;
+import network.data;
+import network.receive_solve;
+import network.serverconnect;
 
 import java.awt.Color;
 import javax.swing.JLabel;
@@ -30,7 +30,7 @@ import java.awt.event.ActionEvent;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-public class dangky extends JFrame {
+public class dangkyform extends JFrame {
 
 	private JPanel contentPane;
 	private JPasswordField pswd1;
@@ -46,7 +46,7 @@ public class dangky extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					dangky frame = new dangky();
+					dangkyform frame = new dangkyform();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -58,7 +58,7 @@ public class dangky extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public dangky() {
+	public dangkyform() {
 		addWindowFocusListener(new WindowFocusListener() {
 			public void windowGainedFocus(WindowEvent arg0) {
 			}
@@ -136,23 +136,23 @@ public class dangky extends JFrame {
 			        		    JOptionPane.WARNING_MESSAGE);	
 					 return;
 			        }
-				 data_socket dtsk = new data_socket();
+				 data dtsk = new data();
 			        String[] data = new String[2];
 			        dtsk.action = "dangky";
 			        data[0] = tendn.getText();
 			        data[1] = pswd1.getText();
 			        dtsk.data = data;
 			        try {
-			        	connectserver cnsv = new connectserver();
+			        	serverconnect cnsv = new serverconnect();
 			            dout = new ObjectOutputStream(cnsv.socket.getOutputStream());
 			            dout.writeObject(dtsk);
 			            dout.flush();
-						Thread receive=new receive(cnsv.socket);
+						Thread receive=new receive_solve(cnsv.socket);
 						receive.start();
 						
 									
 			        } catch (IOException ex) {
-			            Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+			            Logger.getLogger(dangnhapform.class.getName()).log(Level.SEVERE, null, ex);
 			            JOptionPane.showMessageDialog(null,
 			            	    "Lỗi",
 			            	    "Lỗi phát sinh",
@@ -165,6 +165,11 @@ public class dangky extends JFrame {
 		contentPane.add(button);
 		
 		JButton button_1 = new JButton("Hủy");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				mainclient.dkf.setVisible(false);
+			}
+		});
 		button_1.setBounds(178, 162, 89, 23);
 		contentPane.add(button_1);
 	}

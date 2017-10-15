@@ -1,4 +1,4 @@
-package gui;
+package GUI;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -6,10 +6,6 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
-import BUS.connectserver;
-import BUS.data_socket;
-import BUS.receive;
 
 import java.awt.Color;
 import javax.swing.JLabel;
@@ -27,8 +23,12 @@ import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import GUI.dangkyform;
+import network.data;
+import network.receive_solve;
+import network.serverconnect;
 
-public class login extends JFrame {
+public class dangnhapform extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField emailf;
@@ -43,7 +43,7 @@ public class login extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					login frame = new login();
+					dangnhapform frame = new dangnhapform();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -55,7 +55,7 @@ public class login extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public login() {
+	public dangnhapform() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 354, 224);
 		contentPane = new JPanel();
@@ -76,21 +76,21 @@ public class login extends JFrame {
 		
 		JLabel label_1 = new JLabel("Email:");
 		label_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		label_1.setBounds(49, 56, 46, 20);
+		label_1.setBounds(44, 57, 46, 20);
 		panel.add(label_1);
 		
 		emailf = new JTextField();
 		emailf.setColumns(10);
-		emailf.setBounds(101, 58, 147, 20);
+		emailf.setBounds(101, 55, 147, 28);
 		panel.add(emailf);
 		
 		JLabel label_2 = new JLabel("Mật khẩu:");
 		label_2.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		label_2.setBounds(25, 87, 70, 22);
+		label_2.setBounds(21, 92, 70, 22);
 		panel.add(label_2);
 		
 		pswdf = new JPasswordField();
-		pswdf.setBounds(101, 90, 147, 20);
+		pswdf.setBounds(101, 91, 147, 28);
 		panel.add(pswdf);
 		
 		JButton dnbt = new JButton("Đăng nhập");
@@ -114,23 +114,23 @@ public class login extends JFrame {
 			            emailf.requestFocus();	
 			            return;
 			        }
-				data_socket dtsk = new data_socket();
+				data dtsk = new data();
 		        String[] data = new String[2];
 		        dtsk.action = "login";
 		        data[0] = emailf.getText();
 		        data[1] = pswdf.getText();
 		        dtsk.data = data;
 		        try {
-		        	connectserver cnsv = new connectserver();
+		        	serverconnect cnsv = new serverconnect();
 		            dout = new ObjectOutputStream(cnsv.socket.getOutputStream());
 		            dout.writeObject(dtsk);
 		            dout.flush();
-					Thread receive=new receive(cnsv.socket);
+					Thread receive=new receive_solve(cnsv.socket);
 					receive.start();
 					System.out.println("conected");
 								
 		        } catch (IOException ex) {
-		            Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+		            Logger.getLogger(dangnhapform.class.getName()).log(Level.SEVERE, null, ex);
 		            JOptionPane.showMessageDialog(null,
 		            	    "Lỗi",
 		            	    "Lỗi phát sinh",
@@ -139,20 +139,19 @@ public class login extends JFrame {
 		        }
 			}
 		});
-		dnbt.setBounds(49, 129, 101, 23);
+		dnbt.setBounds(62, 132, 94, 24);
 		panel.add(dnbt);
 		
 		JButton dkbt = new JButton("Đăng ký");
 		dkbt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				dangky dkf=new dangky();
-				dkf.setVisible(true);
-				dnbt.setEnabled(false);
+				mainclient.dkf=new dangkyform();
+				mainclient.dkf.setVisible(true);				
 				
 			}
 		});
-		dkbt.setBounds(190, 129, 89, 23);
+		dkbt.setBounds(186, 132, 85, 24);
 		panel.add(dkbt);
 	}
 }
