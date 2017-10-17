@@ -13,17 +13,21 @@ import javax.swing.UIManager;
 import javax.swing.JToggleButton;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.util.ArrayList;
+
 import javax.swing.JTabbedPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.table.DefaultTableModel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class mainform extends JFrame {
 
 	private JPanel contentPane;
-	private JTable table;
+	public static JTable bangdiem;
 
 	/**
 	 * Launch the application.
@@ -54,6 +58,7 @@ public class mainform extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	public ArrayList<String[]> data_arr = new ArrayList<>();
 	public mainform() {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -70,17 +75,24 @@ public class mainform extends JFrame {
 		panel.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Xin chào:");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblNewLabel.setBounds(10, 11, 57, 15);
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		panel.add(lblNewLabel);
 		
-		JButton btnNewButton = new JButton("New button");
-		btnNewButton.setBounds(20, 64, 89, 23);
-		panel.add(btnNewButton);
+		JButton bttest = new JButton("test");
+		bttest.setBounds(20, 64, 89, 23);
+		panel.add(bttest);
 		
-		table = new JTable();
-		table.setModel(new DefaultTableModel(
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(381, 79, 282, 95);
+		panel.add(scrollPane);
+		
+		bangdiem = new JTable();
+		scrollPane.setViewportView(bangdiem);
+		bangdiem.setBounds(432, 64, 201, 133);
+		bangdiem.setModel(new DefaultTableModel(
 			new Object[][] {
+				{null, null, null, null},
 				{null, null, null, null},
 				{null, null, null, null},
 				{null, null, null, null},
@@ -88,13 +100,28 @@ public class mainform extends JFrame {
 			new String[] {
 				"Email", "Ng\u00E0y", "\u0110i\u1EC3m", "K\u1EBFt qu\u1EA3"
 			}
-		));
-		table.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		table.setBounds(432, 64, 201, 133);
-		panel.add(table);
+		) {
+			boolean[] columnEditables = new boolean[] {
+				false, false, false, false
+			};
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
+		});
+		bangdiem.getColumnModel().getColumn(2).setPreferredWidth(50);
+		bangdiem.getColumnModel().getColumn(2).setMinWidth(50);
+		bangdiem.getColumnModel().getColumn(3).setPreferredWidth(50);
+		bangdiem.getColumnModel().getColumn(3).setMinWidth(50);
+		bangdiem.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		bangdiem.getColumnModel().getColumn(0).setPreferredWidth(100);		
+		bangdiem.setRowHeight(20);
+
+
 		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(433, 64, 158, 133);
-		panel.add(scrollPane);
+		bttest.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+		});
 	}
 }

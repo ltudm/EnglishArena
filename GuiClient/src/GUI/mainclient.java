@@ -10,6 +10,7 @@ public class mainclient {
 	public static dangkyform dkf=null;
 	public static dangnhapform dnf=null;
 	public static mainform mf=null;
+	
 	public static void main(String[] args) {
 		try {
 		    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
