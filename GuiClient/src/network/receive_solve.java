@@ -55,6 +55,12 @@ public class receive_solve extends Thread {
 	                	this.dangky(respon);break;
 	                	
 	                }
+	                case "ghepdoi":
+	                {
+	                	System.out.println("ghep");
+	                	String a=respon.data[0];
+	                	System.out.println(a);
+	                }
 	                case "fun" :
 	                {
 	                	String a=respon.data[0];
@@ -68,8 +74,8 @@ public class receive_solve extends Thread {
 			e.printStackTrace();
 		}
     }
-    public void check(data dtsk) {
-    	int a=dtsk.login;
+    public void check(data datat) {
+    	int a=datat.login;
     	if(a==1)
     	{ 
     		mainclient.dnf.setVisible(false);
@@ -101,9 +107,9 @@ public class receive_solve extends Thread {
     			
     		
     }
-    public void dangky(data dtsk)
+    public void dangky(data datat)
     {
-    	int a=dtsk.dk;
+    	int a=datat.dk;
     	if(a==1)
     	{
     		JOptionPane.showMessageDialog(null,
@@ -146,6 +152,10 @@ public class receive_solve extends Thread {
         };
         mainform.bangdiem.setModel(model);
 
+    }
+    public void ghepdoi(data datat)
+    {
+    	
     }
 
 }

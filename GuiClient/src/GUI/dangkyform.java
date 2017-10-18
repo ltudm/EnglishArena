@@ -143,14 +143,9 @@ public class dangkyform extends JFrame {
 			        data[1] = pswd1.getText();
 			        dtsk.data = data;
 			        try {
-			        	serverconnect cnsv = new serverconnect();
-			            dout = new ObjectOutputStream(cnsv.socket.getOutputStream());
+			            dout = new ObjectOutputStream(serverconnect.socket.getOutputStream());
 			            dout.writeObject(dtsk);
-			            dout.flush();
-						Thread receive=new receive_solve(cnsv.socket);
-						receive.start();
-						
-									
+			            dout.flush();							
 			        } catch (IOException ex) {
 			            Logger.getLogger(dangnhapform.class.getName()).log(Level.SEVERE, null, ex);
 			            JOptionPane.showMessageDialog(null,

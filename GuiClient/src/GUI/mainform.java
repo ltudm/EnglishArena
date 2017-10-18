@@ -11,9 +11,14 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.JToggleButton;
+import javax.swing.JWindow;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.JTabbedPane;
 import javax.swing.JScrollPane;
@@ -21,14 +26,24 @@ import javax.swing.JTable;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.table.DefaultTableModel;
+
+import network.data;
+import network.receive_solve;
+import network.serverconnect;
+
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.awt.event.ActionEvent;
+
 
 public class mainform extends JFrame {
 
 	private JPanel contentPane;
 	public static JTable bangdiem;
-
+	ObjectInputStream din = null;
+    ObjectOutputStream dout = null;
 	/**
 	 * Launch the application.
 	 */
@@ -115,11 +130,40 @@ public class mainform extends JFrame {
 		bangdiem.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		bangdiem.getColumnModel().getColumn(0).setPreferredWidth(100);		
 		bangdiem.setRowHeight(20);
+		
+		JButton bttd = new JButton("Thách đấu");
+		bttd.setBounds(381, 203, 89, 23);
+		panel.add(bttd);
+		
+		JButton btbd = new JButton("Bắt đầu");
+		btbd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+		});
+		btbd.setBounds(20, 134, 89, 23);
+		panel.add(btbd);
 
 
 		
 		bttest.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				data data_sent = new data();
+				data_sent.action="ghepdoi";
+		        data_sent.data = mainclient.dnf.data2;
+		        System.out.println(mainclient.dnf.data2[0]);
+		       try {
+		            dout = new ObjectOutputStream(serverconnect.socket.getOutputStream());
+		            dout.writeObject(data_sent);
+		            dout.flush();								
+		        } catch (IOException ex) {
+		            Logger.getLogger(dangnhapform.class.getName()).log(Level.SEVERE, null, ex);
+		            JOptionPane.showMessageDialog(null,
+		            	    "Lỗi",
+		            	    "Lỗi phát sinh",
+		            	    JOptionPane.ERROR_MESSAGE);
+		            
+		        }
 				
 			}
 		});

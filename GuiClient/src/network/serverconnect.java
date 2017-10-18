@@ -15,14 +15,14 @@ import GUI.mainform;
 
 public class serverconnect {
 	public static int port = 6788;
-    public static String ip_server = "localhost";
+    public static String server = "localhost";
     public static Socket socket = null;
     public static mainform mainf=null;
     public serverconnect()
     {
     	try
     	{		
-			socket=new Socket(ip_server,port);
+			socket=new Socket(server,port);
             
     	}
     	catch (IOException ex) {

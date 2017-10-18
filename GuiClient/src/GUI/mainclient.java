@@ -1,15 +1,24 @@
 package GUI;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
 import GUI.dangkyform;
 import GUI.dangnhapform;
 import GUI.mainform;
+import network.receive_solve;
+import network.serverconnect;
 
 public class mainclient {
 	public static dangkyform dkf=null;
 	public static dangnhapform dnf=null;
 	public static mainform mf=null;
+	public static trochoi tc=null;
 	
 	public static void main(String[] args) {
 		try {
@@ -25,6 +34,17 @@ public class mainclient {
 		dnf=new dangnhapform();
 		dkf=new dangkyform();
 		mf=new mainform();
+		tc=new trochoi();
+		try {
+        	serverconnect cnsv = new serverconnect();
+			Thread receive=new receive_solve(cnsv.socket);
+			receive.start();						
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,
+            	    "Lỗi",
+            	    "Lỗi phát sinh",
+            	    JOptionPane.ERROR_MESSAGE);           
+        }
 		dnf.setVisible(true);		
 	}
 	

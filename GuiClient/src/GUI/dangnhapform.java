@@ -33,6 +33,7 @@ public class dangnhapform extends JFrame {
 	private JPanel contentPane;
 	private JTextField emailf;
 	private JPasswordField pswdf;
+	public String[] data2=new String[2];
 
 	/**
 	 * Launch the application.
@@ -120,13 +121,11 @@ public class dangnhapform extends JFrame {
 		        data[0] = emailf.getText();
 		        data[1] = pswdf.getText();
 		        dtsk.data = data;
+		        data2=data;
 		        try {
-		        	serverconnect cnsv = new serverconnect();
-		            dout = new ObjectOutputStream(cnsv.socket.getOutputStream());
+		            dout = new ObjectOutputStream(serverconnect.socket.getOutputStream());
 		            dout.writeObject(dtsk);
 		            dout.flush();
-					Thread receive=new receive_solve(cnsv.socket);
-					receive.start();
 					System.out.println("conected");
 								
 		        } catch (IOException ex) {
