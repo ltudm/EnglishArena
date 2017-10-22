@@ -1,5 +1,6 @@
 package GUI;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,6 +20,8 @@ public class mainclient {
 	public static dangnhapform dnf=null;
 	public static mainform mf=null;
 	public static trochoi tc=null;
+	//public static ObjectInputStream in = null;
+    //public static ObjectOutputStream out = null;
 	
 	public static void main(String[] args) {
 		try {
@@ -38,6 +41,7 @@ public class mainclient {
 		try {
         	serverconnect cnsv = new serverconnect();
 			Thread receive=new receive_solve(cnsv.socket);
+			// out = new ObjectOutputStream(cnsv.socket.getOutputStream());
 			receive.start();						
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null,

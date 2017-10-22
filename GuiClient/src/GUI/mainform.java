@@ -42,8 +42,8 @@ public class mainform extends JFrame {
 
 	private JPanel contentPane;
 	public static JTable bangdiem;
-	ObjectInputStream din = null;
-    ObjectOutputStream dout = null;
+    ObjectOutputStream out = null;
+    public static ObjectInputStream in = null;   
 	/**
 	 * Launch the application.
 	 */
@@ -138,7 +138,22 @@ public class mainform extends JFrame {
 		JButton btbd = new JButton("Bắt đầu");
 		btbd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+				data data_sent = new data();
+				data_sent.action="ghepdoi";
+				data_sent.data = mainclient.dnf.data2;
+				try {
+		            out = new ObjectOutputStream(serverconnect.socket.getOutputStream());
+		            out.writeObject(data_sent);
+		            out.flush();
+		            System.out.println("da gui");
+		        } catch (IOException ex) {
+		            Logger.getLogger(dangnhapform.class.getName()).log(Level.SEVERE, null, ex);
+		            JOptionPane.showMessageDialog(null,
+		            	    "Lỗi",
+		            	    "Lỗi phát sinh",
+		            	    JOptionPane.ERROR_MESSAGE);
+		            
+		        }
 			}
 		});
 		btbd.setBounds(20, 134, 89, 23);
@@ -151,11 +166,12 @@ public class mainform extends JFrame {
 				data data_sent = new data();
 				data_sent.action="ghepdoi";
 		        data_sent.data = mainclient.dnf.data2;
-		        System.out.println(mainclient.dnf.data2[0]);
+		       
 		       try {
-		            dout = new ObjectOutputStream(serverconnect.socket.getOutputStream());
-		            dout.writeObject(data_sent);
-		            dout.flush();								
+		            out = new ObjectOutputStream(serverconnect.socket.getOutputStream());
+		            out.writeObject(data_sent);
+		            out.flush();
+		            System.out.println(mainclient.dnf.data2[0]);
 		        } catch (IOException ex) {
 		            Logger.getLogger(dangnhapform.class.getName()).log(Level.SEVERE, null, ex);
 		            JOptionPane.showMessageDialog(null,

@@ -22,8 +22,7 @@ public class serverconnect {
     {
     	try
     	{		
-			socket=new Socket(server,port);
-            
+			socket=new Socket(server,port);           
     	}
     	catch (IOException ex) {
             Logger.getLogger(dangnhapform.class.getName()).log(Level.SEVERE, null, ex);

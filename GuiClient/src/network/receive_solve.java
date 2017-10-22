@@ -24,54 +24,61 @@ import GUI.*;
 public class receive_solve extends Thread {
 	
 	Socket socket = null;
-    ObjectInputStream din = null;
-    data respon = null;
     mainform mf=new mainform();
     public static  DefaultTableModel model= new DefaultTableModel();
+    ObjectInputStream in=null;
     public receive_solve(Socket sk){
-        this.socket = sk;
+        this.socket = sk;      
     }
     @Override
     public void run()
     {
-    	try {
-			din = new ObjectInputStream(this.socket.getInputStream());
-			 while(true){
-	                respon = (data)din.readObject();
-	                switch(respon.action){
+    	data respon = null;
+    	try {   		 
+    		in  = new ObjectInputStream(this.socket.getInputStream());
+			 while(true){				    
+	                respon = (data)in.readObject();
+	                System.out.println(respon.action);
+	                switch(respon.action){	                
 	                case "login" : 
 	                	{
 	                		this.check(respon); 
 	                		//loaddiem(respon.data_arr);
-	                		for(String[] s:respon.data_arr)
+	                		/*for(String[] s:respon.data_arr)
 	                 		{
 	                 			System.out.println(s[0]+" "+s[1]+" "+s[2]);
-	                 		}
+	                 		}*/
 	                		this.loaddiem(respon.data_arr);
+	                		
 	                		break;
 	                	}
 	                case "dangky":
 	                {
-	                	this.dangky(respon);break;
+	                	this.dangky(respon);
+	                	break;
 	                	
 	                }
 	                case "ghepdoi":
 	                {
-	                	System.out.println("ghep");
-	                	String a=respon.data[0];
-	                	System.out.println(a);
+	                	this.ghepdoi(respon);break;
 	                }
 	                case "fun" :
 	                {
-	                	String a=respon.data[0];
+	                	System.out.println("hello");break;
 	                	
 	                }
+	                default:
+	                {
+	                	System.out.println("hanh dong khong ro rang: "+respon.action);
 	                }
-			 }
-	        }
-		 catch (IOException | ClassNotFoundException e) {
+	                
+			    }
+	          }
+	      }
+		 catch (IOException | ClassNotFoundException ex) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			ex.printStackTrace();
+			System.exit(0);
 		}
     }
     public void check(data datat) {
@@ -110,6 +117,7 @@ public class receive_solve extends Thread {
     public void dangky(data datat)
     {
     	int a=datat.dk;
+    	System.out.println(a);
     	if(a==1)
     	{
     		JOptionPane.showMessageDialog(null,
@@ -155,7 +163,8 @@ public class receive_solve extends Thread {
     }
     public void ghepdoi(data datat)
     {
-    	
+    	System.out.println(datat.data[0]);
+    	System.out.println("da nhan");
     }
 
 }
