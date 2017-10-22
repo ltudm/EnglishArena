@@ -2,6 +2,7 @@ package GUI;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -13,13 +14,16 @@ import GUI.dangkyform;
 import GUI.dangnhapform;
 import GUI.mainform;
 import network.receive_solve;
-import network.serverconnect;
+
 
 public class mainclient {
 	public static dangkyform dkf=null;
 	public static dangnhapform dnf=null;
 	public static mainform mf=null;
 	public static trochoi tc=null;
+	public static Socket socket=null;
+	public static int port = 6788;
+    public static String server = "localhost";
 	//public static ObjectInputStream in = null;
     //public static ObjectOutputStream out = null;
 	
@@ -39,8 +43,8 @@ public class mainclient {
 		mf=new mainform();
 		tc=new trochoi();
 		try {
-        	serverconnect cnsv = new serverconnect();
-			Thread receive=new receive_solve(cnsv.socket);
+			socket=new Socket(mainclient.server,mainclient.port);
+			Thread receive=new receive_solve(socket);
 			// out = new ObjectOutputStream(cnsv.socket.getOutputStream());
 			receive.start();						
         } catch (Exception e) {

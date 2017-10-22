@@ -1,6 +1,7 @@
 package GUI;
 
 import java.awt.BorderLayout;
+import java.awt.Dialog;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -17,6 +18,8 @@ import javax.swing.JOptionPane;
 
 import java.awt.Font;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -29,7 +32,7 @@ import javax.swing.table.DefaultTableModel;
 
 import network.data;
 import network.receive_solve;
-import network.serverconnect;
+
 
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -42,8 +45,9 @@ public class mainform extends JFrame {
 
 	private JPanel contentPane;
 	public static JTable bangdiem;
-    ObjectOutputStream out = null;
-    public static ObjectInputStream in = null;   
+    ObjectOutputStream cout = null;
+    ObjectInputStream cin = null;
+  
 	/**
 	 * Launch the application.
 	 */
@@ -138,14 +142,20 @@ public class mainform extends JFrame {
 		JButton btbd = new JButton("Bắt đầu");
 		btbd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
 				data data_sent = new data();
 				data_sent.action="ghepdoi";
 				data_sent.data = mainclient.dnf.data2;
 				try {
-		            out = new ObjectOutputStream(serverconnect.socket.getOutputStream());
-		            out.writeObject(data_sent);
-		            out.flush();
+		            cout = new ObjectOutputStream(mainclient.socket.getOutputStream());
+		            cout.writeObject(data_sent);
+		            cout.flush();
 		            System.out.println("da gui");
+		            JOptionPane.showMessageDialog(null,
+		            	    "Đang tìm kiếm người dùng",
+		            	    "Thông báo",
+		            	    JOptionPane.ERROR_MESSAGE);
+		            btbd.setEnabled(false);
 		        } catch (IOException ex) {
 		            Logger.getLogger(dangnhapform.class.getName()).log(Level.SEVERE, null, ex);
 		            JOptionPane.showMessageDialog(null,
@@ -154,6 +164,13 @@ public class mainform extends JFrame {
 		            	    JOptionPane.ERROR_MESSAGE);
 		            
 		        }
+				Timer timer = new Timer();
+				timer.schedule(new TimerTask() {
+					  @Override
+					  public void run() {
+						  btbd.setEnabled(true);;
+					  }
+					}, 10*1000);
 			}
 		});
 		btbd.setBounds(20, 134, 89, 23);
@@ -163,15 +180,16 @@ public class mainform extends JFrame {
 		
 		bttest.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				data data_sent = new data();
+				/*data data_sent = new data();
 				data_sent.action="ghepdoi";
 		        data_sent.data = mainclient.dnf.data2;
-		       
+		        //receive_solve.gui(data_sent);
 		       try {
-		            out = new ObjectOutputStream(serverconnect.socket.getOutputStream());
-		            out.writeObject(data_sent);
-		            out.flush();
-		            System.out.println(mainclient.dnf.data2[0]);
+		            cout = new ObjectOutputStream(mainclient.socket.getOutputStream());
+		            cout.writeObject(data_sent);
+		            cout.flush();
+		           
+		            System.out.println(data_sent.action);
 		        } catch (IOException ex) {
 		            Logger.getLogger(dangnhapform.class.getName()).log(Level.SEVERE, null, ex);
 		            JOptionPane.showMessageDialog(null,
@@ -179,7 +197,16 @@ public class mainform extends JFrame {
 		            	    "Lỗi phát sinh",
 		            	    JOptionPane.ERROR_MESSAGE);
 		            
-		        }
+		        }*/
+				btbd.setEnabled(false);
+				Timer timer = new Timer();
+				timer.schedule(new TimerTask() {
+					  @Override
+					  public void run() {
+						  btbd.setEnabled(true);;
+					  }
+					}, 10*1000);
+		   
 				
 			}
 		});

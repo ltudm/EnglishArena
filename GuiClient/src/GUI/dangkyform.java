@@ -9,7 +9,7 @@ import javax.swing.border.EmptyBorder;
 
 import network.data;
 import network.receive_solve;
-import network.serverconnect;
+
 
 import java.awt.Color;
 import javax.swing.JLabel;
@@ -40,8 +40,8 @@ public class dangkyform extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	ObjectInputStream din = null;
-    ObjectOutputStream dout = null;
+	ObjectInputStream cin = null;
+    ObjectOutputStream cout = null;
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -136,16 +136,16 @@ public class dangkyform extends JFrame {
 			        		    JOptionPane.WARNING_MESSAGE);	
 					 return;
 			        }
-				 data dtsk = new data();
+				 data data_sent = new data();
 			        String[] data = new String[2];
-			        dtsk.action = "dangky";
+			        data_sent.action = "dangky";
 			        data[0] = tendn.getText();
 			        data[1] = pswd1.getText();
-			        dtsk.data = data;
+			        data_sent.data = data;
 			        try {
-			            dout = new ObjectOutputStream(serverconnect.socket.getOutputStream());
-			            dout.writeObject(dtsk);
-			            dout.flush();							
+			            cout = new ObjectOutputStream(mainclient.socket.getOutputStream());
+			            cout.writeObject(data_sent);
+			            cout.flush();							
 			        } catch (IOException ex) {
 			            Logger.getLogger(dangnhapform.class.getName()).log(Level.SEVERE, null, ex);
 			            JOptionPane.showMessageDialog(null,

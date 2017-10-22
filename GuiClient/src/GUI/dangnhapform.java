@@ -26,7 +26,7 @@ import java.awt.event.ActionEvent;
 import GUI.dangkyform;
 import network.data;
 import network.receive_solve;
-import network.serverconnect;
+
 
 public class dangnhapform extends JFrame {
 
@@ -38,8 +38,8 @@ public class dangnhapform extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	ObjectInputStream din = null;
-    ObjectOutputStream dout = null;
+	ObjectInputStream cin = null;
+    ObjectOutputStream cout = null;
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -115,20 +115,20 @@ public class dangnhapform extends JFrame {
 			            emailf.requestFocus();	
 			            return;
 			        }
-				data dtsk = new data();
+				data data_sent= new data();
 		        String[] data = new String[2];
-		        dtsk.action = "login";
+		        data_sent.action = "login";
 		        data[0] = emailf.getText();
 		        data[1] = pswdf.getText();
-		        dtsk.data = data;
+		        data_sent.data = data;
 		        data2=data;
 		        try {
-		            dout = new ObjectOutputStream(serverconnect.socket.getOutputStream());
-		            dout.writeObject(dtsk);
-		            dout.flush();
+		            cout = new ObjectOutputStream(mainclient.socket.getOutputStream());
+		            cout.writeObject(data_sent);
+		            cout.flush();		        	
 					System.out.println("conected");
-								
-		        } catch (IOException ex) {
+		        }			
+		        catch (IOException ex) {
 		            Logger.getLogger(dangnhapform.class.getName()).log(Level.SEVERE, null, ex);
 		            JOptionPane.showMessageDialog(null,
 		            	    "Lỗi",

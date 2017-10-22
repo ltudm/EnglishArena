@@ -24,20 +24,23 @@ import GUI.*;
 public class receive_solve extends Thread {
 	
 	Socket socket = null;
-    mainform mf=new mainform();
+    mainform mf=new mainform();  
     public static  DefaultTableModel model= new DefaultTableModel();
-    ObjectInputStream in=null;
+	ObjectInputStream in = null;
+    //static ObjectOutputStream out = null;
+    
     public receive_solve(Socket sk){
-        this.socket = sk;      
+        this.socket = sk;              
     }
     @Override
     public void run()
     {
     	data respon = null;
     	try {   		 
-    		in  = new ObjectInputStream(this.socket.getInputStream());
-			 while(true){				    
-	                respon = (data)in.readObject();
+    		in  = new ObjectInputStream(this.socket.getInputStream());    	
+    
+			 while(true){		
+				    respon = (data) in.readObject();
 	                System.out.println(respon.action);
 	                switch(respon.action){	                
 	                case "login" : 
@@ -49,7 +52,7 @@ public class receive_solve extends Thread {
 	                 			System.out.println(s[0]+" "+s[1]+" "+s[2]);
 	                 		}*/
 	                		this.loaddiem(respon.data_arr);
-	                		
+	                		respon.action=null;
 	                		break;
 	                	}
 	                case "dangky":
@@ -72,7 +75,7 @@ public class receive_solve extends Thread {
 	                	System.out.println("hanh dong khong ro rang: "+respon.action);
 	                }
 	                
-			    }
+	               }
 	          }
 	      }
 		 catch (IOException | ClassNotFoundException ex) {
@@ -166,5 +169,21 @@ public class receive_solve extends Thread {
     	System.out.println(datat.data[0]);
     	System.out.println("da nhan");
     }
+   /* public static void gui(data data_sent)
+    {
+    	try
+    	{
+    		out.writeObject(data_sent);
+    		out.flush();
+    		System.out.println("Da gui: "+data_sent.action);
+    	}
+    	catch (IOException ex) {
+            Logger.getLogger(receive_solve.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null,
+            	    "Lỗi",
+            	    "Lỗi phát sinh",
+            	    JOptionPane.ERROR_MESSAGE);
+        }
+    }*/
 
 }
