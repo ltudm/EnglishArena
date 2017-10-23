@@ -51,7 +51,6 @@ public class receive_solve extends Thread {
 	                 		{
 	                 			System.out.println(s[0]+" "+s[1]+" "+s[2]);
 	                 		}*/
-	                		this.loaddiem(respon.data_arr);
 	                		respon.action=null;
 	                		break;
 	                	}
@@ -90,14 +89,15 @@ public class receive_solve extends Thread {
     	{ 
     		mainclient.dnf.setVisible(false);
     		mf.setVisible(true);		
-    		
+    		this.loaddiem(datat.data_arr);
     	}   		
     	else
     		if(a==2)
     		{
     			System.out.println("admin");
     			mainclient.dnf.setVisible(false);
-        		mf.setVisible(true);       		
+        		mf.setVisible(true); 
+        		this.loaddiem(datat.data_arr);
     		}
     			
     		else
@@ -105,7 +105,6 @@ public class receive_solve extends Thread {
     			{
     				JOptionPane.showMessageDialog(null,
             			    "Tài khoản đang được đăng nhập.");
-
     			}
     				
     			else
@@ -166,6 +165,19 @@ public class receive_solve extends Thread {
     }
     public void ghepdoi(data datat)
     {
+    	if(datat.data[0]==null)
+    	{
+    		JOptionPane.showMessageDialog(null,
+    				datat.data[1],
+            	    "Thông báo",
+            	    JOptionPane.ERROR_MESSAGE);
+    	}
+    	else
+    		if(datat.data[0]!=null)
+    		{
+    			System.out.println(datat.data[0]);
+    			mainclient.tc.setVisible(true);
+    		}
     	System.out.println(datat.data[0]);
     	System.out.println("da nhan");
     }

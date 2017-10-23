@@ -152,7 +152,7 @@ public class mainform extends JFrame {
 		            cout.flush();
 		            System.out.println("da gui");
 		            JOptionPane.showMessageDialog(null,
-		            	    "Đang tìm kiếm người dùng",
+		            	    "Đang tìm kiếm người dùng online trong 10s",
 		            	    "Thông báo",
 		            	    JOptionPane.ERROR_MESSAGE);
 		            btbd.setEnabled(false);

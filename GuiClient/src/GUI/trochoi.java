@@ -46,7 +46,6 @@ public class trochoi extends JFrame {
 	 * Create the frame.
 	 */
 	public trochoi() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 628, 340);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
