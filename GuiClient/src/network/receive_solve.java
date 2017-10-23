@@ -24,7 +24,7 @@ import GUI.*;
 public class receive_solve extends Thread {
 	
 	Socket socket = null;
-    mainform mf=new mainform();  
+   // mainform mf=new mainform();  
     public static  DefaultTableModel model= new DefaultTableModel();
 	ObjectInputStream in = null;
     //static ObjectOutputStream out = null;
@@ -88,7 +88,7 @@ public class receive_solve extends Thread {
     	if(a==1)
     	{ 
     		mainclient.dnf.setVisible(false);
-    		mf.setVisible(true);		
+    		mainclient.mf.setVisible(true);		
     		this.loaddiem(datat.data_arr);
     	}   		
     	else
@@ -96,7 +96,7 @@ public class receive_solve extends Thread {
     		{
     			System.out.println("admin");
     			mainclient.dnf.setVisible(false);
-        		mf.setVisible(true); 
+    			mainclient.mf.setVisible(true); 
         		this.loaddiem(datat.data_arr);
     		}
     			
@@ -175,7 +175,10 @@ public class receive_solve extends Thread {
     	else
     		if(datat.data[0]!=null)
     		{
+    			mainclient.tc.lbemail1.setText(datat.data[1]);
+    			mainclient.tc.lbemail2.setText(datat.data[0]);
     			System.out.println(datat.data[0]);
+    			mainclient.mf.setVisible(false);
     			mainclient.tc.setVisible(true);
     		}
     	System.out.println(datat.data[0]);

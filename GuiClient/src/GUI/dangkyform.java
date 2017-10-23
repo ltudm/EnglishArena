@@ -79,31 +79,31 @@ public class dangkyform extends JFrame {
 		contentPane.add(lblngK);
 		
 		pswd1 = new JPasswordField();
-		pswd1.setBounds(107, 89, 147, 20);
+		pswd1.setBounds(107, 89, 147, 28);
 		contentPane.add(pswd1);
 		
 		tendn = new JTextField();
 		tendn.setColumns(10);
-		tendn.setBounds(107, 57, 147, 20);
+		tendn.setBounds(107, 55, 147, 28);
 		contentPane.add(tendn);
 		
 		JLabel label = new JLabel("Email:");
 		label.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		label.setBounds(55, 55, 46, 20);
+		label.setBounds(51, 57, 46, 20);
 		contentPane.add(label);
 		
 		JLabel label_1 = new JLabel("Mật khẩu:");
 		label_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		label_1.setBounds(31, 86, 70, 22);
+		label_1.setBounds(27, 90, 70, 22);
 		contentPane.add(label_1);
 		
 		JLabel lblNhpLi = new JLabel("Nh\u1EADp l\u1EA1i:");
 		lblNhpLi.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNhpLi.setBounds(31, 120, 70, 22);
+		lblNhpLi.setBounds(31, 124, 70, 22);
 		contentPane.add(lblNhpLi);
 		
 		pswd2 = new JPasswordField();
-		pswd2.setBounds(107, 123, 147, 20);
+		pswd2.setBounds(107, 123, 147, 28);
 		contentPane.add(pswd2);
 		
 		JButton button = new JButton("Đăng ký");
@@ -156,7 +156,7 @@ public class dangkyform extends JFrame {
 			        }
 			}
 		});
-		button.setBounds(55, 162, 89, 23);
+		button.setBounds(55, 162, 89, 24);
 		contentPane.add(button);
 		
 		JButton button_1 = new JButton("Hủy");
@@ -165,7 +165,7 @@ public class dangkyform extends JFrame {
 				mainclient.dkf.setVisible(false);
 			}
 		});
-		button_1.setBounds(178, 162, 89, 23);
+		button_1.setBounds(178, 162, 89, 24);
 		contentPane.add(button_1);
 	}
 
