@@ -118,7 +118,12 @@ public class receive_solve extends Thread {
     				JOptionPane.showMessageDialog(null,
             			    "Tài khoản đang được đăng nhập.");
     			}
-    				
+    			else 
+    				if(a==-2)
+    				{
+        				JOptionPane.showMessageDialog(null,
+                			    "Phiên bản hiện tại đã cũ.");
+        			}   				
     			else
     			{
     				JOptionPane.showMessageDialog(null,
@@ -192,6 +197,8 @@ public class receive_solve extends Thread {
     			System.out.println(datat.data[0]);
     			mainclient.mf.setVisible(false);
     			mainclient.tc.setVisible(true);
+    			mainclient.tc.lbicon1.setVisible(false);
+    			mainclient.tc.lbicon2.setVisible(false);
     		}
     }
     private void sansang(data datat)
@@ -200,6 +207,17 @@ public class receive_solve extends Thread {
     	{
     		mainclient.tc.lbicon2.setVisible(true);
     		mainclient.tc.lbicon2.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("resource/ready-icon.png")).getImage().getScaledInstance(32,32, Image.SCALE_DEFAULT)));
+    		if(mainclient.tc.ready==1)
+    		{
+    			mainclient.tc.lbcd.setVisible(false);
+    		}
+    		else
+    		{
+    			thoigian tg=new thoigian(0);
+    			tg.start();
+    			// =2 để nhận biết 
+    			mainclient.tc.ready=2;
+    		}
     	}
     	else
     		JOptionPane.showMessageDialog(null,

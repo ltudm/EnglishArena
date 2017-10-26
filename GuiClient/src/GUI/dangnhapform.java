@@ -34,6 +34,7 @@ public class dangnhapform extends JFrame {
 	private JTextField emailf;
 	private JPasswordField pswdf;
 	public String[] data2=new String[2];
+	public JLabel lbvs3=null;
 
 	/**
 	 * Launch the application.
@@ -94,6 +95,10 @@ public class dangnhapform extends JFrame {
 		pswdf.setBounds(101, 91, 147, 28);
 		panel.add(pswdf);
 		
+		lbvs3 = new JLabel("1.0");
+		lbvs3.setBounds(61, 171, 60, 14);
+		panel.add(lbvs3);
+		
 		JButton dnbt = new JButton("Đăng nhập");
 		dnbt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -116,11 +121,12 @@ public class dangnhapform extends JFrame {
 			            return;
 			        }
 				data data_sent= new data();
-		        String[] data = new String[2];
+		        String[] data = new String[3];
 		        data_sent.action = "login";
 		        data[0] = emailf.getText();
 		        data[1] = pswdf.getText();
-		        data_sent.data = data;
+		        data[2] = lbvs3.getText();
+		        data_sent.data = data;		       
 		        data2=data;
 		        try {
 		            cout = new ObjectOutputStream(mainclient.socket.getOutputStream());
@@ -152,5 +158,11 @@ public class dangnhapform extends JFrame {
 		});
 		dkbt.setBounds(186, 132, 85, 24);
 		panel.add(dkbt);
+		
+		JLabel lbvs2 = new JLabel("Phiên bản:");
+		lbvs2.setBounds(0, 171, 67, 14);
+		panel.add(lbvs2);
+		
+		
 	}
 }

@@ -238,29 +238,7 @@ public class mainform extends JFrame {
 					  public void run() {
 						  btbd.setEnabled(true);;
 					  }
-					}, 10*1000);*/
-				data data_sent=new data();
-				String[] data = new String[3];
-				data_sent.action="sansang";
-				data[0]="t";				
-				data[1]=mainclient.dnf.data2[0];
-				data[2]="1";
-				data_sent.data=data;
-				try
-				{
-					cout=new ObjectOutputStream(mainclient.socket.getOutputStream());
-					cout.writeObject(data_sent);
-					cout.flush();
-				}
-				catch (IOException ex) {
-		            Logger.getLogger(dangnhapform.class.getName()).log(Level.SEVERE, null, ex);
-		            JOptionPane.showMessageDialog(null,
-		            	    "Không gửi được tín hiệu",
-		            	    "Lỗi",
-		            	    JOptionPane.ERROR_MESSAGE);
-		            
-		        }
-		   
+					}, 10*1000);*/				
 				
 			}
 		});

@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import network.data;
+import network.thoigian;
 
 import javax.swing.JTextField;
 import javax.swing.UIManager;
@@ -29,6 +30,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
+import javax.swing.SwingConstants;
 
 public class trochoi extends JFrame {
 
@@ -37,12 +40,17 @@ public class trochoi extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static JLabel lbemail1;
-	public static JLabel lbdct ;
-	public static JLabel lbemail2;
-	public static JLabel lbdnt;
-	public static JLabel lbicon1;
-	public static JLabel lbicon2;
+	public JLabel lbemail1;
+	public JLabel lbdct ;
+	public JLabel lbemail2;
+	public JLabel lbdnt;
+	public JLabel lbicon1;
+	public JLabel lbicon2;
+	public JLabel lbcd;
+	public JButton btready;
+	public static int ready=0;
+	public JButton btcancer;
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -100,14 +108,14 @@ public class trochoi extends JFrame {
 		        }
 			}
 		});
-		setBounds(100, 100, 628, 340);
+		setBounds(100, 100, 696, 365);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(0, 0, 612, 301);
+		panel.setBounds(0, 0, 680, 326);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -170,7 +178,14 @@ public class trochoi extends JFrame {
 		lbicon1.setBounds(37, 61, 54, 46);
 		panel.add(lbicon1);
 		
-		JButton btready = new JButton("Sẵn sàng");
+		lbcd = new JLabel("");
+		lbcd.setHorizontalAlignment(SwingConstants.CENTER);
+		lbcd.setForeground(Color.RED);
+		lbcd.setFont(new Font("Tahoma", Font.PLAIN, 28));
+		lbcd.setBounds(251, 72, 46, 40);
+		panel.add(lbcd);
+		
+		btready = new JButton("Sẵn sàng");
 		btready.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				lbicon1.setVisible(true);
@@ -187,6 +202,17 @@ public class trochoi extends JFrame {
 					cout=new ObjectOutputStream(mainclient.socket.getOutputStream());
 					cout.writeObject(data_sent);
 					cout.flush();
+					if(ready==2)
+					{
+						lbcd.setVisible(false);
+					}
+					else
+					{
+						thoigian tg=new thoigian(0);
+		    			tg.start();
+		    			ready=1;
+					}
+					
 					System.out.println(data[0]);
 				}
 				catch (IOException ex) {
@@ -202,7 +228,7 @@ public class trochoi extends JFrame {
 		btready.setBounds(144, 216, 89, 23);
 		panel.add(btready);
 		
-		JButton btcancer = new JButton("Hủy bỏ");
+		btcancer = new JButton("Hủy bỏ");
 		btcancer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				data data_sent = new data();
@@ -215,8 +241,10 @@ public class trochoi extends JFrame {
 				try {
 		            cout = new ObjectOutputStream(mainclient.socket.getOutputStream());
 		            cout.writeObject(data_sent);
-		            cout.flush();
-		            System.out.println("da gui");		            
+		            cout.flush();		         
+		            System.out.println("da gui");	
+		            mainclient.tc.setVisible(false);
+		        	mainclient.mf.setVisible(true);
 		        } catch (IOException ex) {
 		            Logger.getLogger(dangnhapform.class.getName()).log(Level.SEVERE, null, ex);
 		            JOptionPane.showMessageDialog(null,
@@ -237,10 +265,13 @@ public class trochoi extends JFrame {
 		JButton btnNewButton = new JButton("New button");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println(lbemail2.getText());
+			
 			}
 		});
 		btnNewButton.setBounds(37, 124, 89, 23);
 		panel.add(btnNewButton);
+		
+		
 	}
+	
 }
