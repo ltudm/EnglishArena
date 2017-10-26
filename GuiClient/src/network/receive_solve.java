@@ -1,4 +1,5 @@
 package network;
+import java.awt.Image;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -12,6 +13,7 @@ import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.sound.sampled.Clip;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -51,7 +53,6 @@ public class receive_solve extends Thread {
 	                 		{
 	                 			System.out.println(s[0]+" "+s[1]+" "+s[2]);
 	                 		}*/
-	                		respon.action=null;
 	                		break;
 	                	}
 	                case "dangky":
@@ -68,6 +69,15 @@ public class receive_solve extends Thread {
 	                {
 	                	System.out.println("hello");break;
 	                	
+	                }
+	                case "sansang":
+	                {
+	                	this.sansang(respon);
+	                	break;
+	                }
+	                case "huythidau":
+	                {
+	                	this.huythidau(respon);break;
 	                }
 	                default:
 	                {
@@ -90,6 +100,7 @@ public class receive_solve extends Thread {
     		mainclient.dnf.setVisible(false);
     		mainclient.mf.setVisible(true);		
     		this.loaddiem(datat.data_arr);
+    		mainclient.mf.lbemailmf.setText(mainclient.dnf.data2[0]);
     	}   		
     	else
     		if(a==2)
@@ -98,6 +109,7 @@ public class receive_solve extends Thread {
     			mainclient.dnf.setVisible(false);
     			mainclient.mf.setVisible(true); 
         		this.loaddiem(datat.data_arr);
+        		mainclient.mf.lbemailmf.setText(mainclient.dnf.data2[0]);
     		}
     			
     		else
@@ -134,7 +146,7 @@ public class receive_solve extends Thread {
     		JOptionPane.showMessageDialog(null,
     			    "email da co nguoi dang ky.");
     }
-    public void loaddiem(ArrayList<String[]> data){
+    private void loaddiem(ArrayList<String[]> data){
         if(data.isEmpty()){
             JOptionPane.showMessageDialog(null, "Không có data");
             return;
@@ -163,7 +175,7 @@ public class receive_solve extends Thread {
         mainform.bangdiem.setModel(model);
 
     }
-    public void ghepdoi(data datat)
+    private void ghepdoi(data datat)
     {
     	if(datat.data[0]==null)
     	{
@@ -181,24 +193,30 @@ public class receive_solve extends Thread {
     			mainclient.mf.setVisible(false);
     			mainclient.tc.setVisible(true);
     		}
-    	System.out.println(datat.data[0]);
-    	System.out.println("da nhan");
     }
-   /* public static void gui(data data_sent)
+    private void sansang(data datat)
     {
-    	try
+    	if(datat.data[0].equals("dasansang"))
     	{
-    		out.writeObject(data_sent);
-    		out.flush();
-    		System.out.println("Da gui: "+data_sent.action);
+    		mainclient.tc.lbicon2.setVisible(true);
+    		mainclient.tc.lbicon2.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("resource/ready-icon.png")).getImage().getScaledInstance(32,32, Image.SCALE_DEFAULT)));
     	}
-    	catch (IOException ex) {
-            Logger.getLogger(receive_solve.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(null,
-            	    "Lỗi",
-            	    "Lỗi phát sinh",
+    	else
+    		JOptionPane.showMessageDialog(null,
+    				"Lỗi trong quá trình nhận",
+            	    "Thông báo",
             	    JOptionPane.ERROR_MESSAGE);
-        }
-    }*/
+    }
+    private void huythidau(data datat)
+    {
+    	JOptionPane.showMessageDialog(null,
+				datat.data[0],
+        	    "Thông báo",
+        	    JOptionPane.ERROR_MESSAGE);
+    	mainclient.tc.setVisible(false);
+    	mainclient.mf.setVisible(true);
+    }
+
+
 
 }

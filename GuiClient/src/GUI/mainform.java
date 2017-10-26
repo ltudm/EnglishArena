@@ -39,6 +39,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 
 public class mainform extends JFrame {
@@ -47,6 +49,7 @@ public class mainform extends JFrame {
 	public static JTable bangdiem;
     ObjectOutputStream cout = null;
     ObjectInputStream cin = null;
+    public static JLabel lbemailmf=null;
   
 	/**
 	 * Launch the application.
@@ -79,6 +82,31 @@ public class mainform extends JFrame {
 	 */
 	public ArrayList<String[]> data_arr = new ArrayList<>();
 	public mainform() {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent arg0) {
+				data data_sent = new data();
+				data_sent.action="dangxuat";
+				String[] data=new String[3];
+				data[0]=mainclient.dnf.data2[1];				
+				data[1]=mainclient.dnf.data2[0];
+				data[2]="dangxuat";
+				data_sent.data = data;
+				try {
+		            cout = new ObjectOutputStream(mainclient.socket.getOutputStream());
+		            cout.writeObject(data_sent);
+		            cout.flush();
+		            System.out.println("da gui");		            
+		        } catch (IOException ex) {
+		            Logger.getLogger(dangnhapform.class.getName()).log(Level.SEVERE, null, ex);
+		            JOptionPane.showMessageDialog(null,
+		            	    "Lỗi phát sinh",
+		            	    "Lỗi",
+		            	    JOptionPane.ERROR_MESSAGE);
+		            
+		        }
+			}
+		});
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 689, 369);
@@ -175,6 +203,11 @@ public class mainform extends JFrame {
 		});
 		btbd.setBounds(20, 134, 89, 23);
 		panel.add(btbd);
+		
+		lbemailmf = new JLabel("");
+		lbemailmf.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lbemailmf.setBounds(62, 12, 134, 15);
+		panel.add(lbemailmf);
 
 
 		
@@ -198,14 +231,35 @@ public class mainform extends JFrame {
 		            	    JOptionPane.ERROR_MESSAGE);
 		            
 		        }*/
-				btbd.setEnabled(false);
+				/*btbd.setEnabled(false);
 				Timer timer = new Timer();
 				timer.schedule(new TimerTask() {
 					  @Override
 					  public void run() {
 						  btbd.setEnabled(true);;
 					  }
-					}, 10*1000);
+					}, 10*1000);*/
+				data data_sent=new data();
+				String[] data = new String[3];
+				data_sent.action="sansang";
+				data[0]="t";				
+				data[1]=mainclient.dnf.data2[0];
+				data[2]="1";
+				data_sent.data=data;
+				try
+				{
+					cout=new ObjectOutputStream(mainclient.socket.getOutputStream());
+					cout.writeObject(data_sent);
+					cout.flush();
+				}
+				catch (IOException ex) {
+		            Logger.getLogger(dangnhapform.class.getName()).log(Level.SEVERE, null, ex);
+		            JOptionPane.showMessageDialog(null,
+		            	    "Không gửi được tín hiệu",
+		            	    "Lỗi",
+		            	    JOptionPane.ERROR_MESSAGE);
+		            
+		        }
 		   
 				
 			}
