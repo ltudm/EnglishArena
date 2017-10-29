@@ -182,7 +182,7 @@ public class mainform extends JFrame {
 		            JOptionPane.showMessageDialog(null,
 		            	    "Đang tìm kiếm người dùng online trong 10s",
 		            	    "Thông báo",
-		            	    JOptionPane.ERROR_MESSAGE);
+		            	    JOptionPane.INFORMATION_MESSAGE);
 		            btbd.setEnabled(false);
 		        } catch (IOException ex) {
 		            Logger.getLogger(dangnhapform.class.getName()).log(Level.SEVERE, null, ex);

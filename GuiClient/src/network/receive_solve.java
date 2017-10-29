@@ -30,7 +30,7 @@ public class receive_solve extends Thread {
     public static  DefaultTableModel model= new DefaultTableModel();
 	ObjectInputStream in = null;
     //static ObjectOutputStream out = null;
-    
+	thoigian tg=null;
     public receive_solve(Socket sk){
         this.socket = sk;              
     }
@@ -187,7 +187,7 @@ public class receive_solve extends Thread {
     		JOptionPane.showMessageDialog(null,
     				datat.data[1],
             	    "Thông báo",
-            	    JOptionPane.ERROR_MESSAGE);
+            	    JOptionPane.INFORMATION_MESSAGE);
     	}
     	else
     		if(datat.data[0]!=null)
@@ -199,6 +199,10 @@ public class receive_solve extends Thread {
     			mainclient.tc.setVisible(true);
     			mainclient.tc.lbicon1.setVisible(false);
     			mainclient.tc.lbicon2.setVisible(false);
+    			mainclient.tc.btready.setVisible(true);
+    			mainclient.tc.btcancer.setVisible(true);mainclient.tc.ready=0;
+    			tg=new thoigian(0);
+    			tg.start();
     		}
     }
     private void sansang(data datat)
@@ -210,11 +214,29 @@ public class receive_solve extends Thread {
     		if(mainclient.tc.ready==1)
     		{
     			mainclient.tc.lbcd.setVisible(false);
+    			mainclient.tc.btready.setVisible(false);
+    			mainclient.tc.btcancer.setVisible(false);
+    			data data_sent = new data();
+				data_sent.action="loadcauhoi";
+				try {
+		            mainclient.tc.cout = new ObjectOutputStream(mainclient.socket.getOutputStream());
+		            mainclient.tc.cout.writeObject(data_sent);
+		            mainclient.tc.cout.flush();
+		            System.out.println("da gui");		            
+		        } catch (IOException ex) {
+		            Logger.getLogger(trochoi.class.getName()).log(Level.SEVERE, null, ex);
+		            JOptionPane.showMessageDialog(null,
+		            	    "Lỗi phát sinh",
+		            	    "Lỗi",
+		            	    JOptionPane.ERROR_MESSAGE);
+		            
+		        }
+    			thoigianchuan tg=new thoigianchuan(1);
+    			tg.start();
+    			//khi bam button chay dung
     		}
     		else
-    		{
-    			thoigian tg=new thoigian(0);
-    			tg.start();
+    		{   			    		
     			// =2 để nhận biết 
     			mainclient.tc.ready=2;
     		}

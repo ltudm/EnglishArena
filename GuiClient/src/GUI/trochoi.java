@@ -9,6 +9,7 @@ import javax.swing.border.EmptyBorder;
 
 import network.data;
 import network.thoigian;
+import network.thoigianchuan;
 
 import javax.swing.JTextField;
 import javax.swing.UIManager;
@@ -50,6 +51,8 @@ public class trochoi extends JFrame {
 	public JButton btready;
 	public static int ready=0;
 	public JButton btcancer;
+	public JLabel lbcd2;
+	thoigian tg=null;
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -78,7 +81,7 @@ public class trochoi extends JFrame {
 	 * Create the frame.
 	 */
 	ObjectInputStream cin=null;
-	ObjectOutputStream cout=null;
+	public ObjectOutputStream cout=null;
 	public trochoi() {
 		addWindowListener(new WindowAdapter() {
 			@Override
@@ -99,7 +102,7 @@ public class trochoi extends JFrame {
 		            cout.flush();
 		            System.out.println("da gui");		            
 		        } catch (IOException ex) {
-		            Logger.getLogger(dangnhapform.class.getName()).log(Level.SEVERE, null, ex);
+		            Logger.getLogger(trochoi.class.getName()).log(Level.SEVERE, null, ex);
 		            JOptionPane.showMessageDialog(null,
 		            	    "Lỗi phát sinh",
 		            	    "Lỗi",
@@ -126,27 +129,27 @@ public class trochoi extends JFrame {
 		
 		JLabel label = new JLabel("Điểm người ta:");
 		label.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		label.setBounds(382, 35, 91, 26);
+		label.setBounds(425, 35, 91, 26);
 		panel.add(label);
 		
 		JLabel lbs = new JLabel("0");
 		lbs.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lbs.setBounds(251, 35, 20, 26);
+		lbs.setBounds(278, 35, 20, 26);
 		panel.add(lbs);
 		
 		JLabel label_1 = new JLabel(":");
 		label_1.setFont(new Font("Tahoma", Font.BOLD, 16));
-		label_1.setBounds(269, 35, 20, 26);
+		label_1.setBounds(296, 35, 20, 26);
 		panel.add(label_1);
 		
 		JLabel lbms = new JLabel("0");
 		lbms.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lbms.setBounds(283, 35, 20, 26);
+		lbms.setBounds(310, 35, 20, 26);
 		panel.add(lbms);
 		
 		JLabel tclb = new JLabel("Email:");
 		tclb.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		tclb.setBounds(437, 11, 91, 26);
+		tclb.setBounds(480, 11, 91, 26);
 		panel.add(tclb);
 		
 		JLabel lbtc2 = new JLabel("Email:");
@@ -166,30 +169,52 @@ public class trochoi extends JFrame {
 		
 		lbemail2 = new JLabel("0");
 		lbemail2.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lbemail2.setBounds(483, 11, 119, 26);
+		lbemail2.setBounds(526, 11, 119, 26);
 		panel.add(lbemail2);
 		
 		lbdnt = new JLabel("0");
 		lbdnt.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lbdnt.setBounds(483, 35, 91, 26);
+		lbdnt.setBounds(526, 35, 91, 26);
 		panel.add(lbdnt);
 							
 		lbicon1 = new JLabel("");
-		lbicon1.setBounds(37, 61, 54, 46);
+		lbicon1.setBounds(0, 61, 54, 46);
 		panel.add(lbicon1);
 		
 		lbcd = new JLabel("");
 		lbcd.setHorizontalAlignment(SwingConstants.CENTER);
 		lbcd.setForeground(Color.RED);
 		lbcd.setFont(new Font("Tahoma", Font.PLAIN, 28));
-		lbcd.setBounds(251, 72, 46, 40);
+		lbcd.setBounds(286, 61, 46, 40);
 		panel.add(lbcd);
+		
+
+		lbcd2 = new JLabel("");
+		lbcd2.setHorizontalAlignment(SwingConstants.CENTER);
+		lbcd2.setForeground(Color.RED);
+		lbcd2.setFont(new Font("Tahoma", Font.PLAIN, 28));
+		lbcd2.setBounds(278, 61, 46, 40);
+		panel.add(lbcd2);
 		
 		btready = new JButton("Sẵn sàng");
 		btready.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				lbicon1.setVisible(true);
 				lbicon1.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("resource/ready-icon.png")).getImage().getScaledInstance(32,32, Image.SCALE_DEFAULT)));
+				if(ready==2)
+				{
+					lbcd.setVisible(false);
+					mainclient.tc.btready.setVisible(false);
+	    			mainclient.tc.btcancer.setVisible(false);
+	    			thoigianchuan tg=new thoigianchuan(1);
+	    			tg.start();
+	    			ready=1;
+				}
+				else
+				{
+	    			ready=1;
+	    			mainclient.tc.btready.setVisible(false);
+				}
 				data data_sent=new data();
 				String[] data = new String[3];
 				data_sent.action="sansang";				
@@ -201,18 +226,7 @@ public class trochoi extends JFrame {
 				{
 					cout=new ObjectOutputStream(mainclient.socket.getOutputStream());
 					cout.writeObject(data_sent);
-					cout.flush();
-					if(ready==2)
-					{
-						lbcd.setVisible(false);
-					}
-					else
-					{
-						thoigian tg=new thoigian(0);
-		    			tg.start();
-		    			ready=1;
-					}
-					
+					cout.flush();										
 					System.out.println(data[0]);
 				}
 				catch (IOException ex) {
@@ -231,47 +245,39 @@ public class trochoi extends JFrame {
 		btcancer = new JButton("Hủy bỏ");
 		btcancer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				data data_sent = new data();
-				data_sent.action="dangxuat";
-				String[] data=new String[3];
-				data[0]=lbemail2.getText();				
-				data[1]=mainclient.dnf.data2[0];
-				data[2]="huythidau";
-				data_sent.data = data;
-				try {
-		            cout = new ObjectOutputStream(mainclient.socket.getOutputStream());
-		            cout.writeObject(data_sent);
-		            cout.flush();		         
-		            System.out.println("da gui");	
-		            mainclient.tc.setVisible(false);
-		        	mainclient.mf.setVisible(true);
-		        } catch (IOException ex) {
-		            Logger.getLogger(dangnhapform.class.getName()).log(Level.SEVERE, null, ex);
-		            JOptionPane.showMessageDialog(null,
-		            	    "Lỗi phát sinh",
-		            	    "Lỗi",
-		            	    JOptionPane.ERROR_MESSAGE);
-		            
-		        }
+				huybo();
 			}
 		});
 		btcancer.setBounds(315, 216, 89, 23);
 		panel.add(btcancer);
 		
 		lbicon2 = new JLabel("");
-		lbicon2.setBounds(483, 61, 54, 46);
-		panel.add(lbicon2);
-		
-		JButton btnNewButton = new JButton("New button");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			
-			}
-		});
-		btnNewButton.setBounds(37, 124, 89, 23);
-		panel.add(btnNewButton);
-		
-		
+		lbicon2.setBounds(425, 61, 54, 46);
+		panel.add(lbicon2);					
 	}
-	
+	public void huybo()
+	{
+	data data_sent = new data();
+	data_sent.action="dangxuat";
+	String[] data=new String[3];
+	data[0]=lbemail2.getText();				
+	data[1]=mainclient.dnf.data2[0];
+	data[2]="huythidau";
+	data_sent.data = data;
+	try {
+        cout = new ObjectOutputStream(mainclient.socket.getOutputStream());
+        cout.writeObject(data_sent);
+        cout.flush();		         
+        System.out.println("da gui");	
+        mainclient.tc.setVisible(false);
+    	mainclient.mf.setVisible(true);
+    } catch (IOException ex) {
+        Logger.getLogger(dangnhapform.class.getName()).log(Level.SEVERE, null, ex);
+        JOptionPane.showMessageDialog(null,
+        	    "Lỗi phát sinh",
+        	    "Lỗi",
+        	    JOptionPane.ERROR_MESSAGE);
+        
+    }
+    }
 }
