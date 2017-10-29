@@ -37,9 +37,10 @@ public class thoigianchuan extends Thread {
 				 if(result==0)
 				 {
 					 mainclient.tc.lbcd2.setVisible(false);
-					 is_running2=false;					 
+					 is_running2=false;					
 				 }					 
 					Thread.sleep(10);				
+						
 			  }
 			}
 			 catch (InterruptedException e) {

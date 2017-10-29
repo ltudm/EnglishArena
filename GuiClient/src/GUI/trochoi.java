@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import network.data;
+import network.receive_solve;
 import network.thoigian;
 import network.thoigianchuan;
 
@@ -52,6 +53,7 @@ public class trochoi extends JFrame {
 	public static int ready=0;
 	public JButton btcancer;
 	public JLabel lbcd2;
+	public JLabel lbch;
 	thoigian tg=null;
 	
 	public static void main(String[] args) {
@@ -201,6 +203,13 @@ public class trochoi extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				lbicon1.setVisible(true);
 				lbicon1.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("resource/ready-icon.png")).getImage().getScaledInstance(32,32, Image.SCALE_DEFAULT)));
+				data data_sent=new data();
+				String[] data = new String[3];
+				data_sent.action="sansang";				
+				data[0]=lbemail2.getText();				
+				data[1]=mainclient.dnf.data2[0];
+				data[2]="1";
+				data_sent.data=data;
 				if(ready==2)
 				{
 					lbcd.setVisible(false);
@@ -209,37 +218,48 @@ public class trochoi extends JFrame {
 	    			thoigianchuan tg=new thoigianchuan(1);
 	    			tg.start();
 	    			ready=1;
+	    			mainclient.tc.btready.setVisible(false);
+	    			try
+					{
+						cout=new ObjectOutputStream(mainclient.socket.getOutputStream());
+						cout.writeObject(data_sent);
+						cout.flush();					    			
+						System.out.println(data[0]);
+					}
+					catch (IOException ex) {
+			            Logger.getLogger(dangnhapform.class.getName()).log(Level.SEVERE, null, ex);
+			            JOptionPane.showMessageDialog(null,
+			            	    "Không gửi được tín hiệu",
+			            	    "Lỗi",
+			            	    JOptionPane.ERROR_MESSAGE);			            
+			        }
+	    			receive_solve.loadcauhoi();
 				}
 				else
 				{
 	    			ready=1;
 	    			mainclient.tc.btready.setVisible(false);
+	    			try
+					{
+						cout=new ObjectOutputStream(mainclient.socket.getOutputStream());
+						cout.writeObject(data_sent);
+						cout.flush();					    			
+						System.out.println(data[0]);
+					}
+					catch (IOException ex) {
+			            Logger.getLogger(dangnhapform.class.getName()).log(Level.SEVERE, null, ex);
+			            JOptionPane.showMessageDialog(null,
+			            	    "Không gửi được tín hiệu",
+			            	    "Lỗi",
+			            	    JOptionPane.ERROR_MESSAGE);
+			            
+			        }
 				}
-				data data_sent=new data();
-				String[] data = new String[3];
-				data_sent.action="sansang";				
-				data[0]=lbemail2.getText();				
-				data[1]=mainclient.dnf.data2[0];
-				data[2]="1";
-				data_sent.data=data;
-				try
-				{
-					cout=new ObjectOutputStream(mainclient.socket.getOutputStream());
-					cout.writeObject(data_sent);
-					cout.flush();										
-					System.out.println(data[0]);
-				}
-				catch (IOException ex) {
-		            Logger.getLogger(dangnhapform.class.getName()).log(Level.SEVERE, null, ex);
-		            JOptionPane.showMessageDialog(null,
-		            	    "Không gửi được tín hiệu",
-		            	    "Lỗi",
-		            	    JOptionPane.ERROR_MESSAGE);
-		            
-		        }
+				
+				
 			}
 		});
-		btready.setBounds(144, 216, 89, 23);
+		btready.setBounds(150, 216, 89, 23);
 		panel.add(btready);
 		
 		btcancer = new JButton("Hủy bỏ");
@@ -248,12 +268,17 @@ public class trochoi extends JFrame {
 				huybo();
 			}
 		});
-		btcancer.setBounds(315, 216, 89, 23);
+		btcancer.setBounds(390, 216, 89, 23);
 		panel.add(btcancer);
 		
 		lbicon2 = new JLabel("");
 		lbicon2.setBounds(425, 61, 54, 46);
 		panel.add(lbicon2);					
+		
+		lbch = new JLabel("");
+		lbch.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lbch.setBounds(51, 107, 519, 26);
+		panel.add(lbch);
 	}
 	public void huybo()
 	{

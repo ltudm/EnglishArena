@@ -31,6 +31,8 @@ public class receive_solve extends Thread {
 	ObjectInputStream in = null;
     //static ObjectOutputStream out = null;
 	thoigian tg=null;
+	//load cau hoi 
+	private ArrayList<String[]> datach=null;
     public receive_solve(Socket sk){
         this.socket = sk;              
     }
@@ -74,6 +76,20 @@ public class receive_solve extends Thread {
 	                {
 	                	this.sansang(respon);
 	                	break;
+	                }
+	                case "loadcauhoi":
+	                {
+	                	//this.loadcautl(respon);break;
+	                	int n=respon.data_arr.size();
+	                	for(int i=0;i<n;i++)
+	                	{
+	                		System.out.println(respon.data_arr.get(i)[0]);
+	                	}
+	                	break;
+	                }
+	                case "loadcautl":
+	                {
+	                	System.out.println("load cau tra loi");break;
 	                }
 	                case "huythidau":
 	                {
@@ -215,29 +231,14 @@ public class receive_solve extends Thread {
     		{
     			mainclient.tc.lbcd.setVisible(false);
     			mainclient.tc.btready.setVisible(false);
-    			mainclient.tc.btcancer.setVisible(false);
-    			data data_sent = new data();
-				data_sent.action="loadcauhoi";
-				try {
-		            mainclient.tc.cout = new ObjectOutputStream(mainclient.socket.getOutputStream());
-		            mainclient.tc.cout.writeObject(data_sent);
-		            mainclient.tc.cout.flush();
-		            System.out.println("da gui");		            
-		        } catch (IOException ex) {
-		            Logger.getLogger(trochoi.class.getName()).log(Level.SEVERE, null, ex);
-		            JOptionPane.showMessageDialog(null,
-		            	    "Lỗi phát sinh",
-		            	    "Lỗi",
-		            	    JOptionPane.ERROR_MESSAGE);
-		            
-		        }
+    			mainclient.tc.btcancer.setVisible(false);  			
     			thoigianchuan tg=new thoigianchuan(1);
     			tg.start();
     			//khi bam button chay dung
     		}
     		else
     		{   			    		
-    			// =2 để nhận biết 
+    			// =2 để nhận biết hien tai chua ss
     			mainclient.tc.ready=2;
     		}
     	}
@@ -246,6 +247,49 @@ public class receive_solve extends Thread {
     				"Lỗi trong quá trình nhận",
             	    "Thông báo",
             	    JOptionPane.ERROR_MESSAGE);
+    }
+    //load cau hoi sau khi 1 trong 2 san sang
+    public static void loadcauhoi()
+    {
+    	data data_sent = new data();
+		data_sent.action="loadcauhoi";
+		String[] data = new String[1];
+		data[0]=mainclient.tc.lbemail2.getText();
+		data_sent.data=data;
+		try {
+            mainclient.tc.cout = new ObjectOutputStream(mainclient.socket.getOutputStream());
+            mainclient.tc.cout.writeObject(data_sent);
+            mainclient.tc.cout.flush();
+            System.out.println("da gui");		            
+        } catch (IOException ex) {
+            Logger.getLogger(trochoi.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null,
+            	    "Lỗi phát sinh",
+            	    "Lỗi",
+            	    JOptionPane.ERROR_MESSAGE);
+            
+        }
+    }
+    private void loadcautl(data datat)
+    {
+    	datach=datat.data_arr;
+    	System.out.println(datach.get(0));
+    	data data_sent = new data();
+		data_sent.action="loadcautl";
+		try {
+            mainclient.tc.cout = new ObjectOutputStream(mainclient.socket.getOutputStream());
+            mainclient.tc.cout.writeObject(data_sent);
+            mainclient.tc.cout.flush();
+            System.out.println("da gui");		            
+        } catch (IOException ex) {
+            Logger.getLogger(trochoi.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null,
+            	    "Lỗi phát sinh",
+            	    "Lỗi",
+            	    JOptionPane.ERROR_MESSAGE);
+            
+        }
+
     }
     private void huythidau(data datat)
     {
