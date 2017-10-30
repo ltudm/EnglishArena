@@ -32,7 +32,7 @@ public class receive_solve extends Thread {
     //static ObjectOutputStream out = null;
 	thoigian tg=null;
 	//load cau hoi 
-	private ArrayList<String[]> datach=null;
+	public static ArrayList<String[]> datach=null;
     public receive_solve(Socket sk){
         this.socket = sk;              
     }
@@ -80,12 +80,12 @@ public class receive_solve extends Thread {
 	                case "loadcauhoi":
 	                {
 	                	//this.loadcautl(respon);break;
-	                	int n=respon.data_arr.size();
-	                	for(int i=0;i<n;i++)
+	                	this.datach=respon.data_arr;
+	                	/*for(int i=0;i<13;i++)
 	                	{
-	                		System.out.println(respon.data_arr.get(i)[0]);
-	                	}
-	                	break;
+	                		System.out.println(respon.data_arr.get(i)[1]);
+	                	}*/
+	                	break; 
 	                }
 	                case "loadcautl":
 	                {
@@ -270,27 +270,7 @@ public class receive_solve extends Thread {
             
         }
     }
-    private void loadcautl(data datat)
-    {
-    	datach=datat.data_arr;
-    	System.out.println(datach.get(0));
-    	data data_sent = new data();
-		data_sent.action="loadcautl";
-		try {
-            mainclient.tc.cout = new ObjectOutputStream(mainclient.socket.getOutputStream());
-            mainclient.tc.cout.writeObject(data_sent);
-            mainclient.tc.cout.flush();
-            System.out.println("da gui");		            
-        } catch (IOException ex) {
-            Logger.getLogger(trochoi.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(null,
-            	    "Lỗi phát sinh",
-            	    "Lỗi",
-            	    JOptionPane.ERROR_MESSAGE);
-            
-        }
-
-    }
+   
     private void huythidau(data datat)
     {
     	JOptionPane.showMessageDialog(null,

@@ -34,6 +34,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import javax.swing.SwingConstants;
+import java.awt.SystemColor;
 
 public class trochoi extends JFrame {
 
@@ -54,6 +55,8 @@ public class trochoi extends JFrame {
 	public JButton btcancer;
 	public JLabel lbcd2;
 	public JLabel lbch;
+	public JLabel lbs;
+	public JLabel lbms;
 	thoigian tg=null;
 	
 	public static void main(String[] args) {
@@ -91,6 +94,7 @@ public class trochoi extends JFrame {
 				mainclient.mf.setVisible(true);
 				mainclient.tc.lbicon1.setVisible(false);
 				mainclient.tc.lbicon2.setVisible(false);
+				
 				data data_sent = new data();
 				data_sent.action="dangxuat";
 				String[] data=new String[3];
@@ -134,7 +138,7 @@ public class trochoi extends JFrame {
 		label.setBounds(425, 35, 91, 26);
 		panel.add(label);
 		
-		JLabel lbs = new JLabel("0");
+		lbs = new JLabel("0");
 		lbs.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lbs.setBounds(278, 35, 20, 26);
 		panel.add(lbs);
@@ -144,7 +148,7 @@ public class trochoi extends JFrame {
 		label_1.setBounds(296, 35, 20, 26);
 		panel.add(label_1);
 		
-		JLabel lbms = new JLabel("0");
+		lbms = new JLabel("0");
 		lbms.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lbms.setBounds(310, 35, 20, 26);
 		panel.add(lbms);
@@ -276,9 +280,21 @@ public class trochoi extends JFrame {
 		panel.add(lbicon2);					
 		
 		lbch = new JLabel("");
+		lbch.setBackground(SystemColor.window);
+		lbch.setForeground(Color.BLACK);
 		lbch.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lbch.setBounds(51, 107, 519, 26);
+		lbch.setBounds(51, 107, 569, 56);
+		lbch.setOpaque(true);
 		panel.add(lbch);
+		
+		JButton btnNewButton = new JButton("New button");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				mainclient.tgc.dieukienlap(false);
+			}
+		});
+		btnNewButton.setBounds(29, 216, 89, 23);
+		panel.add(btnNewButton);
 	}
 	public void huybo()
 	{

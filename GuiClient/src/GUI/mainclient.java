@@ -14,6 +14,7 @@ import GUI.dangkyform;
 import GUI.dangnhapform;
 import GUI.mainform;
 import network.receive_solve;
+import network.thoigianchinh;
 
 
 public class mainclient {
@@ -24,6 +25,7 @@ public class mainclient {
 	public static Socket socket=null;
 	public static int port = 6788;
     public static String server = "localhost";
+    public static thoigianchinh tgc=null;
 	//public static ObjectInputStream in = null;
     //public static ObjectOutputStream out = null;
 	
@@ -42,6 +44,7 @@ public class mainclient {
 		dkf=new dangkyform();
 		mf=new mainform();
 		tc=new trochoi();
+		tgc=new thoigianchinh();
 		try {
 			socket=new Socket(mainclient.server,mainclient.port);
 			Thread receive=new receive_solve(socket);
