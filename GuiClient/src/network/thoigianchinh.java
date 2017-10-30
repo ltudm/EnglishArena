@@ -17,6 +17,7 @@ public class thoigianchinh extends Thread {
 	@Override
 	public void run()
 	{
+			is_running=true;
 		    arr_ch=receive_solve.datach;
 			int result=9;   	
 			sec=0;tic=0;
@@ -25,9 +26,10 @@ public class thoigianchinh extends Thread {
 			 while(is_running)
 			  {
 				 tic++;
+				 mainclient.tc.tach.setVisible(true);;
 				 if(result==9)
 				 {
-					 mainclient.tc.lbch.setText(arr_ch.get(slc)[1]);
+					 mainclient.tc.tach.setText(arr_ch.get(slc)[1]);
 				 }
 				 if(tic==100)
 				 {
@@ -48,6 +50,7 @@ public class thoigianchinh extends Thread {
 					 is_running=false;
 					 mainclient.tc.lbs.setText("0");
 					 System.out.println(slc);
+					 mainclient.tc.tach.setVisible(false);
 				 }
 					Thread.sleep(10);										
 			  }

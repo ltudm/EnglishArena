@@ -35,6 +35,8 @@ import java.awt.event.ActionEvent;
 import java.awt.Color;
 import javax.swing.SwingConstants;
 import java.awt.SystemColor;
+import javax.swing.JTextArea;
+import javax.swing.JScrollPane;
 
 public class trochoi extends JFrame {
 
@@ -54,9 +56,9 @@ public class trochoi extends JFrame {
 	public static int ready=0;
 	public JButton btcancer;
 	public JLabel lbcd2;
-	public JLabel lbch;
 	public JLabel lbs;
 	public JLabel lbms;
+	public JTextArea tach;
 	thoigian tg=null;
 	
 	public static void main(String[] args) {
@@ -277,15 +279,7 @@ public class trochoi extends JFrame {
 		
 		lbicon2 = new JLabel("");
 		lbicon2.setBounds(425, 61, 54, 46);
-		panel.add(lbicon2);					
-		
-		lbch = new JLabel("");
-		lbch.setBackground(SystemColor.window);
-		lbch.setForeground(Color.BLACK);
-		lbch.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lbch.setBounds(51, 107, 569, 56);
-		lbch.setOpaque(true);
-		panel.add(lbch);
+		panel.add(lbicon2);
 		
 		JButton btnNewButton = new JButton("New button");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -295,6 +289,18 @@ public class trochoi extends JFrame {
 		});
 		btnNewButton.setBounds(29, 216, 89, 23);
 		panel.add(btnNewButton);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setEnabled(false);
+		scrollPane.setBounds(51, 112, 566, 58);
+		panel.add(scrollPane);
+		
+		tach = new JTextArea();
+		scrollPane.setViewportView(tach);
+		tach.setEditable(false);
+		tach.setFont(new Font("Monospaced", Font.PLAIN, 14));
+		tach.setLineWrap(true);
+		tach.setVisible(false);
 	}
 	public void huybo()
 	{
