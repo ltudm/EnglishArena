@@ -37,6 +37,8 @@ import javax.swing.SwingConstants;
 import java.awt.SystemColor;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class trochoi extends JFrame {
 
@@ -59,6 +61,11 @@ public class trochoi extends JFrame {
 	public JLabel lbs;
 	public JLabel lbms;
 	public JTextArea tach;
+	public JLabel lbch1;
+	public JLabel lbch2;
+	public JLabel lbch3;
+	public JLabel lbch4;
+	String dapan;
 	thoigian tg=null;
 	
 	public static void main(String[] args) {
@@ -287,7 +294,7 @@ public class trochoi extends JFrame {
 				mainclient.tgc.dieukienlap(false);
 			}
 		});
-		btnNewButton.setBounds(29, 216, 89, 23);
+		btnNewButton.setBounds(53, 268, 89, 23);
 		panel.add(btnNewButton);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -296,11 +303,85 @@ public class trochoi extends JFrame {
 		panel.add(scrollPane);
 		
 		tach = new JTextArea();
+		tach.setBackground(new Color(245, 255, 250));
 		scrollPane.setViewportView(tach);
 		tach.setEditable(false);
 		tach.setFont(new Font("Monospaced", Font.PLAIN, 14));
 		tach.setLineWrap(true);
 		tach.setVisible(false);
+		
+		lbch1 = new JLabel("");
+		lbch1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				lbch1.setBackground(new Color(173, 255, 47));
+				lbch2.setBackground(new Color(245, 255, 250));
+				lbch3.setBackground(new Color(245, 255, 250));
+				lbch4.setBackground(new Color(245, 255, 250));
+				dapan=lbch1.getText();
+			}
+		});
+		lbch1.setBackground(new Color(245, 255, 250));
+		lbch1.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lbch1.setBounds(51, 181, 181, 26);
+		panel.add(lbch1);
+		lbch1.setOpaque(true);
+		lbch1.setVisible(false);
+		
+		lbch3 = new JLabel("");
+		lbch3.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				lbch3.setBackground(new Color(173, 255, 47));
+				lbch1.setBackground(new Color(245, 255, 250));
+				lbch2.setBackground(new Color(245, 255, 250));				
+				lbch4.setBackground(new Color(245, 255, 250));
+				dapan=lbch3.getText();
+			}
+		});
+		lbch3.setBackground(new Color(245, 255, 250));
+		lbch3.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lbch3.setBounds(298, 181, 181, 26);
+		panel.add(lbch3);
+		lbch3.setOpaque(true);
+		lbch3.setVisible(false);
+		
+		lbch2 = new JLabel("");
+		lbch2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				lbch2.setBackground(new Color(173, 255, 47));
+				lbch1.setBackground(new Color(245, 255, 250));
+				lbch3.setBackground(new Color(245, 255, 250));
+				lbch4.setBackground(new Color(245, 255, 250));
+				dapan=lbch2.getText();
+			}
+		});
+		lbch2.setBackground(new Color(245, 255, 250));
+		lbch2.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lbch2.setBounds(51, 220, 181, 26);
+		panel.add(lbch2);
+		lbch2.setOpaque(true);
+		lbch2.setVisible(false);
+		
+		lbch4 = new JLabel("");
+		lbch4.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				lbch4.setBackground(new Color(173, 255, 47));
+				lbch1.setBackground(new Color(245, 255, 250));
+				lbch2.setBackground(new Color(245, 255, 250));
+				lbch3.setBackground(new Color(245, 255, 250));		
+				dapan=lbch4.getText();
+			}
+		});
+		lbch4.setBackground(new Color(245, 255, 250));
+		lbch4.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lbch4.setBounds(296, 220, 181, 26);
+		panel.add(lbch4);
+		lbch4.setOpaque(true);
+		lbch4.setVisible(false);
+		
 	}
 	public void huybo()
 	{

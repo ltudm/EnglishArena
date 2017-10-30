@@ -33,6 +33,7 @@ public class receive_solve extends Thread {
 	thoigian tg=null;
 	//load cau hoi 
 	public static ArrayList<String[]> datach=null;
+	public static ArrayList<String[]> datactl=null;
     public receive_solve(Socket sk){
         this.socket = sk;              
     }
@@ -89,7 +90,7 @@ public class receive_solve extends Thread {
 	                }
 	                case "loadcautl":
 	                {
-	                	System.out.println("load cau tra loi");break;
+	                	this.datactl=respon.data_arr;break;
 	                }
 	                case "huythidau":
 	                {
