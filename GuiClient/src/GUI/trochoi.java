@@ -39,6 +39,8 @@ import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class trochoi extends JFrame {
 
@@ -66,6 +68,7 @@ public class trochoi extends JFrame {
 	public JLabel lbch3;
 	public JLabel lbch4;
 	String dapan;
+	int vtctl=0;
 	thoigian tg=null;
 	
 	public static void main(String[] args) {
@@ -96,6 +99,8 @@ public class trochoi extends JFrame {
 	 */
 	ObjectInputStream cin=null;
 	public ObjectOutputStream cout=null;
+	private JTable table;
+	private JScrollPane scrollPane_1;
 	public trochoi() {
 		addWindowListener(new WindowAdapter() {
 			@Override
@@ -288,14 +293,45 @@ public class trochoi extends JFrame {
 		lbicon2.setBounds(425, 61, 54, 46);
 		panel.add(lbicon2);
 		
-		JButton btnNewButton = new JButton("New button");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton btkt = new JButton("Kiểm tra");
+		btkt.setForeground(new Color(0, 0, 0));
+		btkt.setBackground(new Color(173, 255, 47));
+		btkt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				mainclient.tgc.dieukienlap(false);
+				int vtch=mainclient.tgc.slc;
+				String giay=lbs.getText();
+				String ms=lbms.getText();
+				String[] data=new String[7];
+				data[0]=lbemail2.getText();				
+				data[1]=mainclient.dnf.data2[0];
+				data[2]=giay;
+				data[3]=ms;
+				data[4]=dapan;
+				data[5]=String.valueOf(receive_solve.datach.get(vtch)[2]);
+				data[6]=String.valueOf(receive_solve.datactl.get(vtctl)[2]);
+				data data_sent=new data();
+				data_sent.action="tinhdiem";
+				data_sent.data=data;
+				try
+				{
+					cout=new ObjectOutputStream(mainclient.socket.getOutputStream());
+					cout.writeObject(data_sent);
+					cout.flush();					    			
+					System.out.println(data[0]);
+				}
+				catch (IOException ex) {
+		            Logger.getLogger(dangnhapform.class.getName()).log(Level.SEVERE, null, ex);
+		            JOptionPane.showMessageDialog(null,
+		            	    "Không gửi được tín hiệu",
+		            	    "Lỗi",
+		            	    JOptionPane.ERROR_MESSAGE);
+		            
+		        }
+				System.out.println(dapan);
 			}
 		});
-		btnNewButton.setBounds(53, 268, 89, 23);
-		panel.add(btnNewButton);
+		btkt.setBounds(208, 257, 119, 23);
+		panel.add(btkt);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setEnabled(false);
@@ -319,6 +355,7 @@ public class trochoi extends JFrame {
 				lbch3.setBackground(new Color(245, 255, 250));
 				lbch4.setBackground(new Color(245, 255, 250));
 				dapan=lbch1.getText();
+				vtctl=network.thoigianchinh.sttctl;
 			}
 		});
 		lbch1.setBackground(new Color(245, 255, 250));
@@ -337,6 +374,7 @@ public class trochoi extends JFrame {
 				lbch2.setBackground(new Color(245, 255, 250));				
 				lbch4.setBackground(new Color(245, 255, 250));
 				dapan=lbch3.getText();
+				vtctl=network.thoigianchinh.sttctl+2;
 			}
 		});
 		lbch3.setBackground(new Color(245, 255, 250));
@@ -355,6 +393,7 @@ public class trochoi extends JFrame {
 				lbch3.setBackground(new Color(245, 255, 250));
 				lbch4.setBackground(new Color(245, 255, 250));
 				dapan=lbch2.getText();
+				vtctl=network.thoigianchinh.sttctl+1;
 			}
 		});
 		lbch2.setBackground(new Color(245, 255, 250));
@@ -373,6 +412,7 @@ public class trochoi extends JFrame {
 				lbch2.setBackground(new Color(245, 255, 250));
 				lbch3.setBackground(new Color(245, 255, 250));		
 				dapan=lbch4.getText();
+				vtctl=network.thoigianchinh.sttctl+3;
 			}
 		});
 		lbch4.setBackground(new Color(245, 255, 250));
@@ -380,6 +420,23 @@ public class trochoi extends JFrame {
 		lbch4.setBounds(296, 220, 181, 26);
 		panel.add(lbch4);
 		lbch4.setOpaque(true);
+		
+		scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(508, 181, 162, 134);
+		panel.add(scrollPane_1);
+		
+		table = new JTable();
+		scrollPane_1.setViewportView(table);
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+				{null, null, null},
+				{null, null, null},
+			},
+			new String[] {
+				"email", "G\u00E2y", "\u0110i\u1EC3m"
+			}
+		));
+		
 		lbch4.setVisible(false);
 		
 	}
@@ -408,4 +465,11 @@ public class trochoi extends JFrame {
         
     }
     }
+	public void resetmau()
+	{
+		lbch1.setBackground(new Color(245, 255, 250));
+		lbch2.setBackground(new Color(245, 255, 250));
+		lbch3.setBackground(new Color(245, 255, 250));
+		lbch4.setBackground(new Color(245, 255, 250));
+	}
 }

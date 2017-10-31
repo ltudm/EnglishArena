@@ -45,7 +45,7 @@ public class thoigianchuan extends Thread {
 				 }					 
 					Thread.sleep(10);										
 			  }
-			 mainclient.tgc.run();
+			 mainclient.tgc.start();
 			}
 			 catch (InterruptedException e) {
 					// TODO Auto-generated catch block
