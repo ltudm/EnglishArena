@@ -67,7 +67,7 @@ public class trochoi extends JFrame {
 	public JLabel lbch2;
 	public JLabel lbch3;
 	public JLabel lbch4;
-	String dapan;
+	public String dapan;
 	int vtctl=0;
 	thoigian tg=null;
 	
@@ -299,7 +299,22 @@ public class trochoi extends JFrame {
 		btkt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int vtch=mainclient.tgc.slc;
-				String giay=lbs.getText();
+				if(!receive_solve.datactl.get(vtctl)[2].equals("1"))
+				{
+					if(network.thoigianchinh.sttctl==vtctl)
+						lbch1.setBackground(new Color(255, 0, 0));
+					else
+						if(network.thoigianchinh.sttctl+2==vtctl)
+							lbch3.setBackground(new Color(255, 0, 0));
+						else
+							if(network.thoigianchinh.sttctl+1==vtctl)
+								lbch2.setBackground(new Color(255, 0, 0));
+							else
+								lbch4.setBackground(new Color(255, 0, 0));														
+						
+				}
+					
+				/*String giay=lbs.getText();
 				String ms=lbms.getText();
 				String[] data=new String[7];
 				data[0]=lbemail2.getText();				
@@ -309,8 +324,9 @@ public class trochoi extends JFrame {
 				data[4]=dapan;
 				data[5]=String.valueOf(receive_solve.datach.get(vtch)[2]);
 				data[6]=String.valueOf(receive_solve.datactl.get(vtctl)[2]);
+								
 				data data_sent=new data();
-				data_sent.action="tinhdiem";
+				data_sent.action="traloitruoc";
 				data_sent.data=data;
 				try
 				{
@@ -326,7 +342,7 @@ public class trochoi extends JFrame {
 		            	    "Lỗi",
 		            	    JOptionPane.ERROR_MESSAGE);
 		            
-		        }
+		        }*/
 				System.out.println(dapan);
 			}
 		});

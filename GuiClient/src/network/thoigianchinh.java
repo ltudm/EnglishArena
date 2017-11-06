@@ -46,6 +46,7 @@ public class thoigianchinh extends Thread {
 					 mainclient.tc.lbch2.setText(arr_ctl.get(sttctl+1)[1]);
 					 mainclient.tc.lbch3.setText(arr_ctl.get(sttctl+2)[1]);
 					 mainclient.tc.lbch4.setText(arr_ctl.get(sttctl+3)[1]);
+					 mainclient.tc.dapan="";
 				 }
 				 if(tic==100)
 				 {

@@ -96,6 +96,11 @@ public class receive_solve extends Thread {
 	                {
 	                	this.huythidau(respon);break;
 	                }
+	                case "traloitruoc":
+	                {
+	                	
+	                	break;
+	                }
 	                default:
 	                {
 	                	System.out.println("hanh dong khong ro rang: "+respon.action);
