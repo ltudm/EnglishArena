@@ -34,6 +34,8 @@ public class receive_solve extends Thread {
 	//load cau hoi 
 	public static ArrayList<String[]> datach=null;
 	public static ArrayList<String[]> datactl=null;
+	//chu du lieu gui ve
+	public static String[] data_client=new String[5];
     public receive_solve(Socket sk){
         this.socket = sk;              
     }
@@ -98,7 +100,8 @@ public class receive_solve extends Thread {
 	                }
 	                case "traloitruoc":
 	                {
-	                	
+	                	this.data_client=respon.data;
+	                	mainclient.dieukiengui=1;
 	                	break;
 	                }
 	                default:
@@ -275,6 +278,10 @@ public class receive_solve extends Thread {
             	    JOptionPane.ERROR_MESSAGE);
             
         }
+    }
+    public void traloisau(data datat)
+    {
+    	
     }
    
     private void huythidau(data datat)

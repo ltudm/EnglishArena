@@ -310,39 +310,44 @@ public class trochoi extends JFrame {
 							if(network.thoigianchinh.sttctl+1==vtctl)
 								lbch2.setBackground(new Color(255, 0, 0));
 							else
-								lbch4.setBackground(new Color(255, 0, 0));														
-						
-				}
-					
-				/*String giay=lbs.getText();
-				String ms=lbms.getText();
-				String[] data=new String[7];
-				data[0]=lbemail2.getText();				
-				data[1]=mainclient.dnf.data2[0];
-				data[2]=giay;
-				data[3]=ms;
-				data[4]=dapan;
-				data[5]=String.valueOf(receive_solve.datach.get(vtch)[2]);
-				data[6]=String.valueOf(receive_solve.datactl.get(vtctl)[2]);
-								
-				data data_sent=new data();
-				data_sent.action="traloitruoc";
-				data_sent.data=data;
-				try
+								lbch4.setBackground(new Color(255, 0, 0));																				
+				}						
+				if(mainclient.dieukiengui==0)
 				{
-					cout=new ObjectOutputStream(mainclient.socket.getOutputStream());
-					cout.writeObject(data_sent);
-					cout.flush();					    			
-					System.out.println(data[0]);
+					String giay=lbs.getText();
+					String ms=lbms.getText();
+					String[] data=new String[5];
+					data[0]=lbemail2.getText();				
+					data[1]=mainclient.dnf.data2[0];
+					data[2]=giay;
+					data[3]=ms;
+					data[4]=String.valueOf(receive_solve.datactl.get(vtctl)[2]);					
+					data data_sent=new data();
+					data_sent.action="traloitruoc";
+					data_sent.data=data;
+					try
+					{
+						cout=new ObjectOutputStream(mainclient.socket.getOutputStream());
+						cout.writeObject(data_sent);
+						cout.flush();					    			
+						System.out.println(data[0]);
+					}
+					catch (IOException ex) {
+			            Logger.getLogger(dangnhapform.class.getName()).log(Level.SEVERE, null, ex);
+			            JOptionPane.showMessageDialog(null,
+			            	    "Không gửi được tín hiệu",
+			            	    "Lỗi",
+			            	    JOptionPane.ERROR_MESSAGE);
+			            
+			        }
 				}
-				catch (IOException ex) {
-		            Logger.getLogger(dangnhapform.class.getName()).log(Level.SEVERE, null, ex);
-		            JOptionPane.showMessageDialog(null,
-		            	    "Không gửi được tín hiệu",
-		            	    "Lỗi",
-		            	    JOptionPane.ERROR_MESSAGE);
-		            
-		        }*/
+					else
+						if(mainclient.dieukiengui==1)
+						{
+							
+							guidapan();
+						}
+							
 				System.out.println(dapan);
 			}
 		});
@@ -487,5 +492,38 @@ public class trochoi extends JFrame {
 		lbch2.setBackground(new Color(245, 255, 250));
 		lbch3.setBackground(new Color(245, 255, 250));
 		lbch4.setBackground(new Color(245, 255, 250));
+	}
+	// gui cau tra loi lan sau
+	public void guidapan()
+	{		
+			String[] data=new String[10];
+			data[0]=lbemail2.getText();				
+			data[1]=mainclient.dnf.data2[0];
+			data[2]=lbs.getText();
+			data[3]=lbms.getText();
+			data[4]=String.valueOf(receive_solve.datactl.get(vtctl)[2]);		
+			data[5]=receive_solve.data_client[2];
+			data[6]=receive_solve.data_client[3];
+			data[7]=receive_solve.data_client[4];
+			data[8]=receive_solve.data_client[5];
+			data[9]=receive_solve.datach.get(mainclient.tgc.slc)[2];
+			data data_sent=new data();
+			data_sent.action="traloisau";
+			data_sent.data=data;
+			try
+			{
+				cout=new ObjectOutputStream(mainclient.socket.getOutputStream());
+				cout.writeObject(data_sent);
+				cout.flush();					    			
+				System.out.println(data[0]);
+			}
+			catch (IOException ex) {
+	            Logger.getLogger(dangnhapform.class.getName()).log(Level.SEVERE, null, ex);
+	            JOptionPane.showMessageDialog(null,
+	            	    "Không gửi được tín hiệu",
+	            	    "Lỗi",
+	            	    JOptionPane.ERROR_MESSAGE);
+	            
+	        }	
 	}
 }

@@ -26,6 +26,8 @@ public class mainclient {
 	public static int port = 6788;
     public static String server = "localhost";
     public static thoigianchinh tgc=null;
+    // dk gui dap an
+    public static int dieukiengui=0;
 	//public static ObjectInputStream in = null;
     //public static ObjectOutputStream out = null;
 	
