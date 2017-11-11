@@ -107,8 +107,7 @@ public class trochoi extends JFrame {
 			public void windowClosing(WindowEvent arg0) {
 				mainclient.mf.setVisible(true);
 				mainclient.tc.lbicon1.setVisible(false);
-				mainclient.tc.lbicon2.setVisible(false);
-				
+				mainclient.tc.lbicon2.setVisible(false);			
 				data data_sent = new data();
 				data_sent.action="dangxuat";
 				String[] data=new String[3];
@@ -116,6 +115,7 @@ public class trochoi extends JFrame {
 				data[1]=mainclient.dnf.data2[0];
 				data[2]="huythidau";
 				data_sent.data = data;
+				mainclient.tgc.dieukienlap(false);
 				try {
 		            cout = new ObjectOutputStream(mainclient.socket.getOutputStream());
 		            cout.writeObject(data_sent);
@@ -343,8 +343,7 @@ public class trochoi extends JFrame {
 				}
 					else
 						if(mainclient.dieukiengui==1)
-						{
-							
+						{							
 							guidapan();
 						}
 							
@@ -501,12 +500,12 @@ public class trochoi extends JFrame {
 			data[1]=mainclient.dnf.data2[0];
 			data[2]=lbs.getText();
 			data[3]=lbms.getText();
-			data[4]=String.valueOf(receive_solve.datactl.get(vtctl)[2]);		
+			data[4]=String.valueOf(receive_solve.datactl.get(vtctl)[2]);//ket qua		
 			data[5]=receive_solve.data_client[2];
 			data[6]=receive_solve.data_client[3];
-			data[7]=receive_solve.data_client[4];
+			data[7]=receive_solve.data_client[4];// ket qua
 			data[8]=receive_solve.data_client[5];
-			data[9]=receive_solve.datach.get(mainclient.tgc.slc)[2];
+			data[9]=receive_solve.datach.get(mainclient.tgc.slc)[2]; //cap do
 			data data_sent=new data();
 			data_sent.action="traloisau";
 			data_sent.data=data;
