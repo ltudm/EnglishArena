@@ -35,8 +35,7 @@ public class thoigianchinh extends Thread {
 				 mainclient.tc.lbch1.setVisible(true);
 				 mainclient.tc.lbch2.setVisible(true);
 				 mainclient.tc.lbch3.setVisible(true);
-				 mainclient.tc.lbch4.setVisible(true);
-				 
+				 mainclient.tc.lbch4.setVisible(true);						 
 				 if(result==9)
 				 {
 					 sttctl=slc*4;
@@ -47,6 +46,7 @@ public class thoigianchinh extends Thread {
 					 mainclient.tc.lbch3.setText(arr_ctl.get(sttctl+2)[1]);
 					 mainclient.tc.lbch4.setText(arr_ctl.get(sttctl+3)[1]);
 					 mainclient.tc.dapan="";
+					 mainclient.tc.btkt.setEnabled(true);
 				 }
 				 if(tic==100)
 				 {
@@ -59,20 +59,33 @@ public class thoigianchinh extends Thread {
 				 if(result==-1)
 				 {								 
 					 result=9;
-					 slc++;
+					 slc++;					 
+					 /*if(mainclient.dieukiengui==1)
+					 {
+						 mainclient.tc.guidapan();
+						 mainclient.dieukiengui=0;
+					 }	*/				 
+					 //else 
+						 //if(mainclient.dieukiengui==0)
+						// {
+						//	 mainclient.tc.traloibang();
+						// }
+					 
 				 }			
 				 if(slc==arr_ch.size()-1)
 				 {
 					 
 					 is_running=false;
 					 mainclient.tc.lbs.setText("0");
-					 System.out.println(slc);
+					 //System.out.println(slc);
 					 mainclient.tc.tach.setVisible(false);
 					 mainclient.tc.lbch1.setVisible(false);
 					 mainclient.tc.lbch2.setVisible(false);
 					 mainclient.tc.lbch3.setVisible(false);
 					 mainclient.tc.lbch4.setVisible(false);
 				 }
+				 if(is_running==false)
+					 break;
 					Thread.sleep(10);										
 			  }
 			}

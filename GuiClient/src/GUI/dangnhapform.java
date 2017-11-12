@@ -19,7 +19,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.JPasswordField;
+import javax.swing.JRootPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -162,7 +164,8 @@ public class dangnhapform extends JFrame {
 		JLabel lbvs2 = new JLabel("Phiên bản:");
 		lbvs2.setBounds(0, 171, 67, 14);
 		panel.add(lbvs2);
-		
+		JRootPane rootPane = SwingUtilities.getRootPane(dnbt); 
+		rootPane.setDefaultButton(dnbt);
 		
 	}
 }

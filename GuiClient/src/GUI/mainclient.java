@@ -26,8 +26,10 @@ public class mainclient {
 	public static int port = 6788;
     public static String server = "localhost";
     public static thoigianchinh tgc=null;
-    // dk gui dap an
+    // dk gui dap an 0 gui lan dau, 1 gui lan 2
     public static int dieukiengui=0;
+    //de xet xem 2 client gui cung nhau ko
+    public static int dieukiengui_bang=0;
 	//public static ObjectInputStream in = null;
     //public static ObjectOutputStream out = null;
 	

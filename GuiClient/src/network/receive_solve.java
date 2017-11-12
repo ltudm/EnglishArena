@@ -34,8 +34,10 @@ public class receive_solve extends Thread {
 	//load cau hoi 
 	public static ArrayList<String[]> datach=null;
 	public static ArrayList<String[]> datactl=null;
-	//chu du lieu gui ve
+	//chua du lieu gui ve
 	public static String[] data_client=new String[5];
+	//so dong cuatable diem
+	private int sodong=0;
     public receive_solve(Socket sk){
         this.socket = sk;              
     }
@@ -102,6 +104,13 @@ public class receive_solve extends Thread {
 	                {
 	                	this.data_client=respon.data;
 	                	mainclient.dieukiengui=1;
+	                	break;
+	                }
+	                case "traloisau":
+	                {
+	                	this.traloisau(respon.data_arr,sodong);
+	                	mainclient.dieukiengui=0;
+	                	sodong+=2;
 	                	break;
 	                }
 	                default:
@@ -219,7 +228,7 @@ public class receive_solve extends Thread {
     		{
     			mainclient.tc.lbemail1.setText(datat.data[1]);
     			mainclient.tc.lbemail2.setText(datat.data[0]);
-    			System.out.println(datat.data[0]);
+    			System.out.println(datat.data[1]);
     			mainclient.mf.setVisible(false);
     			mainclient.tc.setVisible(true);
     			mainclient.tc.lbicon1.setVisible(false);
@@ -269,7 +278,7 @@ public class receive_solve extends Thread {
             mainclient.tc.cout = new ObjectOutputStream(mainclient.socket.getOutputStream());
             mainclient.tc.cout.writeObject(data_sent);
             mainclient.tc.cout.flush();
-            System.out.println("da gui");		            
+            //System.out.println("da gui");		            
         } catch (IOException ex) {
             Logger.getLogger(trochoi.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null,
@@ -279,11 +288,49 @@ public class receive_solve extends Thread {
             
         }
     }
-    public void traloisau(data datat)
+    public void traloisau(ArrayList<String[]> data,int i)
     {
-    	
+    	  //hien thi diem tren label
+    	  congdiem(Integer.parseInt(data.get(0)[2]),Integer.parseInt(data.get(1)[2]));
+    	  String[] column = new String[3];
+          column[0] = "Email";
+          column[1] = "Thời gian";
+          column[2] = "Điểm số";
+          Object[][] table = new Object[2][3];
+          model = new DefaultTableModel(table, column);
+          int n=0;
+          for(int j=i;n<2 ;j++)
+          {
+        	  ((DefaultTableModel) model).addRow(new Object[]{data.get(n)[0], data.get(n)[1],data.get(n)[2]});
+        	  n++;
+          }                       
+          /*{
+              @Override
+              public boolean isCellEditable(int row, int column) {
+                  //all cells false
+                  return false;
+              }
+          };*/
+        //table[i][0] = data.get(i)[0];
+          //table[i][1] = data.get(i)[1];
+          //table[i][2] =data.get(i)[2];           
+          //System.out.println(data.get(i)[0]+" "+data.get(i)[1]+" "+data.get(i)[2]);
+          mainclient.tc.tablediem.setModel(model);
     }
-   
+    //tra loi truoc diem1, traloisau diem2
+    private void congdiem(int diem1, int diem2)
+    {
+    	int diema=Integer.parseInt(mainclient.tc.lbdct.getText());
+    	int diemb=Integer.parseInt(mainclient.tc.lbdnt.getText());
+    	diema+=diem1;
+    	diemb+=diem2;
+    	mainclient.tc.lbcd.setText(String.valueOf(diema));
+    	mainclient.tc.lbcd.setText(String.valueOf(diemb));
+    }
+   private void addtable()
+   {
+	   
+   }
     private void huythidau(data datat)
     {
     	JOptionPane.showMessageDialog(null,

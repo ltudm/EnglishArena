@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 import network.data;
 import network.receive_solve;
 import network.thoigian;
+import network.thoigianchinh;
 import network.thoigianchuan;
 
 import javax.swing.JTextField;
@@ -68,6 +69,7 @@ public class trochoi extends JFrame {
 	public JLabel lbch3;
 	public JLabel lbch4;
 	public String dapan;
+	public JButton btkt;
 	int vtctl=0;
 	thoigian tg=null;
 	
@@ -99,7 +101,7 @@ public class trochoi extends JFrame {
 	 */
 	ObjectInputStream cin=null;
 	public ObjectOutputStream cout=null;
-	private JTable table;
+	public JTable tablediem;
 	private JScrollPane scrollPane_1;
 	public trochoi() {
 		addWindowListener(new WindowAdapter() {
@@ -242,7 +244,7 @@ public class trochoi extends JFrame {
 						cout=new ObjectOutputStream(mainclient.socket.getOutputStream());
 						cout.writeObject(data_sent);
 						cout.flush();					    			
-						System.out.println(data[0]);
+						//System.out.println(data[0]);
 					}
 					catch (IOException ex) {
 			            Logger.getLogger(dangnhapform.class.getName()).log(Level.SEVERE, null, ex);
@@ -262,7 +264,7 @@ public class trochoi extends JFrame {
 						cout=new ObjectOutputStream(mainclient.socket.getOutputStream());
 						cout.writeObject(data_sent);
 						cout.flush();					    			
-						System.out.println(data[0]);
+						//System.out.println(data[0]);
 					}
 					catch (IOException ex) {
 			            Logger.getLogger(dangnhapform.class.getName()).log(Level.SEVERE, null, ex);
@@ -293,11 +295,12 @@ public class trochoi extends JFrame {
 		lbicon2.setBounds(425, 61, 54, 46);
 		panel.add(lbicon2);
 		
-		JButton btkt = new JButton("Kiểm tra");
+		btkt = new JButton("Kiểm tra");
 		btkt.setForeground(new Color(0, 0, 0));
 		btkt.setBackground(new Color(173, 255, 47));
 		btkt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				btkt.setEnabled(false);
 				int vtch=mainclient.tgc.slc;
 				if(!receive_solve.datactl.get(vtctl)[2].equals("1"))
 				{
@@ -324,13 +327,15 @@ public class trochoi extends JFrame {
 					data[4]=String.valueOf(receive_solve.datactl.get(vtctl)[2]);					
 					data data_sent=new data();
 					data_sent.action="traloitruoc";
-					data_sent.data=data;
+					data_sent.data=data;					
+					messout(data_sent.action);
+					//System.out.println(data[1]+data[2]+data[3]+data[4]+data[0]);
 					try
 					{
 						cout=new ObjectOutputStream(mainclient.socket.getOutputStream());
 						cout.writeObject(data_sent);
 						cout.flush();					    			
-						System.out.println(data[0]);
+						//System.out.println(data[0]);
 					}
 					catch (IOException ex) {
 			            Logger.getLogger(dangnhapform.class.getName()).log(Level.SEVERE, null, ex);
@@ -343,11 +348,42 @@ public class trochoi extends JFrame {
 				}
 					else
 						if(mainclient.dieukiengui==1)
-						{							
-							guidapan();
+						{				
+							messout("tra loi sau");
+							String[] data=new String[10];
+							data[0]=lbemail2.getText();				
+							data[1]=mainclient.dnf.data2[0];
+							data[2]=lbs.getText();
+							data[3]=lbms.getText();
+							data[4]=String.valueOf(receive_solve.datactl.get(vtctl)[2]);//ket qua		
+							data[5]=receive_solve.data_client[2];
+							data[6]=receive_solve.data_client[3];
+							data[7]=receive_solve.data_client[4];// ket qua
+							data[8]="thoigian";
+							data[9]=receive_solve.datach.get(thoigianchinh.slc)[2]; //cap do
+							data data_sent=new data();
+							data_sent.action="traloisau";
+							data_sent.data=data;
+							try
+							{
+								cout=new ObjectOutputStream(mainclient.socket.getOutputStream());
+								cout.writeObject(data_sent);
+								cout.flush();					    			
+								//System.out.println(data[0]);
+							}
+							catch (IOException ex) {
+					            Logger.getLogger(dangnhapform.class.getName()).log(Level.SEVERE, null, ex);
+					            JOptionPane.showMessageDialog(null,
+					            	    "Không gửi được tín hiệu",
+					            	    "Lỗi",
+					            	    JOptionPane.ERROR_MESSAGE);
+					            
+					        }		
+							
+							btkt.setEnabled(false);
 						}
 							
-				System.out.println(dapan);
+				//System.out.println(dapan);
 			}
 		});
 		btkt.setBounds(208, 257, 119, 23);
@@ -445,15 +481,15 @@ public class trochoi extends JFrame {
 		scrollPane_1.setBounds(508, 181, 162, 134);
 		panel.add(scrollPane_1);
 		
-		table = new JTable();
-		scrollPane_1.setViewportView(table);
-		table.setModel(new DefaultTableModel(
+		tablediem = new JTable();
+		scrollPane_1.setViewportView(tablediem);
+		tablediem.setModel(new DefaultTableModel(
 			new Object[][] {
 				{null, null, null},
 				{null, null, null},
 			},
 			new String[] {
-				"email", "G\u00E2y", "\u0110i\u1EC3m"
+				"email", "Th\u1EDDi gian", "\u0110i\u1EC3m"
 			}
 		));
 		
@@ -462,6 +498,7 @@ public class trochoi extends JFrame {
 	}
 	public void huybo()
 	{
+		reset();
 	data data_sent = new data();
 	data_sent.action="dangxuat";
 	String[] data=new String[3];
@@ -487,6 +524,8 @@ public class trochoi extends JFrame {
     }
 	public void resetmau()
 	{
+		/*if(mainclient.dieukiengui==0)
+			btkt.setEnabled(true);*/
 		lbch1.setBackground(new Color(245, 255, 250));
 		lbch2.setBackground(new Color(245, 255, 250));
 		lbch3.setBackground(new Color(245, 255, 250));
@@ -504,8 +543,8 @@ public class trochoi extends JFrame {
 			data[5]=receive_solve.data_client[2];
 			data[6]=receive_solve.data_client[3];
 			data[7]=receive_solve.data_client[4];// ket qua
-			data[8]=receive_solve.data_client[5];
-			data[9]=receive_solve.datach.get(mainclient.tgc.slc)[2]; //cap do
+			data[8]="thoigian";
+			data[9]=receive_solve.datach.get(thoigianchinh.slc)[2]; //cap do
 			data data_sent=new data();
 			data_sent.action="traloisau";
 			data_sent.data=data;
@@ -514,7 +553,7 @@ public class trochoi extends JFrame {
 				cout=new ObjectOutputStream(mainclient.socket.getOutputStream());
 				cout.writeObject(data_sent);
 				cout.flush();					    			
-				System.out.println(data[0]);
+				//System.out.println(data[0]);
 			}
 			catch (IOException ex) {
 	            Logger.getLogger(dangnhapform.class.getName()).log(Level.SEVERE, null, ex);
@@ -524,5 +563,51 @@ public class trochoi extends JFrame {
 	            	    JOptionPane.ERROR_MESSAGE);
 	            
 	        }	
+	}
+	  private void messout(String mess)
+	    {
+	    	System.out.println("mess: "+mess);
+	    }
+	//gui cau traloi bang
+	public void traloibang()
+	{
+		String giay=lbs.getText();
+		String ms=lbms.getText();
+		String[] data=new String[5];
+		data[0]=lbemail2.getText();				
+		data[1]=mainclient.dnf.data2[0];
+		data[2]=giay;
+		data[3]=ms;
+		data[4]=String.valueOf(receive_solve.datactl.get(vtctl)[2]);					
+		data data_sent=new data();
+		data_sent.action="traloibang";
+		data_sent.data=data;
+		//System.out.println(data[1]+data[2]+data[3]+data[4]+data[0]);
+		try
+		{
+			cout=new ObjectOutputStream(mainclient.socket.getOutputStream());
+			cout.writeObject(data_sent);
+			cout.flush();					    			
+			System.out.println(data[0]);
+		}
+		catch (IOException ex) {
+            Logger.getLogger(dangnhapform.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null,
+            	    "Không gửi được tín hiệu",
+            	    "Lỗi",
+            	    JOptionPane.ERROR_MESSAGE);
+            
+        }
+	}
+	public void reset()
+	{
+		 
+		 mainclient.tc.tach.setVisible(false);
+		 mainclient.tc.lbch1.setVisible(false);
+		 mainclient.tc.lbch2.setVisible(false);
+		 mainclient.tc.lbch3.setVisible(false);
+		 mainclient.tc.lbch4.setVisible(false);
+		 mainclient.tc.lbdct.setText("0");
+		 mainclient.tc.lbdnt.setText("0");
 	}
 }
