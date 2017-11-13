@@ -108,8 +108,13 @@ public class receive_solve extends Thread {
 	                }
 	                case "traloisau":
 	                {
-	                	this.traloisau(respon.data_arr,sodong);
+	                	//this.traloisau(respon.data_arr,sodong);
+	                	for(int j=0;j<2 ;j++)
+	                    {
+	                  	  System.out.println(respon.data_arr.get(j)[0]+ respon.data_arr.get(j)[1]+respon.data_arr.get(j)[2]);                  	  
+	                    }    
 	                	mainclient.dieukiengui=0;
+	                	respon.data_arr=null;
 	                	sodong+=2;
 	                	break;
 	                }
@@ -299,10 +304,11 @@ public class receive_solve extends Thread {
           Object[][] table = new Object[2][3];
           model = new DefaultTableModel(table, column);
           int n=0;
-          for(int j=i;n<2 ;j++)
+          for(int j=0;j<2 ;j++)
           {
-        	  ((DefaultTableModel) model).addRow(new Object[]{data.get(n)[0], data.get(n)[1],data.get(n)[2]});
-        	  n++;
+        	  /*((DefaultTableModel) model).addRow(new Object[]{data.get(n)[0], data.get(n)[1],data.get(n)[2]});
+        	  n++;*/
+        	  System.out.println(data.get(j)[0]+ data.get(j)[1]+data.get(j)[2]);
           }                       
           /*{
               @Override

@@ -350,36 +350,7 @@ public class trochoi extends JFrame {
 						if(mainclient.dieukiengui==1)
 						{				
 							messout("tra loi sau");
-							String[] data=new String[10];
-							data[0]=lbemail2.getText();				
-							data[1]=mainclient.dnf.data2[0];
-							data[2]=lbs.getText();
-							data[3]=lbms.getText();
-							data[4]=String.valueOf(receive_solve.datactl.get(vtctl)[2]);//ket qua		
-							data[5]=receive_solve.data_client[2];
-							data[6]=receive_solve.data_client[3];
-							data[7]=receive_solve.data_client[4];// ket qua
-							data[8]="thoigian";
-							data[9]=receive_solve.datach.get(thoigianchinh.slc)[2]; //cap do
-							data data_sent=new data();
-							data_sent.action="traloisau";
-							data_sent.data=data;
-							try
-							{
-								cout=new ObjectOutputStream(mainclient.socket.getOutputStream());
-								cout.writeObject(data_sent);
-								cout.flush();					    			
-								//System.out.println(data[0]);
-							}
-							catch (IOException ex) {
-					            Logger.getLogger(dangnhapform.class.getName()).log(Level.SEVERE, null, ex);
-					            JOptionPane.showMessageDialog(null,
-					            	    "Không gửi được tín hiệu",
-					            	    "Lỗi",
-					            	    JOptionPane.ERROR_MESSAGE);
-					            
-					        }		
-							
+							guidapan();
 							btkt.setEnabled(false);
 						}
 							
