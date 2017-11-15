@@ -456,8 +456,6 @@ public class trochoi extends JFrame {
 		scrollPane_1.setViewportView(tablediem);
 		tablediem.setModel(new DefaultTableModel(
 			new Object[][] {
-				{null, null, null},
-				{null, null, null},
 			},
 			new String[] {
 				"email", "Th\u1EDDi gian", "\u0110i\u1EC3m"
@@ -544,16 +542,37 @@ public class trochoi extends JFrame {
 	{
 		String giay=lbs.getText();
 		String ms=lbms.getText();
-		String[] data=new String[5];
+		String[] data=new String[2];
 		data[0]=lbemail2.getText();				
-		data[1]=mainclient.dnf.data2[0];
-		data[2]=giay;
-		data[3]=ms;
-		data[4]=String.valueOf(receive_solve.datactl.get(vtctl)[2]);					
+		data[1]=mainclient.dnf.data2[0];	
 		data data_sent=new data();
 		data_sent.action="traloibang";
 		data_sent.data=data;
 		//System.out.println(data[1]+data[2]+data[3]+data[4]+data[0]);
+		try
+		{
+			cout=new ObjectOutputStream(mainclient.socket.getOutputStream());
+			cout.writeObject(data_sent);
+			cout.flush();					    			
+			System.out.println(data[0]);
+		}
+		catch (IOException ex) {
+            Logger.getLogger(dangnhapform.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null,
+            	    "Không gửi được tín hiệu",
+            	    "Lỗi",
+            	    JOptionPane.ERROR_MESSAGE);
+            
+        }
+	}
+	public void guidiem()
+	{
+		String[] data=new String[2];
+		data[0]=mainclient.dnf.data2[0];				
+		data[1]=lbdct.getText();
+		data data_sent=null;
+		data_sent.action="themdiem";
+		data_sent.data=data;
 		try
 		{
 			cout=new ObjectOutputStream(mainclient.socket.getOutputStream());

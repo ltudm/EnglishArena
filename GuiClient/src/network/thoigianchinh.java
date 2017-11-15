@@ -47,6 +47,7 @@ public class thoigianchinh extends Thread {
 					 mainclient.tc.lbch4.setText(arr_ctl.get(sttctl+3)[1]);
 					 mainclient.tc.dapan="";
 					 mainclient.tc.btkt.setEnabled(true);
+					 mainclient.dieukiengui_bang=0;
 				 }
 				 if(tic==100)
 				 {
@@ -60,11 +61,17 @@ public class thoigianchinh extends Thread {
 				 {								 
 					 result=9;
 					 slc++;					 
-					 /*if(mainclient.dieukiengui==1)
+					 if(mainclient.dieukiengui==1)
 					 {
 						 mainclient.tc.guidapan();
 						 mainclient.dieukiengui=0;
-					 }	*/				 
+					 }		 
+					 else
+						 if(mainclient.dieukiengui_bang==0)
+						 {
+							 mainclient.tc.traloibang();
+							 mainclient.dieukiengui_bang=1;
+						 }
 					 //else 
 						 //if(mainclient.dieukiengui==0)
 						// {

@@ -27,7 +27,7 @@ public class receive_solve extends Thread {
 	
 	Socket socket = null;
    // mainform mf=new mainform();  
-    public static  DefaultTableModel model= new DefaultTableModel();
+    public static  DefaultTableModel model= null;
 	ObjectInputStream in = null;
     //static ObjectOutputStream out = null;
 	thoigian tg=null;
@@ -37,7 +37,6 @@ public class receive_solve extends Thread {
 	//chua du lieu gui ve
 	public static String[] data_client=new String[5];
 	//so dong cuatable diem
-	private int sodong=0;
     public receive_solve(Socket sk){
         this.socket = sk;              
     }
@@ -84,12 +83,12 @@ public class receive_solve extends Thread {
 	                }
 	                case "loadcauhoi":
 	                {
-	                	//this.loadcautl(respon);break;
 	                	this.datach=respon.data_arr;
 	                	/*for(int i=0;i<13;i++)
 	                	{
 	                		System.out.println(respon.data_arr.get(i)[1]);
 	                	}*/
+	                	this.taotable();// table hien thi diem moi luot choi
 	                	break; 
 	                }
 	                case "loadcautl":
@@ -104,18 +103,24 @@ public class receive_solve extends Thread {
 	                {
 	                	this.data_client=respon.data;
 	                	mainclient.dieukiengui=1;
+	                	mainclient.dieukiengui_bang=1;
 	                	break;
 	                }
 	                case "traloisau":
 	                {
-	                	//this.traloisau(respon.data_arr,sodong);
-	                	for(int j=0;j<2 ;j++)
+	                	this.traloisau(respon.data_arr,1);
+	                	/*for(int j=0;j<2 ;j++)
 	                    {
 	                  	  System.out.println(respon.data_arr.get(j)[0]+ respon.data_arr.get(j)[1]+respon.data_arr.get(j)[2]);                  	  
-	                    }    
+	                    }    */
 	                	mainclient.dieukiengui=0;
+	                	mainclient.dieukiengui_bang=1;
 	                	respon.data_arr=null;
-	                	sodong+=2;
+	                	break;
+	                }
+	                case "traloibang":
+	                {
+	                	this.traloisau(respon.data_arr,0);
 	                	break;
 	                }
 	                default:
@@ -206,8 +211,7 @@ public class receive_solve extends Thread {
             table[i][0] = data.get(i)[0];
             table[i][1] = data.get(i)[1];
             table[i][2] = data.get(i)[2];
-            table[i][3] = data.get(i)[3];
-            
+            table[i][3] = data.get(i)[3];       
         }
         TableModel model = new DefaultTableModel(table, column){
             @Override
@@ -293,35 +297,49 @@ public class receive_solve extends Thread {
             
         }
     }
+    private void taotable()
+    {
+    	String[] column = new String[3];
+        column[0] = "Email";
+        column[1] = "Thời gian";
+        column[2] = "Điểm số";
+        Object[][] table = new Object[2][3];
+        model = new DefaultTableModel(table, column);
+    }
     public void traloisau(ArrayList<String[]> data,int i)
     {
-    	  //hien thi diem tren label
-    	  congdiem(Integer.parseInt(data.get(0)[2]),Integer.parseInt(data.get(1)[2]));
-    	  String[] column = new String[3];
-          column[0] = "Email";
-          column[1] = "Thời gian";
-          column[2] = "Điểm số";
-          Object[][] table = new Object[2][3];
-          model = new DefaultTableModel(table, column);
-          int n=0;
-          for(int j=0;j<2 ;j++)
-          {
-        	  /*((DefaultTableModel) model).addRow(new Object[]{data.get(n)[0], data.get(n)[1],data.get(n)[2]});
-        	  n++;*/
-        	  System.out.println(data.get(j)[0]+ data.get(j)[1]+data.get(j)[2]);
-          }                       
-          /*{
-              @Override
-              public boolean isCellEditable(int row, int column) {
-                  //all cells false
-                  return false;
-              }
-          };*/
-        //table[i][0] = data.get(i)[0];
-          //table[i][1] = data.get(i)[1];
-          //table[i][2] =data.get(i)[2];           
-          //System.out.println(data.get(i)[0]+" "+data.get(i)[1]+" "+data.get(i)[2]);
-          mainclient.tc.tablediem.setModel(model);
+    	if(i==1)
+    	{
+    		if(data.get(0)[0].equals(mainclient.mf.lbemailmf.getText()))
+    		{
+    			congdiem(Integer.parseInt(data.get(0)[2]),Integer.parseInt(data.get(1)[2]));
+    			messout("th1");
+    			messout(data.get(1)[2]);
+    			messout(data.get(0)[2]);
+    		}  		 
+    		else
+    		{
+    			congdiem(Integer.parseInt(data.get(1)[2]),Integer.parseInt(data.get(0)[2]));
+    			messout(data.get(1)[0]);
+    			messout(data.get(1)[2]);
+    			messout(data.get(0)[2]);
+    		}
+    			
+    		 for(int j=0;j<2 ;j++)
+             {
+           	  ((DefaultTableModel) model).addRow(new Object[]{data.get(j)[0], data.get(j)[1],data.get(j)[2]});
+             }                       
+             mainclient.tc.tablediem.setModel(model);
+    	}
+    	else 
+    		if(i==0)
+    		{
+    			for(int j=0;j<2 ;j++)
+                {
+              	  ((DefaultTableModel) model).addRow(new Object[]{data.get(j)[0], data.get(j)[1],data.get(j)[2]});
+                }  
+    			mainclient.tc.tablediem.setModel(model);
+    		}   			          
     }
     //tra loi truoc diem1, traloisau diem2
     private void congdiem(int diem1, int diem2)
@@ -330,13 +348,9 @@ public class receive_solve extends Thread {
     	int diemb=Integer.parseInt(mainclient.tc.lbdnt.getText());
     	diema+=diem1;
     	diemb+=diem2;
-    	mainclient.tc.lbcd.setText(String.valueOf(diema));
-    	mainclient.tc.lbcd.setText(String.valueOf(diemb));
+    	mainclient.tc.lbdct.setText(String.valueOf(diema));
+    	mainclient.tc.lbdnt.setText(String.valueOf(diemb));
     }
-   private void addtable()
-   {
-	   
-   }
     private void huythidau(data datat)
     {
     	JOptionPane.showMessageDialog(null,
@@ -345,6 +359,10 @@ public class receive_solve extends Thread {
         	    JOptionPane.ERROR_MESSAGE);
     	mainclient.tc.setVisible(false);
     	mainclient.mf.setVisible(true);
+    }
+    private void messout(String mess)
+    {
+    	System.out.println("mess: "+mess);
     }
 
 
