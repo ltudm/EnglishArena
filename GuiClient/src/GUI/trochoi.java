@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JRootPane;
 import javax.swing.border.EmptyBorder;
 
 import network.data;
@@ -35,6 +36,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+
 import java.awt.SystemColor;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
@@ -463,6 +466,8 @@ public class trochoi extends JFrame {
 		));
 		
 		lbch4.setVisible(false);
+		JRootPane rootPane = SwingUtilities.getRootPane(btkt); 
+		rootPane.setDefaultButton(btkt);
 		
 	}
 	public void huybo()

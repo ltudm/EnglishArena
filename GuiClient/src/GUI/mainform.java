@@ -6,6 +6,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JRootPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.UIManager.*;
 import javax.swing.JButton;
@@ -13,6 +14,7 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.JToggleButton;
 import javax.swing.JWindow;
+import javax.swing.SwingUtilities;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -208,6 +210,8 @@ public class mainform extends JFrame {
 		lbemailmf.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lbemailmf.setBounds(62, 12, 134, 15);
 		panel.add(lbemailmf);
+		
+		
 
 
 		
