@@ -29,6 +29,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class dangkyform extends JFrame {
 
@@ -36,6 +38,7 @@ public class dangkyform extends JFrame {
 	private JPasswordField pswd1;
 	private JTextField tendn;
 	private JPasswordField pswd2;
+
 
 	/**
 	 * Launch the application.
@@ -111,15 +114,22 @@ public class dangkyform extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String username = tendn.getText();
 				String pass = pswd1.getText();
-				String vpass=pswd2.getText();				
+				String vpass=pswd2.getText();		
+				 if(isValid(username)==false){		            
+			            JOptionPane.showMessageDialog(null,
+			        		    "Email không đúng định dạng",
+			        		    "warning",
+			        		    JOptionPane.WARNING_MESSAGE);
+			            tendn.requestFocus();
+			            return;			           
+			        }
 				 if(username.equalsIgnoreCase("")){		            
 			            JOptionPane.showMessageDialog(null,
 			        		    "Tên đăng nhập để trống.",
 			        		    "warning",
 			        		    JOptionPane.WARNING_MESSAGE);
 			            tendn.requestFocus();
-			            return;
-			           
+			            return;			           
 			        }
 				 if(pass.equalsIgnoreCase("")){
 					 JOptionPane.showMessageDialog(null,
@@ -168,5 +178,8 @@ public class dangkyform extends JFrame {
 		button_1.setBounds(178, 162, 89, 24);
 		contentPane.add(button_1);
 	}
+	public Boolean isValid(String username) {
+        return username.matches("[a-zA-Z0-9\\.]+@[a-zA-Z0-9\\-\\_\\.]+\\.[a-zA-Z0-9]{3}");
+    }
 
 }

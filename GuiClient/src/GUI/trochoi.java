@@ -332,6 +332,7 @@ public class trochoi extends JFrame {
 					data_sent.action="traloitruoc";
 					data_sent.data=data;					
 					messout(data_sent.action);
+					
 					//System.out.println(data[1]+data[2]+data[3]+data[4]+data[0]);
 					try
 					{
@@ -354,7 +355,7 @@ public class trochoi extends JFrame {
 						{				
 							messout("tra loi sau");
 							guidapan();
-							btkt.setEnabled(false);
+							//rootPane.setEnabled(false);
 						}
 							
 				//System.out.println(dapan);
@@ -466,8 +467,7 @@ public class trochoi extends JFrame {
 		));
 		
 		lbch4.setVisible(false);
-		JRootPane rootPane = SwingUtilities.getRootPane(btkt); 
-		rootPane.setDefaultButton(btkt);
+		
 		
 	}
 	public void huybo()
