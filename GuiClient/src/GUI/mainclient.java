@@ -24,7 +24,7 @@ public class mainclient {
 	public static trochoi tc=null;
 	public static Socket socket=null;
 	public static int port = 6788;
-    public static String server = "171.233.235.132";
+    public static String server = "localhost";
     public static thoigianchinh tgc=null;
     // dk gui dap an 0 gui lan dau, 1 gui lan 2
     public static int dieukiengui=0;

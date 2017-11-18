@@ -123,6 +123,11 @@ public class receive_solve extends Thread {
 	                	this.traloisau(respon.data_arr,0);
 	                	break;
 	                }
+	                case "themdiem":
+	                {
+	                	
+	                	break;
+	                }
 	                default:
 	                {
 	                	System.out.println("hanh dong khong ro rang: "+respon.action);
