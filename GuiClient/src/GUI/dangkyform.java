@@ -18,6 +18,7 @@ import javax.swing.JOptionPane;
 import java.awt.Font;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.WindowFocusListener;
 import java.io.IOException;
@@ -29,16 +30,14 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
+import java.awt.Image;
+import javax.swing.border.TitledBorder;
 public class dangkyform extends JFrame {
 
 	private JPanel contentPane;
 	private JPasswordField pswd1;
 	private JTextField tendn;
 	private JPasswordField pswd2;
-
 
 	/**
 	 * Launch the application.
@@ -69,67 +68,63 @@ public class dangkyform extends JFrame {
 			}
 		});
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 349, 287);
+		setBounds(100, 100, 349, 326);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(176, 224, 230));
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setBackground(new Color(173, 216, 230));
+		contentPane.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JLabel lblngK = new JLabel("\u0110\u0103ng k\u00FD");
-		lblngK.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblngK.setBounds(100, 11, 105, 33);
+		lblngK.setFont(new Font("Arial", Font.PLAIN, 18));
+		lblngK.setBounds(234, 99, 89, 33);
 		contentPane.add(lblngK);
 		
 		pswd1 = new JPasswordField();
-		pswd1.setBounds(107, 89, 147, 28);
+		pswd1.setBounds(119, 164, 181, 28);
 		contentPane.add(pswd1);
 		
 		tendn = new JTextField();
 		tendn.setColumns(10);
-		tendn.setBounds(107, 55, 147, 28);
+		tendn.setBounds(119, 133, 181, 28);
 		contentPane.add(tendn);
 		
 		JLabel label = new JLabel("Email:");
 		label.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		label.setBounds(51, 57, 46, 20);
+		label.setBounds(27, 135, 46, 20);
 		contentPane.add(label);
 		
 		JLabel label_1 = new JLabel("Mật khẩu:");
 		label_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		label_1.setBounds(27, 90, 70, 22);
+		label_1.setBounds(27, 165, 70, 22);
 		contentPane.add(label_1);
 		
 		JLabel lblNhpLi = new JLabel("Nh\u1EADp l\u1EA1i:");
 		lblNhpLi.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNhpLi.setBounds(31, 124, 70, 22);
+		lblNhpLi.setBounds(27, 198, 70, 22);
 		contentPane.add(lblNhpLi);
 		
 		pswd2 = new JPasswordField();
-		pswd2.setBounds(107, 123, 147, 28);
+		pswd2.setBounds(119, 197, 181, 28);
 		contentPane.add(pswd2);
 		
 		JButton button = new JButton("Đăng ký");
+		button.setBackground(new Color(192, 192, 192));
+		button.setFont(new Font("Arial", Font.BOLD, 12));
+		button.setForeground(new Color(0, 0, 0));
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String username = tendn.getText();
 				String pass = pswd1.getText();
-				String vpass=pswd2.getText();		
-				 if(isValid(username)==false){		            
-			            JOptionPane.showMessageDialog(null,
-			        		    "Email không đúng định dạng",
-			        		    "warning",
-			        		    JOptionPane.WARNING_MESSAGE);
-			            tendn.requestFocus();
-			            return;			           
-			        }
+				String vpass=pswd2.getText();				
 				 if(username.equalsIgnoreCase("")){		            
 			            JOptionPane.showMessageDialog(null,
 			        		    "Tên đăng nhập để trống.",
 			        		    "warning",
 			        		    JOptionPane.WARNING_MESSAGE);
 			            tendn.requestFocus();
-			            return;			           
+			            return;
+			           
 			        }
 				 if(pass.equalsIgnoreCase("")){
 					 JOptionPane.showMessageDialog(null,
@@ -166,20 +161,24 @@ public class dangkyform extends JFrame {
 			        }
 			}
 		});
-		button.setBounds(55, 162, 89, 24);
+		button.setBounds(48, 243, 105, 33);
 		contentPane.add(button);
 		
 		JButton button_1 = new JButton("Hủy");
+		button_1.setBackground(Color.LIGHT_GRAY);
+		button_1.setFont(new Font("Arial", Font.BOLD, 12));
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				mainclient.dkf.setVisible(false);
 			}
 		});
-		button_1.setBounds(178, 162, 89, 24);
+		button_1.setBounds(187, 242, 98, 34);
 		contentPane.add(button_1);
+		
+		JLabel label_2 = new JLabel("");
+		Image image = new ImageIcon(this.getClass().getResource("/logo4.png")).getImage();
+		label_2 .setIcon(new ImageIcon(image));
+		label_2.setBounds(34, 11, 266, 81);
+		contentPane.add(label_2);
 	}
-	public Boolean isValid(String username) {
-        return username.matches("[a-zA-Z0-9\\.]+@[a-zA-Z0-9\\-\\_\\.]+\\.[a-zA-Z0-9]{3}");
-    }
-
 }
