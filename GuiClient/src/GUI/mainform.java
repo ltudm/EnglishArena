@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.JRootPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.UIManager.*;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
@@ -19,6 +20,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
+import java.awt.Image;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -43,6 +45,10 @@ import java.io.ObjectOutputStream;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import javax.swing.ScrollPaneConstants;
+import java.awt.Color;
+import javax.swing.border.MatteBorder;
+import java.awt.SystemColor;
 
 
 public class mainform extends JFrame {
@@ -84,6 +90,7 @@ public class mainform extends JFrame {
 	 */
 	public ArrayList<String[]> data_arr = new ArrayList<>();
 	public mainform() {
+		setBackground(new Color(255, 255, 153));
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent arg0) {
@@ -102,8 +109,8 @@ public class mainform extends JFrame {
 		        } catch (IOException ex) {
 		            Logger.getLogger(dangnhapform.class.getName()).log(Level.SEVERE, null, ex);
 		            JOptionPane.showMessageDialog(null,
-		            	    "Lỗi phát sinh",
-		            	    "Lỗi",
+		            	    "Lá»—i phÃ¡t sinh",
+		            	    "Lá»—i",
 		            	    JOptionPane.ERROR_MESSAGE);
 		            
 		        }
@@ -111,36 +118,47 @@ public class mainform extends JFrame {
 		});
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 689, 369);
+		setBounds(100, 100, 689, 362);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		panel.setBounds(0, 0, 673, 330);
+		panel.setBackground(new Color(204, 255, 204));
+		panel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, UIManager.getColor("TabbedPane.light"), null));
+		panel.setBounds(0, 0, 663, 323);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Xin chào:");
-		lblNewLabel.setBounds(10, 11, 57, 15);
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon(mainform.class.getResource("/resource/user.png")));
+		lblNewLabel.setBounds(490, 11, 163, 25);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		panel.add(lblNewLabel);
 		
 		JButton bttest = new JButton("test");
-		bttest.setBounds(20, 64, 89, 23);
+		bttest.setBounds(29, 163, 89, 49);
 		panel.add(bttest);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(381, 79, 282, 95);
+		scrollPane.setEnabled(false);
+		scrollPane.setViewportBorder(UIManager.getBorder("TextArea.border"));
+		scrollPane.setBounds(395, 133, 258, 175);
 		panel.add(scrollPane);
 		
 		bangdiem = new JTable();
+		bangdiem.setBackground(UIManager.getColor("Table.focusCellBackground"));
+		bangdiem.setEnabled(false);
+		bangdiem.setForeground(Color.DARK_GRAY);
 		scrollPane.setViewportView(bangdiem);
 		bangdiem.setBounds(432, 64, 201, 133);
 		bangdiem.setModel(new DefaultTableModel(
 			new Object[][] {
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
 				{null, null, null, null},
 				{null, null, null, null},
 				{null, null, null, null},
@@ -151,25 +169,36 @@ public class mainform extends JFrame {
 			}
 		) {
 			boolean[] columnEditables = new boolean[] {
-				false, false, false, false
+				false, false, false, true
 			};
 			public boolean isCellEditable(int row, int column) {
 				return columnEditables[column];
 			}
 		});
-		bangdiem.getColumnModel().getColumn(2).setPreferredWidth(50);
+		bangdiem.getColumnModel().getColumn(0).setPreferredWidth(103);
+		bangdiem.getColumnModel().getColumn(2).setPreferredWidth(73);
 		bangdiem.getColumnModel().getColumn(2).setMinWidth(50);
-		bangdiem.getColumnModel().getColumn(3).setPreferredWidth(50);
+		bangdiem.getColumnModel().getColumn(3).setPreferredWidth(69);
 		bangdiem.getColumnModel().getColumn(3).setMinWidth(50);
-		bangdiem.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		bangdiem.getColumnModel().getColumn(0).setPreferredWidth(100);		
+		bangdiem.setBorder(new MatteBorder(3, 3, 3, 3, (Color) new Color(245, 255, 250)));
 		bangdiem.setRowHeight(20);
 		
-		JButton bttd = new JButton("Thách đấu");
-		bttd.setBounds(381, 203, 89, 23);
+		JButton bttd = new JButton(" Thách đấu");
+		bttd.setBackground(new Color(135, 206, 250));
+		bttd.setFont(new Font("Tahoma", Font.BOLD, 12));
+		bttd.setIcon(new ImageIcon(mainform.class.getResource("/resource/multimedia.png")));
+		bttd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		bttd.setBounds(266, 163, 119, 49);
 		panel.add(bttd);
 		
-		JButton btbd = new JButton("Bắt đầu");
+		JButton btbd = new JButton(" Bắt đầu");
+		btbd.setForeground(new Color(0, 0, 0));
+		btbd.setBackground(new Color(240, 128, 128));
+		btbd.setFont(new Font("Tahoma", Font.BOLD, 12));
+		btbd.setIcon(new ImageIcon(mainform.class.getResource("/resource/people.png")));
 		btbd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
@@ -182,15 +211,15 @@ public class mainform extends JFrame {
 		            cout.flush();
 		            System.out.println("da gui");
 		            JOptionPane.showMessageDialog(null,
-		            	    "Đang tìm kiếm người dùng online trong 10s",
-		            	    "Thông báo",
+		            	    "Ä�ang tÃ¬m kiáº¿m ngÆ°á»�i dÃ¹ng online trong 10s",
+		            	    "ThÃ´ng bÃ¡o",
 		            	    JOptionPane.INFORMATION_MESSAGE);
 		            btbd.setEnabled(false);
 		        } catch (IOException ex) {
 		            Logger.getLogger(dangnhapform.class.getName()).log(Level.SEVERE, null, ex);
 		            JOptionPane.showMessageDialog(null,
-		            	    "Lỗi",
-		            	    "Lỗi phát sinh",
+		            	    "Lá»—i",
+		            	    "Lá»—i phÃ¡t sinh",
 		            	    JOptionPane.ERROR_MESSAGE);
 		            
 		        }
@@ -203,14 +232,24 @@ public class mainform extends JFrame {
 					}, 10*1000);
 			}
 		});
-		btbd.setBounds(20, 134, 89, 23);
+		btbd.setBounds(128, 163, 119, 49);
 		panel.add(btbd);
 		
 		lbemailmf = new JLabel("");
 		lbemailmf.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lbemailmf.setBounds(62, 12, 134, 15);
 		panel.add(lbemailmf);
+		JLabel label_3 = new JLabel("");
+		Image image = new ImageIcon(this.getClass().getResource("/logo2.png")).getImage();
+		label_3 .setIcon(new ImageIcon(image));
+		label_3.setBounds(36, 12, 294, 98);
+		panel.add(label_3);
 		
+		JLabel lblBngThnhTch = new JLabel("  B\u1EA3ng th\u00E0nh t\u00EDch");
+		lblBngThnhTch.setIcon(new ImageIcon("C:\\Users\\huykhanh22\\Desktop\\record.png"));
+		lblBngThnhTch.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 14));
+		lblBngThnhTch.setBounds(490, 95, 163, 32);
+		panel.add(lblBngThnhTch);
 		
 
 
@@ -230,8 +269,8 @@ public class mainform extends JFrame {
 		        } catch (IOException ex) {
 		            Logger.getLogger(dangnhapform.class.getName()).log(Level.SEVERE, null, ex);
 		            JOptionPane.showMessageDialog(null,
-		            	    "Lỗi",
-		            	    "Lỗi phát sinh",
+		            	    "Lá»—i",
+		            	    "Lá»—i phÃ¡t sinh",
 		            	    JOptionPane.ERROR_MESSAGE);
 		            
 		        }*/

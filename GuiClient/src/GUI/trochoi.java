@@ -74,7 +74,6 @@ public class trochoi extends JFrame {
 	public String dapan;
 	public JButton btkt;
 	int vtctl=0;
-	int is_champion=0;
 	thoigian tg=null;
 	
 	public static void main(String[] args) {
@@ -594,45 +593,6 @@ public class trochoi extends JFrame {
             	    JOptionPane.ERROR_MESSAGE);
             
         }
-	}
-	public void themdiem()
-	{
-		this.ischampion(Integer.parseInt(lbdct.getText()),Integer.parseInt(lbdnt.getText()));
-		String[] data=new String[3];
-		data[0]=mainclient.dnf.data2[0];				
-		data[1]=lbdct.getText();
-		data[2]=String.valueOf(is_champion);
-		data data_sent=new data();
-		data_sent.action="themdiem";
-		data_sent.data=data;		
-		try
-		{
-			cout=new ObjectOutputStream(mainclient.socket.getOutputStream());
-			cout.writeObject(data_sent);
-			cout.flush();					    			
-			System.out.println(data[0]);
-		}
-		catch (IOException ex) {
-            Logger.getLogger(dangnhapform.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(null,
-            	    "Không gửi được tín hiệu",
-            	    "Lỗi",
-            	    JOptionPane.ERROR_MESSAGE);
-            
-        }
-	}
-	public void ischampion(int dct,int dnt)
-	{
-		if(dct>dnt)
-		{
-			is_champion=1;
-			int dk=mainclient.tc.HIDE_ON_CLOSE;
-		}
-		else
-		{
-			is_champion=0;
-			int dk=mainclient.tc.HIDE_ON_CLOSE;
-		}
 	}
 	public void reset()
 	{

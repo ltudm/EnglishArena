@@ -32,8 +32,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.awt.Image;
 import javax.swing.border.TitledBorder;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 public class dangkyform extends JFrame {
 
 	private JPanel contentPane;
@@ -118,15 +116,7 @@ public class dangkyform extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String username = tendn.getText();
 				String pass = pswd1.getText();
-				String vpass=pswd2.getText();			
-				 if(isValid(username)==false){		            
-					 JOptionPane.showMessageDialog(null,
-					 "Email không đúng định dạng",
-					 "warning",
-					 JOptionPane.WARNING_MESSAGE);
-					 tendn.requestFocus();
-					 return;			           
-					}
+				String vpass=pswd2.getText();				
 				 if(username.equalsIgnoreCase("")){		            
 			            JOptionPane.showMessageDialog(null,
 			        		    "Tên đăng nhập để trống.",
@@ -191,7 +181,4 @@ public class dangkyform extends JFrame {
 		label_2.setBounds(34, 11, 266, 81);
 		contentPane.add(label_2);
 	}
-	public Boolean isValid(String username) {
-		 return username.matches("[a-zA-Z0-9\\.]+@[a-zA-Z0-9\\-\\_\\.]+\\.[a-zA-Z0-9]{3}");
-		 }
 }
