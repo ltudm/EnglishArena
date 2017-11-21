@@ -246,7 +246,7 @@ public class mainform extends JFrame {
 		panel.add(label_3);
 		
 		JLabel lblBngThnhTch = new JLabel("  B\u1EA3ng th\u00E0nh t\u00EDch");
-		lblBngThnhTch.setIcon(new ImageIcon("C:\\Users\\huykhanh22\\Desktop\\record.png"));
+		lblBngThnhTch.setIcon(new ImageIcon("/resource/.png"));
 		lblBngThnhTch.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 14));
 		lblBngThnhTch.setBounds(490, 95, 163, 32);
 		panel.add(lblBngThnhTch);

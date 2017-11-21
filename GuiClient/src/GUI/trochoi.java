@@ -45,6 +45,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.JTextPane;
 
 public class trochoi extends JFrame {
 
@@ -222,6 +223,7 @@ public class trochoi extends JFrame {
 		panel.add(lbcd2);
 		
 		btready = new JButton("Sẵn sàng");
+		btready.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btready.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				lbicon1.setVisible(true);
@@ -282,23 +284,26 @@ public class trochoi extends JFrame {
 				
 			}
 		});
-		btready.setBounds(150, 216, 89, 23);
+		btready.setBounds(68, 273, 89, 31);
 		panel.add(btready);
 		
 		btcancer = new JButton("Hủy bỏ");
+		btcancer.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btcancer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				huybo();
 			}
 		});
-		btcancer.setBounds(390, 216, 89, 23);
+		btcancer.setBounds(390, 273, 89, 31);
 		panel.add(btcancer);
 		
 		lbicon2 = new JLabel("");
 		lbicon2.setBounds(425, 61, 54, 46);
 		panel.add(lbicon2);
 		
-		btkt = new JButton("Kiểm tra");
+		btkt = new JButton(" Kiểm tra");
+		btkt.setIcon(new ImageIcon(trochoi.class.getResource("/resource/play1.png")));
+		btkt.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btkt.setForeground(new Color(0, 0, 0));
 		btkt.setBackground(new Color(173, 255, 47));
 		btkt.addActionListener(new ActionListener() {
@@ -360,7 +365,7 @@ public class trochoi extends JFrame {
 				//System.out.println(dapan);
 			}
 		});
-		btkt.setBounds(208, 257, 119, 23);
+		btkt.setBounds(211, 264, 128, 40);
 		panel.add(btkt);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -369,7 +374,8 @@ public class trochoi extends JFrame {
 		panel.add(scrollPane);
 		
 		tach = new JTextArea();
-		tach.setBackground(new Color(245, 255, 250));
+		tach.setForeground(new Color(255, 255, 255));
+		tach.setBackground(new Color(224, 255, 255));
 		scrollPane.setViewportView(tach);
 		tach.setEditable(false);
 		tach.setFont(new Font("Monospaced", Font.PLAIN, 14));
@@ -390,7 +396,7 @@ public class trochoi extends JFrame {
 		});
 		lbch1.setBackground(new Color(245, 255, 250));
 		lbch1.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lbch1.setBounds(51, 181, 181, 26);
+		lbch1.setBounds(50, 181, 181, 26);
 		panel.add(lbch1);
 		lbch1.setOpaque(true);
 		lbch1.setVisible(false);
