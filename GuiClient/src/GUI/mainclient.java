@@ -64,7 +64,7 @@ public class mainclient {
 		tc.btkt.setFont(new Font("Tahoma", Font.BOLD, 13));
 		tc.btkt.setBackground(new Color(255, 255, 0));
 		tc.btkt.setSize(133, 40);
-		tc.btkt.setLocation(225, 257);
+		tc.btkt.setLocation(183, 257);
 		tc.tablediem.setModel(new DefaultTableModel(
 			new Object[][] {
 			},
@@ -83,11 +83,11 @@ public class mainclient {
 		tc.btready.setFont(new Font("Tahoma", Font.BOLD, 13));
 		tc.btcancer.setSize(101, 40);
 		tc.btready.setSize(102, 40);
-		tc.btcancer.setLocation(298, 192);
-		tc.btready.setLocation(167, 192);
+		tc.btcancer.setLocation(378, 257);
+		tc.btready.setLocation(35, 257);
 		tc.lbicon2.setBounds(419, 61, 128, 33);
 		tc.lbicon2.setIcon(new ImageIcon(mainclient.class.getResource("/resource/ready.png")));
-		tc.lbicon1.setBounds(0, 61, 128, 33);
+		tc.lbicon1.setBounds(0, 61, 194, 33);
 		tc.lbicon1.setIcon(new ImageIcon(mainclient.class.getResource("/resource/ready.png")));
 		tc.btready.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {

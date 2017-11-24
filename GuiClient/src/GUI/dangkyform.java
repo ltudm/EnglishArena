@@ -177,7 +177,7 @@ public class dangkyform extends JFrame {
 		
 		JLabel label_2 = new JLabel("");
 		Image image = new ImageIcon(this.getClass().getResource("/logo4.png")).getImage();
-		label_2 .setIcon(new ImageIcon(image));
+		label_2 .setIcon(new ImageIcon(dangkyform.class.getResource("/resource/logo4.png")));
 		label_2.setBounds(34, 11, 266, 81);
 		contentPane.add(label_2);
 	}

@@ -82,7 +82,7 @@ public class dangnhapform extends JFrame {
 		
 		emailf = new JTextField();
 		emailf.setColumns(10);
-		emailf.setBounds(121, 109, 147, 28);
+		emailf.setBounds(131, 109, 159, 28);
 		panel.add(emailf);
 		
 		JLabel label_2 = new JLabel("Mật khẩu:");
@@ -91,7 +91,7 @@ public class dangnhapform extends JFrame {
 		panel.add(label_2);
 		
 		pswdf = new JPasswordField();
-		pswdf.setBounds(121, 148, 147, 28);
+		pswdf.setBounds(131, 148, 159, 28);
 		panel.add(pswdf);
 		
 		lbvs3 = new JLabel("1.0");
@@ -170,7 +170,7 @@ public class dangnhapform extends JFrame {
 		
 		JLabel label_3 = new JLabel("");
 		Image image = new ImageIcon(this.getClass().getResource("/logo5.png")).getImage();
-		label_3 .setIcon(new ImageIcon(image));
+		label_3 .setIcon(new ImageIcon(dangnhapform.class.getResource("/resource/logo4.png")));
 		label_3.setBounds(42, 11, 274, 83);
 		panel.add(label_3);
 		

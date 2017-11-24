@@ -46,6 +46,8 @@ import java.awt.event.MouseEvent;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JTextPane;
+import javax.swing.border.LineBorder;
+import javax.swing.border.CompoundBorder;
 
 public class trochoi extends JFrame {
 
@@ -144,63 +146,64 @@ public class trochoi extends JFrame {
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
+		panel.setBackground(new Color(135, 206, 250));
 		panel.setBounds(0, 0, 680, 326);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
 		JLabel lblimCaTui = new JLabel("Điểm của tui:");
 		lblimCaTui.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblimCaTui.setBounds(10, 35, 81, 26);
+		lblimCaTui.setBounds(12, 35, 81, 26);
 		panel.add(lblimCaTui);
 		
 		JLabel label = new JLabel("Điểm người ta:");
 		label.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		label.setBounds(425, 35, 91, 26);
+		label.setBounds(356, 35, 91, 26);
 		panel.add(label);
 		
 		lbs = new JLabel("0");
 		lbs.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lbs.setBounds(278, 35, 20, 26);
+		lbs.setBounds(214, 35, 20, 26);
 		panel.add(lbs);
 		
 		JLabel label_1 = new JLabel(":");
 		label_1.setFont(new Font("Tahoma", Font.BOLD, 16));
-		label_1.setBounds(296, 35, 20, 26);
+		label_1.setBounds(243, 35, 20, 26);
 		panel.add(label_1);
 		
 		lbms = new JLabel("0");
 		lbms.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lbms.setBounds(310, 35, 20, 26);
+		lbms.setBounds(264, 35, 20, 26);
 		panel.add(lbms);
 		
 		JLabel tclb = new JLabel("Email:");
 		tclb.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		tclb.setBounds(480, 11, 91, 26);
+		tclb.setBounds(411, 11, 91, 26);
 		panel.add(tclb);
 		
 		JLabel lbtc2 = new JLabel("Email:");
 		lbtc2.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lbtc2.setBounds(51, 11, 91, 26);
+		lbtc2.setBounds(56, 11, 64, 26);
 		panel.add(lbtc2);
 		
 		lbemail1 = new JLabel("0");
 		lbemail1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lbemail1.setBounds(93, 11, 128, 26);
+		lbemail1.setBounds(103, 11, 101, 26);
 		panel.add(lbemail1);
 		
 		lbdct = new JLabel("0");
 		lbdct.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lbdct.setBounds(93, 35, 91, 26);
+		lbdct.setBounds(103, 35, 91, 26);
 		panel.add(lbdct);
 		
 		lbemail2 = new JLabel("0");
 		lbemail2.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lbemail2.setBounds(526, 11, 119, 26);
+		lbemail2.setBounds(457, 11, 64, 26);
 		panel.add(lbemail2);
 		
 		lbdnt = new JLabel("0");
 		lbdnt.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lbdnt.setBounds(526, 35, 91, 26);
+		lbdnt.setBounds(457, 35, 91, 26);
 		panel.add(lbdnt);
 							
 		lbicon1 = new JLabel("");
@@ -284,7 +287,7 @@ public class trochoi extends JFrame {
 				
 			}
 		});
-		btready.setBounds(68, 273, 89, 31);
+		btready.setBounds(56, 280, 89, 31);
 		panel.add(btready);
 		
 		btcancer = new JButton("Hủy bỏ");
@@ -294,11 +297,11 @@ public class trochoi extends JFrame {
 				huybo();
 			}
 		});
-		btcancer.setBounds(390, 273, 89, 31);
+		btcancer.setBounds(373, 280, 89, 31);
 		panel.add(btcancer);
 		
 		lbicon2 = new JLabel("");
-		lbicon2.setBounds(425, 61, 54, 46);
+		lbicon2.setBounds(482, 11, 54, 46);
 		panel.add(lbicon2);
 		
 		btkt = new JButton(" Kiểm tra");
@@ -365,24 +368,26 @@ public class trochoi extends JFrame {
 				//System.out.println(dapan);
 			}
 		});
-		btkt.setBounds(211, 264, 128, 40);
+		btkt.setBounds(190, 275, 128, 40);
 		panel.add(btkt);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setEnabled(false);
-		scrollPane.setBounds(51, 112, 566, 58);
+		scrollPane.setBounds(35, 98, 444, 58);
 		panel.add(scrollPane);
 		
 		tach = new JTextArea();
+		scrollPane.setViewportView(tach);
 		tach.setForeground(new Color(255, 255, 255));
 		tach.setBackground(new Color(224, 255, 255));
-		scrollPane.setViewportView(tach);
 		tach.setEditable(false);
 		tach.setFont(new Font("Monospaced", Font.PLAIN, 14));
 		tach.setLineWrap(true);
 		tach.setVisible(false);
 		
 		lbch1 = new JLabel("");
+		LineBorder line = new LineBorder(Color.gray, 4, true);
+		lbch1.setBorder(new LineBorder(new Color(240, 248, 255), 10, true));
 		lbch1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -394,9 +399,9 @@ public class trochoi extends JFrame {
 				vtctl=network.thoigianchinh.sttctl;
 			}
 		});
-		lbch1.setBackground(new Color(245, 255, 250));
+		lbch1.setBackground(new Color(240, 248, 255));
 		lbch1.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lbch1.setBounds(50, 181, 181, 26);
+		lbch1.setBounds(35, 167, 181, 40);
 		panel.add(lbch1);
 		lbch1.setOpaque(true);
 		lbch1.setVisible(false);
@@ -413,9 +418,9 @@ public class trochoi extends JFrame {
 				vtctl=network.thoigianchinh.sttctl+2;
 			}
 		});
-		lbch3.setBackground(new Color(245, 255, 250));
+		lbch3.setBackground(new Color(240, 248, 255));
 		lbch3.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lbch3.setBounds(298, 181, 181, 26);
+		lbch3.setBounds(286, 167, 193, 40);
 		panel.add(lbch3);
 		lbch3.setOpaque(true);
 		lbch3.setVisible(false);
@@ -432,9 +437,9 @@ public class trochoi extends JFrame {
 				vtctl=network.thoigianchinh.sttctl+1;
 			}
 		});
-		lbch2.setBackground(new Color(245, 255, 250));
+		lbch2.setBackground(new Color(240, 248, 255));
 		lbch2.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lbch2.setBounds(51, 220, 181, 26);
+		lbch2.setBounds(35, 218, 181, 40);
 		panel.add(lbch2);
 		lbch2.setOpaque(true);
 		lbch2.setVisible(false);
@@ -451,14 +456,15 @@ public class trochoi extends JFrame {
 				vtctl=network.thoigianchinh.sttctl+3;
 			}
 		});
-		lbch4.setBackground(new Color(245, 255, 250));
+		lbch4.setBackground(new Color(240, 248, 255));
 		lbch4.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lbch4.setBounds(296, 220, 181, 26);
+		lbch4.setBounds(286, 218, 193, 40);
 		panel.add(lbch4);
 		lbch4.setOpaque(true);
 		
 		scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(508, 181, 162, 134);
+		scrollPane_1.setViewportBorder(new CompoundBorder(UIManager.getBorder("CheckBoxMenuItem.border"), new LineBorder(new Color(130, 135, 144))));
+		scrollPane_1.setBounds(528, 12, 142, 292);
 		panel.add(scrollPane_1);
 		
 		tablediem = new JTable();
