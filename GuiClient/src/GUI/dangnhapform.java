@@ -95,7 +95,7 @@ public class dangnhapform extends JFrame {
 		panel.add(pswdf);
 		
 		lbvs3 = new JLabel("1.0");
-		lbvs3.setBounds(63, 257, 60, 14);
+		lbvs3.setBounds(76, 257, 60, 14);
 		panel.add(lbvs3);
 		
 		JButton dnbt = new JButton("Đăng nhập");

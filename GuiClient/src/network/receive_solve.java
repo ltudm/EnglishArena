@@ -123,6 +123,16 @@ public class receive_solve extends Thread {
 	                	this.traloisau(respon.data_arr,0);
 	                	break;
 	                }
+	                case "themdiem":
+	                {
+	                	this.themdiem();                	
+	                	break;
+	                }
+	                case "thachdau":
+	                {
+	                	this.thachdau(respon);
+	                	break;
+	                }
 	                default:
 	                {
 	                	System.out.println("hanh dong khong ro rang: "+respon.action);
@@ -351,6 +361,50 @@ public class receive_solve extends Thread {
     	mainclient.tc.lbdct.setText(String.valueOf(diema));
     	mainclient.tc.lbdnt.setText(String.valueOf(diemb));
     }
+    private void themdiem()
+    {
+    	mainclient.tc.setVisible(false);
+    	mainclient.mf.setVisible(true);
+    }
+    private void thachdau(data datat)
+    {
+    	if(datat.data[0]==null)
+    	{
+    		JOptionPane.showMessageDialog(null,
+    				datat.data[1],
+            	    "Thông báo",
+            	    JOptionPane.INFORMATION_MESSAGE);
+    	}
+    	else
+    	{
+    		int dialogButton = JOptionPane.YES_NO_OPTION;
+    		int dialogResult = JOptionPane.showConfirmDialog(null,
+    				"Có người đang thách đấu bạn",
+            	    "Thông báo",
+            	    dialogButton);
+    		if(dialogResult == 0)
+    			{
+    			String[] s=new String[3];
+    			s[0]=datat.data[0];
+    			s[1]=datat.data[1];
+    			s[2]="0";
+    			
+    			System.out.println("Yes option");
+    			} else 
+    			{
+    				String[] s=new String[3];
+        			s[0]=datat.data[0];
+        			s[1]=datat.data[1];
+        			s[2]="1";
+        			mainclient.tdf.guiaccept(s);
+    			  System.out.println("No Option");
+    			} 
+    		
+    		
+    	}
+    	
+    }
+
     private void huythidau(data datat)
     {
     	JOptionPane.showMessageDialog(null,
@@ -364,7 +418,7 @@ public class receive_solve extends Thread {
     {
     	System.out.println("mess: "+mess);
     }
-
+    
 
 
 }

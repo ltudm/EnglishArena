@@ -214,7 +214,7 @@ public class trochoi extends JFrame {
 		lbcd.setHorizontalAlignment(SwingConstants.CENTER);
 		lbcd.setForeground(Color.RED);
 		lbcd.setFont(new Font("Tahoma", Font.PLAIN, 28));
-		lbcd.setBounds(286, 61, 46, 40);
+		lbcd.setBounds(232, 61, 46, 40);
 		panel.add(lbcd);
 		
 
@@ -222,7 +222,7 @@ public class trochoi extends JFrame {
 		lbcd2.setHorizontalAlignment(SwingConstants.CENTER);
 		lbcd2.setForeground(Color.RED);
 		lbcd2.setFont(new Font("Tahoma", Font.PLAIN, 28));
-		lbcd2.setBounds(278, 61, 46, 40);
+		lbcd2.setBounds(224, 61, 46, 40);
 		panel.add(lbcd2);
 		
 		btready = new JButton("Sẵn sàng");
@@ -243,6 +243,7 @@ public class trochoi extends JFrame {
 					lbcd.setVisible(false);
 					mainclient.tc.btready.setVisible(false);
 	    			mainclient.tc.btcancer.setVisible(false);
+	    			
 	    			thoigianchuan tg=new thoigianchuan(1);
 	    			tg.start();
 	    			ready=1;
@@ -301,7 +302,7 @@ public class trochoi extends JFrame {
 		panel.add(btcancer);
 		
 		lbicon2 = new JLabel("");
-		lbicon2.setBounds(482, 11, 54, 46);
+		lbicon2.setBounds(467, 61, 54, 46);
 		panel.add(lbicon2);
 		
 		btkt = new JButton(" Kiểm tra");
@@ -309,6 +310,7 @@ public class trochoi extends JFrame {
 		btkt.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btkt.setForeground(new Color(0, 0, 0));
 		btkt.setBackground(new Color(173, 255, 47));
+		btkt.setVisible(false);
 		btkt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				btkt.setEnabled(false);
@@ -378,7 +380,7 @@ public class trochoi extends JFrame {
 		
 		tach = new JTextArea();
 		scrollPane.setViewportView(tach);
-		tach.setForeground(new Color(255, 255, 255));
+		tach.setForeground(SystemColor.desktop);
 		tach.setBackground(new Color(224, 255, 255));
 		tach.setEditable(false);
 		tach.setFont(new Font("Monospaced", Font.PLAIN, 14));
@@ -386,8 +388,6 @@ public class trochoi extends JFrame {
 		tach.setVisible(false);
 		
 		lbch1 = new JLabel("");
-		LineBorder line = new LineBorder(Color.gray, 4, true);
-		lbch1.setBorder(new LineBorder(new Color(240, 248, 255), 10, true));
 		lbch1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -464,7 +464,7 @@ public class trochoi extends JFrame {
 		
 		scrollPane_1 = new JScrollPane();
 		scrollPane_1.setViewportBorder(new CompoundBorder(UIManager.getBorder("CheckBoxMenuItem.border"), new LineBorder(new Color(130, 135, 144))));
-		scrollPane_1.setBounds(528, 12, 142, 292);
+		scrollPane_1.setBounds(528, 25, 142, 279);
 		panel.add(scrollPane_1);
 		
 		tablediem = new JTable();
@@ -582,20 +582,24 @@ public class trochoi extends JFrame {
             
         }
 	}
+
 	public void guidiem()
 	{
-		String[] data=new String[2];
+		int kq=0;
+		if(Integer.parseInt(lbdct.getText())>Integer.parseInt(lbdnt.getText()))
+			kq=1;
+		String[] data=new String[3];
 		data[0]=mainclient.dnf.data2[0];				
 		data[1]=lbdct.getText();
-		data data_sent=null;
+		data[2]=String.valueOf(kq);
+		data data_sent=new data();
 		data_sent.action="themdiem";
 		data_sent.data=data;
 		try
-		{
+		{			
 			cout=new ObjectOutputStream(mainclient.socket.getOutputStream());
 			cout.writeObject(data_sent);
 			cout.flush();					    			
-			System.out.println(data[0]);
 		}
 		catch (IOException ex) {
             Logger.getLogger(dangnhapform.class.getName()).log(Level.SEVERE, null, ex);

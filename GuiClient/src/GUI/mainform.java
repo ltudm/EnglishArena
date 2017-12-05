@@ -109,8 +109,8 @@ public class mainform extends JFrame {
 		        } catch (IOException ex) {
 		            Logger.getLogger(dangnhapform.class.getName()).log(Level.SEVERE, null, ex);
 		            JOptionPane.showMessageDialog(null,
-		            	    "Lá»—i phÃ¡t sinh",
-		            	    "Lá»—i",
+		            	    "Lỗi phát sinh",
+		            	    "Lỗi",
 		            	    JOptionPane.ERROR_MESSAGE);
 		            
 		        }
@@ -127,7 +127,7 @@ public class mainform extends JFrame {
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(204, 255, 204));
 		panel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, UIManager.getColor("TabbedPane.light"), null));
-		panel.setBounds(0, 0, 663, 323);
+		panel.setBounds(0, 0, 673, 323);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -144,7 +144,7 @@ public class mainform extends JFrame {
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setEnabled(false);
 		scrollPane.setViewportBorder(UIManager.getBorder("TextArea.border"));
-		scrollPane.setBounds(395, 133, 258, 175);
+		scrollPane.setBounds(395, 133, 258, 179);
 		panel.add(scrollPane);
 		
 		bangdiem = new JTable();
@@ -189,6 +189,8 @@ public class mainform extends JFrame {
 		bttd.setIcon(new ImageIcon(mainform.class.getResource("/resource/multimedia.png")));
 		bttd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				mainclient.tdf.setVisible(true);
+							
 			}
 		});
 		bttd.setBounds(266, 163, 119, 49);
@@ -211,15 +213,15 @@ public class mainform extends JFrame {
 		            cout.flush();
 		            System.out.println("da gui");
 		            JOptionPane.showMessageDialog(null,
-		            	    "Ä�ang tÃ¬m kiáº¿m ngÆ°á»�i dÃ¹ng online trong 10s",
-		            	    "ThÃ´ng bÃ¡o",
+		            	    "Đang tìm kiếm người chơi online trong 10s",
+		            	    "Thông báo",
 		            	    JOptionPane.INFORMATION_MESSAGE);
 		            btbd.setEnabled(false);
 		        } catch (IOException ex) {
 		            Logger.getLogger(dangnhapform.class.getName()).log(Level.SEVERE, null, ex);
 		            JOptionPane.showMessageDialog(null,
-		            	    "Lá»—i",
-		            	    "Lá»—i phÃ¡t sinh",
+		            	    "Lỗi",
+		            	    "Lỗi",
 		            	    JOptionPane.ERROR_MESSAGE);
 		            
 		        }
@@ -237,7 +239,7 @@ public class mainform extends JFrame {
 		
 		lbemailmf = new JLabel("");
 		lbemailmf.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lbemailmf.setBounds(62, 12, 134, 15);
+		lbemailmf.setBounds(519, 21, 134, 15);
 		panel.add(lbemailmf);
 		JLabel label_3 = new JLabel("");
 		Image image = new ImageIcon(this.getClass().getResource("/logo2.png")).getImage();

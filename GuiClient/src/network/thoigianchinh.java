@@ -35,7 +35,8 @@ public class thoigianchinh extends Thread {
 				 mainclient.tc.lbch1.setVisible(true);
 				 mainclient.tc.lbch2.setVisible(true);
 				 mainclient.tc.lbch3.setVisible(true);
-				 mainclient.tc.lbch4.setVisible(true);						 
+				 mainclient.tc.lbch4.setVisible(true);		
+				 mainclient.tc.btkt.setVisible(true);
 				 if(result==9)
 				 {
 					 sttctl=slc*4;
@@ -90,6 +91,9 @@ public class thoigianchinh extends Thread {
 					 mainclient.tc.lbch2.setVisible(false);
 					 mainclient.tc.lbch3.setVisible(false);
 					 mainclient.tc.lbch4.setVisible(false);
+					 mainclient.tc.btkt.setVisible(false);
+					 mainclient.tc.guidiem();
+					 mainclient.tc.setVisible(false);
 				 }
 				 if(is_running==false)
 					 break;
