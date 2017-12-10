@@ -379,7 +379,7 @@ public class receive_solve extends Thread {
     	{
     		int dialogButton = JOptionPane.YES_NO_OPTION;
     		int dialogResult = JOptionPane.showConfirmDialog(null,
-    				"Có người đang thách đấu bạn",
+    				"Người dùng "+datat.data[1]+" đang thách đấu bạn",
             	    "Thông báo",
             	    dialogButton);
     		if(dialogResult == 0)
@@ -388,7 +388,7 @@ public class receive_solve extends Thread {
     			s[0]=datat.data[0];
     			s[1]=datat.data[1];
     			s[2]="0";
-    			
+    			mainclient.tdf.guiaccept(s);
     			System.out.println("Yes option");
     			} else 
     			{
