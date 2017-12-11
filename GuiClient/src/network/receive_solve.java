@@ -54,11 +54,6 @@ public class receive_solve extends Thread {
 	                case "login" : 
 	                	{
 	                		this.check(respon); 
-	                		//loaddiem(respon.data_arr);
-	                		/*for(String[] s:respon.data_arr)
-	                 		{
-	                 			System.out.println(s[0]+" "+s[1]+" "+s[2]);
-	                 		}*/
 	                		break;
 	                	}
 	                case "dangky":
@@ -131,6 +126,16 @@ public class receive_solve extends Thread {
 	                case "thachdau":
 	                {
 	                	this.thachdau(respon);
+	                	break;
+	                }
+	                case "ketquamoitd":
+	                {
+	                	this.ketquamoitd(respon);
+	                	break;
+	                }
+	                case "gohome":
+	                {
+	                	this.gohome(respon);
 	                	break;
 	                }
 	                default:
@@ -387,24 +392,65 @@ public class receive_solve extends Thread {
     			String[] s=new String[3];
     			s[0]=datat.data[0];
     			s[1]=datat.data[1];
-    			s[2]="0";
+    			s[2]="1";
     			mainclient.tdf.guiaccept(s);
-    			System.out.println("Yes option");
-    			} else 
+    			mainclient.tc.lbemail1.setText(datat.data[0]);
+    			mainclient.tc.lbemail2.setText(datat.data[1]);
+    			System.out.println(datat.data[1]);
+    			mainclient.mf.setVisible(false);
+    			mainclient.tc.setVisible(true);
+    			mainclient.tc.lbicon1.setVisible(false);
+    			mainclient.tc.lbicon2.setVisible(false);
+    			mainclient.tc.btready.setVisible(true);
+    			mainclient.tc.btcancer.setVisible(true);mainclient.tc.ready=0;
+    			tg=new thoigian(0);
+    			tg.start();
+    			//System.out.println("Yes option");
+    			} 
+    		else 
     			{
     				String[] s=new String[3];
         			s[0]=datat.data[0];
         			s[1]=datat.data[1];
-        			s[2]="1";
+        			s[2]="0";
         			mainclient.tdf.guiaccept(s);
-    			  System.out.println("No Option");
-    			} 
-    		
-    		
+        			mainclient.dnf.gohome();
+    			 // System.out.println("No Option");
+    			}     				
     	}
     	
     }
-
+    private void ketquamoitd(data datat)
+    {
+    	if(datat.data[2].equals("1"))
+    	{
+    		mainclient.tc.lbemail1.setText(datat.data[1]);
+			mainclient.tc.lbemail2.setText(datat.data[0]);
+			//System.out.println(datat.data[1]);
+			mainclient.mf.setVisible(false);
+			mainclient.tc.setVisible(true);
+			mainclient.tc.lbicon1.setVisible(false);
+			mainclient.tc.lbicon2.setVisible(false);
+			mainclient.tc.btready.setVisible(true);
+			mainclient.tc.btcancer.setVisible(true);mainclient.tc.ready=0;
+			tg=new thoigian(0);
+			tg.start();
+			messout("2");
+    	}
+    	else
+    	{
+    		JOptionPane.showMessageDialog(null,
+    				datat.data[0],
+            	    "Thông báo",
+            	    JOptionPane.INFORMATION_MESSAGE);
+    		mainclient.dnf.gohome();
+    	}
+    		
+    }
+    private void gohome(data datat)
+    {
+    	this.loaddiem(datat.data_arr);
+    } 
     private void huythidau(data datat)
     {
     	JOptionPane.showMessageDialog(null,

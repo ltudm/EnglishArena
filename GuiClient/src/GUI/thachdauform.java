@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JRootPane;
 import javax.swing.border.EmptyBorder;
 
 import network.data;
@@ -14,6 +15,7 @@ import javax.swing.JOptionPane;
 
 import java.awt.Font;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -80,6 +82,7 @@ public class thachdauform extends JFrame {
 				data data_sent=new data();
 				data_sent.action="thachdau";
 				data_sent.data=data;
+				mainclient.tdf.setVisible(false);
 				try
 				{
 					cout=new ObjectOutputStream(mainclient.socket.getOutputStream());
@@ -99,11 +102,13 @@ public class thachdauform extends JFrame {
 		});
 		bttd1.setBounds(114, 88, 102, 23);
 		panel.add(bttd1);
+		JRootPane rootPane = SwingUtilities.getRootPane(bttd1); 
+		rootPane.setDefaultButton(bttd1);
 	}
 	public void guiaccept(String[] s)
 	{
 		data data_sent=new data();
-		data_sent.action="ketquatd";
+		data_sent.action="ketquamoitd";
 		data_sent.data=s;
 		try
 		{			

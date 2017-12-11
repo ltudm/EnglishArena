@@ -175,4 +175,26 @@ public class dangnhapform extends JFrame {
 		panel.add(label_3);
 		
 	}
+	public void gohome()
+	{
+		data data_sent=new data();
+		data_sent.action="gohome";
+		String[] data = new String[1];
+	    data[0] = data2[0];
+		data_sent.data=data;
+		try
+		{			
+			cout=new ObjectOutputStream(mainclient.socket.getOutputStream());
+			cout.writeObject(data_sent);
+			cout.flush();					    			
+		}
+		catch (IOException ex) {
+            Logger.getLogger(dangnhapform.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null,
+            	    "Không gửi được tín hiệu",
+            	    "Lỗi",
+            	    JOptionPane.ERROR_MESSAGE);
+            
+        }
+	}
 }

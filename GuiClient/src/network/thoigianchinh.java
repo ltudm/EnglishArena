@@ -93,7 +93,9 @@ public class thoigianchinh extends Thread {
 					 mainclient.tc.lbch4.setVisible(false);
 					 mainclient.tc.btkt.setVisible(false);
 					 mainclient.tc.guidiem();
-					 mainclient.tc.setVisible(false);
+					 mainclient.dnf.gohome();
+					 mainclient.tc.setVisible(false);		 
+				
 				 }
 				 if(is_running==false)
 					 break;
