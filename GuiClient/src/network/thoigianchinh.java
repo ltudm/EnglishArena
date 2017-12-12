@@ -2,6 +2,8 @@ package network;
 import java.io.*;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
+
 import GUI.*;
 import network.receive_solve;
 
@@ -86,15 +88,7 @@ public class thoigianchinh extends Thread {
 					 is_running=false;
 					 mainclient.tc.lbs.setText("0");
 					 //System.out.println(slc);
-					 mainclient.tc.tach.setVisible(false);
-					 mainclient.tc.lbch1.setVisible(false);
-					 mainclient.tc.lbch2.setVisible(false);
-					 mainclient.tc.lbch3.setVisible(false);
-					 mainclient.tc.lbch4.setVisible(false);
-					 mainclient.tc.btkt.setVisible(false);
-					 mainclient.tc.guidiem();
-					 mainclient.dnf.gohome();
-					 mainclient.tc.setVisible(false);		 
+					 ketquathidau();	 
 				
 				 }
 				 if(is_running==false)
@@ -107,6 +101,39 @@ public class thoigianchinh extends Thread {
 					e.printStackTrace();
 				}
 		}		
-		
+		public void ketquathidau()
+		{
+			try
+			{
+				 mainclient.tc.tach.setVisible(false);
+				 mainclient.tc.lbch1.setVisible(false);
+				 mainclient.tc.lbch2.setVisible(false);
+				 mainclient.tc.lbch3.setVisible(false);
+				 mainclient.tc.lbch4.setVisible(false);
+				 mainclient.tc.btkt.setVisible(false);
+				 mainclient.tc.guidiem();
+				 mainclient.dnf.gohome();
+				 mainclient.tc.setVisible(false);
+				 mainclient.hnf.setVisible(true);
+				 if(Integer.parseInt(mainclient.tc.lbdct.getText())>=Integer.parseInt(mainclient.tc.lbdnt.getText()))
+				 {
+					 mainclient.hnf.lbhinh.setIcon(new ImageIcon(mainform.class.getResource("/resource/phaohoa.gif")));
+					 mainclient.hnf.lbtext.setText("Victoria!!!"); 
+				 }
+				 else
+				 {
+					 {
+						 mainclient.hnf.lbhinh.setIcon(new ImageIcon(mainform.class.getResource("/resource/tenor.gif")));
+						 mainclient.hnf.lbtext.setText("Lêu lêu thua rồi....."); 
+					 }
+				 }
+					 
+				 
+			}
+			 catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		}
 	
 }

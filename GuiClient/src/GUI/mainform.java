@@ -137,10 +137,6 @@ public class mainform extends JFrame {
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		panel.add(lblNewLabel);
 		
-		JButton bttest = new JButton("test");
-		bttest.setBounds(29, 163, 89, 49);
-		panel.add(bttest);
-		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setEnabled(false);
 		scrollPane.setViewportBorder(UIManager.getBorder("TextArea.border"));
@@ -252,40 +248,5 @@ public class mainform extends JFrame {
 		lblBngThnhTch.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 14));
 		lblBngThnhTch.setBounds(490, 95, 163, 32);
 		panel.add(lblBngThnhTch);
-		
-
-
-		
-		bttest.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				/*data data_sent = new data();
-				data_sent.action="ghepdoi";
-		        data_sent.data = mainclient.dnf.data2;
-		        //receive_solve.gui(data_sent);
-		       try {
-		            cout = new ObjectOutputStream(mainclient.socket.getOutputStream());
-		            cout.writeObject(data_sent);
-		            cout.flush();
-		           
-		            System.out.println(data_sent.action);
-		        } catch (IOException ex) {
-		            Logger.getLogger(dangnhapform.class.getName()).log(Level.SEVERE, null, ex);
-		            JOptionPane.showMessageDialog(null,
-		            	    "Lá»—i",
-		            	    "Lá»—i phÃ¡t sinh",
-		            	    JOptionPane.ERROR_MESSAGE);
-		            
-		        }*/
-				/*btbd.setEnabled(false);
-				Timer timer = new Timer();
-				timer.schedule(new TimerTask() {
-					  @Override
-					  public void run() {
-						  btbd.setEnabled(true);;
-					  }
-					}, 10*1000);*/				
-				
-			}
-		});
 	}
 }

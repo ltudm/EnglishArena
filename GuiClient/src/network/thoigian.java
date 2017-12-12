@@ -68,14 +68,13 @@ public class thoigian extends Thread {
 				 {
 					 mainclient.tc.lbcd.setVisible(false);
 					 is_running=false;
-				 }
-					 
+					 if(mainclient.tc.ready==2)
+					 {
+						 mainclient.tc.huybo();
+					 }
+				 }				 
 					Thread.sleep(10);				
-			  }
-			 if(mainclient.tc.ready==2)
-			 {
-				 mainclient.tc.huybo();
-			 }
+			  }			 
 			}
 			 catch (InterruptedException e) {
 					// TODO Auto-generated catch block

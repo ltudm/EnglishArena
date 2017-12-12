@@ -328,16 +328,10 @@ public class receive_solve extends Thread {
     		if(data.get(0)[0].equals(mainclient.mf.lbemailmf.getText()))
     		{
     			congdiem(Integer.parseInt(data.get(0)[2]),Integer.parseInt(data.get(1)[2]));
-    			messout("th1");
-    			messout(data.get(1)[2]);
-    			messout(data.get(0)[2]);
     		}  		 
     		else
     		{
     			congdiem(Integer.parseInt(data.get(1)[2]),Integer.parseInt(data.get(0)[2]));
-    			messout(data.get(1)[0]);
-    			messout(data.get(1)[2]);
-    			messout(data.get(0)[2]);
     		}
     			
     		 for(int j=0;j<2 ;j++)
@@ -435,7 +429,6 @@ public class receive_solve extends Thread {
 			mainclient.tc.btcancer.setVisible(true);mainclient.tc.ready=0;
 			tg=new thoigian(0);
 			tg.start();
-			messout("2");
     	}
     	else
     	{

@@ -64,7 +64,7 @@ public class trochoi extends JFrame {
 	public JLabel lbicon2;
 	public JLabel lbcd;
 	public JButton btready;
-	public static int ready=0;
+	public static int ready=2;
 	public JButton btcancer;
 	public JLabel lbcd2;
 	public JLabel lbs;
@@ -115,15 +115,15 @@ public class trochoi extends JFrame {
 			public void windowClosing(WindowEvent arg0) {
 				mainclient.mf.setVisible(true);
 				mainclient.tc.lbicon1.setVisible(false);
-				mainclient.tc.lbicon2.setVisible(false);			
+				mainclient.tc.lbicon2.setVisible(false);
+				mainclient.tgc.dieukienlap(false);
 				data data_sent = new data();
 				data_sent.action="dangxuat";
 				String[] data=new String[3];
 				data[0]=lbemail2.getText();				
 				data[1]=mainclient.dnf.data2[0];
 				data[2]="huythidau";
-				data_sent.data = data;
-				mainclient.tgc.dieukienlap(false);
+				data_sent.data = data;				
 				try {
 		            cout = new ObjectOutputStream(mainclient.socket.getOutputStream());
 		            cout.writeObject(data_sent);
@@ -397,6 +397,7 @@ public class trochoi extends JFrame {
 				lbch4.setBackground(new Color(245, 255, 250));
 				dapan=lbch1.getText();
 				vtctl=network.thoigianchinh.sttctl;
+				hiendapan();
 			}
 		});
 		lbch1.setBackground(new Color(240, 248, 255));
@@ -416,6 +417,7 @@ public class trochoi extends JFrame {
 				lbch4.setBackground(new Color(245, 255, 250));
 				dapan=lbch3.getText();
 				vtctl=network.thoigianchinh.sttctl+2;
+				hiendapan();
 			}
 		});
 		lbch3.setBackground(new Color(240, 248, 255));
@@ -435,6 +437,7 @@ public class trochoi extends JFrame {
 				lbch4.setBackground(new Color(245, 255, 250));
 				dapan=lbch2.getText();
 				vtctl=network.thoigianchinh.sttctl+1;
+				hiendapan();
 			}
 		});
 		lbch2.setBackground(new Color(240, 248, 255));
@@ -454,6 +457,7 @@ public class trochoi extends JFrame {
 				lbch3.setBackground(new Color(245, 255, 250));		
 				dapan=lbch4.getText();
 				vtctl=network.thoigianchinh.sttctl+3;
+				
 			}
 		});
 		lbch4.setBackground(new Color(240, 248, 255));
@@ -588,10 +592,11 @@ public class trochoi extends JFrame {
 		int kq=0;
 		if(Integer.parseInt(lbdct.getText())>Integer.parseInt(lbdnt.getText()))
 			kq=1;
-		String[] data=new String[3];
-		data[0]=mainclient.dnf.data2[0];				
-		data[1]=lbdct.getText();
-		data[2]=String.valueOf(kq);
+		String[] data=new String[4];
+		data[0]=mainclient.tc.lbemail2.getText();
+		data[1]=mainclient.dnf.data2[0];
+		data[2]=lbdct.getText();
+		data[3]=String.valueOf(kq);
 		data data_sent=new data();
 		data_sent.action="themdiem";
 		data_sent.data=data;
@@ -620,5 +625,10 @@ public class trochoi extends JFrame {
 		 mainclient.tc.lbch4.setVisible(false);
 		 mainclient.tc.lbdct.setText("0");
 		 mainclient.tc.lbdnt.setText("0");
+	}
+	private void hiendapan()
+	{
+		String s=receive_solve.datactl.get(vtctl)[2];
+		System.out.println("da: "+s);
 	}
 }

@@ -29,6 +29,7 @@ public class mainclient {
 	public static mainform mf=null;
 	public static thachdauform tdf=null;
 	public static trochoi tc=null;
+	public static hinhnenform hnf=null;
 	public static Socket socket=null;
 	public static int port = 6788;
     public static String server = "localhost";
@@ -58,6 +59,7 @@ public class mainclient {
 		tc=new trochoi();
 		tdf=new thachdauform();
 		tgc=new thoigianchinh();
+		hnf=new hinhnenform();
 		try {
 			socket=new Socket(mainclient.server,mainclient.port);
 			Thread receive=new receive_solve(socket);
