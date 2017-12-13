@@ -123,7 +123,8 @@ public class trochoi extends JFrame {
 				data[0]=lbemail2.getText();				
 				data[1]=mainclient.dnf.data2[0];
 				data[2]="huythidau";
-				data_sent.data = data;				
+				data_sent.data = data;		
+				mainclient.tc.reset();
 				try {
 		            cout = new ObjectOutputStream(mainclient.socket.getOutputStream());
 		            cout.writeObject(data_sent);
@@ -488,7 +489,6 @@ public class trochoi extends JFrame {
 	}
 	public void huybo()
 	{
-		reset();
 	data data_sent = new data();
 	data_sent.action="dangxuat";
 	String[] data=new String[3];
@@ -496,6 +496,7 @@ public class trochoi extends JFrame {
 	data[1]=mainclient.dnf.data2[0];
 	data[2]="huythidau";
 	data_sent.data = data;
+	mainclient.tc.reset();
 	try {
         cout = new ObjectOutputStream(mainclient.socket.getOutputStream());
         cout.writeObject(data_sent);
@@ -626,6 +627,7 @@ public class trochoi extends JFrame {
 		 mainclient.tc.lbch4.setVisible(false);
 		 mainclient.tc.lbdct.setText("0");
 		 mainclient.tc.lbdnt.setText("0");
+		 mainclient.tgc.dieukienlap(false);
 	}
 	private void hiendapan()
 	{

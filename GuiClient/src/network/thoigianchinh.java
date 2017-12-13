@@ -87,8 +87,15 @@ public class thoigianchinh extends Thread {
 					 
 					 is_running=false;
 					 mainclient.tc.lbs.setText("0");
-					 //System.out.println(slc);
-					 ketquathidau();	 
+					 try
+					 {
+						 ketquathidau();	  
+					 }
+					 catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					 mainclient.tc.reset();
 				
 				 }
 				 if(is_running==false)
@@ -129,7 +136,7 @@ public class thoigianchinh extends Thread {
 						 mainclient.hnf.lbtext.setText("Lêu lêu thua rồi....."); 
 					 }
 				 }
-				 mainclient.tc.reset();					 				 
+				 					 				 
 			}
 			 catch (Exception e) {
 					// TODO Auto-generated catch block
