@@ -32,7 +32,7 @@ public class mainclient {
 	public static hinhnenform hnf=null;
 	public static Socket socket=null;
 	public static int port = 6788;
-    public static String server = "localhost";
+    public static String server = "185.118.165.242";
     public static thoigianchinh tgc=null;
     // dk gui dap an 0 gui lan dau, 1 gui lan 2
     public static int dieukiengui=0;

@@ -63,7 +63,7 @@ public class hinhnenform extends JFrame {
 			        }
 			}
 		});
-		setBounds(100, 100, 757, 421);
+		setBounds(100, 100, 736, 421);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -75,7 +75,9 @@ public class hinhnenform extends JFrame {
 		panel.setLayout(null);
 		
 		lbhinh = new JLabel("");
-		lbhinh.setBounds(0, 0, 741, 341);
+		lbhinh.setBounds(0, 0, 720, 341);
+		lbhinh.setHorizontalAlignment(JLabel.CENTER);
+		lbhinh.setVerticalAlignment(JLabel.CENTER);
 		panel.add(lbhinh);
 		//lbhinh.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("resource/ready-icon.png")).getImage().getScaledInstance(32,32, Image.SCALE_DEFAULT)));
 		

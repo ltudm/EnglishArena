@@ -105,6 +105,7 @@ public class thoigianchinh extends Thread {
 		{
 			try
 			{
+				 
 				 mainclient.tc.tach.setVisible(false);
 				 mainclient.tc.lbch1.setVisible(false);
 				 mainclient.tc.lbch2.setVisible(false);
@@ -115,20 +116,20 @@ public class thoigianchinh extends Thread {
 				 mainclient.dnf.gohome();
 				 mainclient.tc.setVisible(false);
 				 mainclient.hnf.setVisible(true);
-				 if(Integer.parseInt(mainclient.tc.lbdct.getText())>=Integer.parseInt(mainclient.tc.lbdnt.getText()))
+				 if(Integer.parseInt(mainclient.tc.lbdct.getText())>Integer.parseInt(mainclient.tc.lbdnt.getText()))
 				 {
 					 mainclient.hnf.lbhinh.setIcon(new ImageIcon(mainform.class.getResource("/resource/phaohoa.gif")));
 					 mainclient.hnf.lbtext.setText("Victoria!!!"); 
 				 }
 				 else
 				 {
+					 if(Integer.parseInt(mainclient.tc.lbdct.getText())<Integer.parseInt(mainclient.tc.lbdnt.getText()))
 					 {
 						 mainclient.hnf.lbhinh.setIcon(new ImageIcon(mainform.class.getResource("/resource/tenor.gif")));
 						 mainclient.hnf.lbtext.setText("Lêu lêu thua rồi....."); 
 					 }
 				 }
-					 
-				 
+				 mainclient.tc.reset();					 				 
 			}
 			 catch (Exception e) {
 					// TODO Auto-generated catch block

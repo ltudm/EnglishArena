@@ -189,7 +189,7 @@ public class mainform extends JFrame {
 							
 			}
 		});
-		bttd.setBounds(266, 163, 119, 49);
+		bttd.setBounds(229, 163, 119, 49);
 		panel.add(bttd);
 		
 		JButton btbd = new JButton(" Bắt đầu");
@@ -230,7 +230,7 @@ public class mainform extends JFrame {
 					}, 10*1000);
 			}
 		});
-		btbd.setBounds(128, 163, 119, 49);
+		btbd.setBounds(54, 163, 119, 49);
 		panel.add(btbd);
 		
 		lbemailmf = new JLabel("");

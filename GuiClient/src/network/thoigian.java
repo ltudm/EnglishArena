@@ -68,7 +68,7 @@ public class thoigian extends Thread {
 				 {
 					 mainclient.tc.lbcd.setVisible(false);
 					 is_running=false;
-					 if(mainclient.tc.ready==2)
+					 if(mainclient.tc.ready!=1)
 					 {
 						 mainclient.tc.huybo();
 					 }

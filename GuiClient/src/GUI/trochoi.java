@@ -64,7 +64,7 @@ public class trochoi extends JFrame {
 	public JLabel lbicon2;
 	public JLabel lbcd;
 	public JButton btready;
-	public static int ready=2;
+	public static int ready=0;
 	public JButton btcancer;
 	public JLabel lbcd2;
 	public JLabel lbs;
@@ -600,6 +600,7 @@ public class trochoi extends JFrame {
 		data data_sent=new data();
 		data_sent.action="themdiem";
 		data_sent.data=data;
+		messout(data[1]);
 		try
 		{			
 			cout=new ObjectOutputStream(mainclient.socket.getOutputStream());
